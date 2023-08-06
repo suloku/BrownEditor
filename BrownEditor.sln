@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30028.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrownEditor", "BrownEditor\BrownEditor.csproj", "{ECD1CD2A-95FE-4498-B6D0-10C53ECB5C71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ECD1CD2A-95FE-4498-B6D0-10C53ECB5C71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECD1CD2A-95FE-4498-B6D0-10C53ECB5C71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECD1CD2A-95FE-4498-B6D0-10C53ECB5C71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECD1CD2A-95FE-4498-B6D0-10C53ECB5C71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B1B6E24-A9F3-426F-9969-68867D619590}
+	EndGlobalSection
+EndGlobal
