@@ -35,6 +35,7 @@
             this.evomovesBut = new System.Windows.Forms.Button();
             this.tmhmBut = new System.Windows.Forms.Button();
             this.wildBut = new System.Windows.Forms.Button();
+            this.SGBPaletteBut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ButtonLoad
@@ -112,11 +113,23 @@
             this.wildBut.UseVisualStyleBackColor = true;
             this.wildBut.Click += new System.EventHandler(this.wildBut_Click);
             // 
+            // SGBPaletteBut
+            // 
+            this.SGBPaletteBut.Enabled = false;
+            this.SGBPaletteBut.Location = new System.Drawing.Point(124, 133);
+            this.SGBPaletteBut.Name = "SGBPaletteBut";
+            this.SGBPaletteBut.Size = new System.Drawing.Size(106, 23);
+            this.SGBPaletteBut.TabIndex = 7;
+            this.SGBPaletteBut.Text = "SGB Palettes";
+            this.SGBPaletteBut.UseVisualStyleBackColor = true;
+            this.SGBPaletteBut.Click += new System.EventHandler(this.SGBPaletteBut_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(240, 164);
+            this.Controls.Add(this.SGBPaletteBut);
             this.Controls.Add(this.wildBut);
             this.Controls.Add(this.tmhmBut);
             this.Controls.Add(this.evomovesBut);
@@ -140,6 +153,7 @@
         private System.Windows.Forms.Button evomovesBut;
         private System.Windows.Forms.Button tmhmBut;
         private System.Windows.Forms.Button wildBut;
+        private System.Windows.Forms.Button SGBPaletteBut;
     }
 }
 

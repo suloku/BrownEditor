@@ -59,6 +59,7 @@ namespace BrownEditor
             this.BaseStatsEditorBut.Enabled = true;
             this.evomovesBut.Enabled = true;
             this.wildBut.Enabled = true;
+            this.SGBPaletteBut.Enabled = true;
         }
 
         private void BaseStatsEditorBut_Click(object sender, EventArgs e)
@@ -90,6 +91,12 @@ namespace BrownEditor
         {
             Form wildencounters = new BrownEditor.editor.wild();
             wildencounters.ShowDialog();
+        }
+
+        private void SGBPaletteBut_Click(object sender, EventArgs e)
+        {
+            Form sgbpalette = new BrownEditor.editor.SGBPalette();
+            sgbpalette.ShowDialog();
         }
     }
 }

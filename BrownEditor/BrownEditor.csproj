@@ -77,6 +77,12 @@
     <Compile Include="editor\MoveEditor.Designer.cs">
       <DependentUpon>MoveEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="editor\SGBPalette.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editor\SGBPalette.Designer.cs">
+      <DependentUpon>SGBPalette.cs</DependentUpon>
+    </Compile>
     <Compile Include="editor\StatsEvos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="editor\MoveEditor.resx">
       <DependentUpon>MoveEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editor\SGBPalette.resx">
+      <DependentUpon>SGBPalette.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="editor\StatsEvos.resx">
       <DependentUpon>StatsEvos.cs</DependentUpon>
