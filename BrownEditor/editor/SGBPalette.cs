@@ -23,22 +23,35 @@ namespace BrownEditor.editor
         public static int testpicAddr = 0x152002;
         private static byte[] bppbuffer = new byte[784];
 
-        Bitmap bmp = new Bitmap(16, 14);
+        Bitmap bmp;
+        Bitmap resized;
 
         bool autoupdate = false;
         public SGBPalette()
         {
             sgbpalettes = new SGBPALETTEDATA(BrownEditor.MainForm.filebuffer.Skip(SGBPaletteOffset).Take(SGBPalettes_totalSize).ToArray());
             InitializeComponent();
+            bmp = new Bitmap(56, 56);
+            resized = new Bitmap(bmp, new Size(bmp.Width * 8, bmp.Height * 8));
             load_palette((int)paletteIndex.Value);
 
-            //Load image
+            /*//Load image
             Buffer.BlockCopy(BrownEditor.MainForm.filebuffer, testpicAddr, bppbuffer, 0, 784);
             bmp = new Bitmap(56, 56);
-            process_5656_2bpp(bppbuffer, bmp);
-            Bitmap resized = new Bitmap(bmp, new Size(bmp.Width * 8, bmp.Height * 8));
-            pictureBox1.Image = ResizeBitmap(bmp, 168, 168);
+            process_5656_2bpp(bppbuffer, bmp, true);
+            resized = new Bitmap(bmp, new Size(bmp.Width * 8, bmp.Height * 8));
+            pictureBox1.Image = ResizeBitmap(bmp, 168, 168);*/
 
+        }
+        void reload_image()
+        {
+            //bmp.Dispose();
+            //bmp = new Bitmap(56, 56);
+            Buffer.BlockCopy(BrownEditor.MainForm.filebuffer, testpicAddr, bppbuffer, 0, 784);
+            process_5656_2bpp(bppbuffer, bmp, true);
+            //resized.Dispose();
+            resized = new Bitmap(bmp, new Size(bmp.Width * 8, bmp.Height * 8));
+            pictureBox1.Image = ResizeBitmap(bmp, 168, 168);
         }
 
         private Bitmap ResizeBitmap(Bitmap sourceBMP, int width, int height)
@@ -52,44 +65,75 @@ namespace BrownEditor.editor
             return result;
         }
 
-        void process_5656_2bpp(byte [] twobpp, Bitmap bmp)
+        void process_5656_2bpp(byte [] twobpp, Bitmap bmp, bool colMajor)
         {
-            //Load current palette colors
-            Color color0 = sgbpalettes.toRGB(0);
-            Color color1 = sgbpalettes.toRGB(1);
-            Color color2 = sgbpalettes.toRGB(2);
-            Color color3 = sgbpalettes.toRGB(3);
+
+            byte [] rawtile = new byte[16];
+
 
             int column = 0;
             int row = 0;
+            int curtile = 0;
+
             //Each tile is 8x8 pixels, a 56x56 image has 7x7 tiles
 
             for (row = 0; row < 7; row++)
             {
-
+                //Buffer.BlockCopy(twobpp, row*16+16*column, rawtile, 0, 16);
                 for (column = 0; column < 7; column++)
                 {
-                    drawtile(twobpp, bmp, row, column, color0, color1, color2, color3);
+                    Buffer.BlockCopy(twobpp, curtile*16, rawtile, 0, 16);
+                    if (colMajor)
+                        drawtile(rawtile, bmp, column, row);
+                    else
+                        drawtile(rawtile, bmp, row, column);
+                    curtile++;
                 }
                 column = 0;
             }
             //drawtile(twobpp, bmp, row, column, color0, color1, color2, color3);
         }
-        void drawtile(byte[] twobpp, Bitmap bmp, int row, int column, Color color0, Color color1, Color color2, Color color3)
+        void drawtile(byte[] rawtile, Bitmap bmp, int row, int column)
         {
             int tilerow = 0;
             int tilecolumn = 0;
+            int pixel = 0;
+            byte [] pixelcolors = gettilepixels(rawtile);
+            foreach (byte i in pixelcolors)
+            {
+                //Debug.WriteLine (i.ToString("X"));
+            }
             for (tilerow = 0; tilerow < 8; tilerow++)
             {
                 for (tilecolumn = 0; tilecolumn < 8; tilecolumn++)
                 {
-                    //
-                    //twobpp[i]
-                    bmp.SetPixel((column*8)+tilecolumn, (row*8)+tilerow, color2);
-                    Debug.WriteLine("X:" + ((column*8) + tilecolumn).ToString() + " Y:" + ((row*8) + tilerow).ToString()) ;
+                    //Get the color for each pixel
+                    //get2bppcolor(twobpp[1], twobpp[0], tilecolumn;
+
+                    bmp.SetPixel((column*8)+tilecolumn, (row*8)+tilerow, sgbpalettes.toRGB(pixelcolors[pixel]));
+                    //Debug.WriteLine(pixel.ToString());
+                    //Debug.WriteLine("X:" + ((column*8) + tilecolumn).ToString() + " Y:" + ((row*8) + tilerow).ToString()) ;
+                    pixel++;
                 }
                 tilecolumn = 0;
             }
+        }
+
+        byte [] gettilepixels(byte [] tile)
+        {
+            byte [] pixels = new byte[8*8];
+            int j = 0;
+            int i = 0;
+            for (j = 0; j < 8; j++)
+            {
+                for (i = 0; i < 8; i++)
+                {
+                    byte hiBit = (byte)( (tile[j * 2 + 1] >> (7 - i)) & 1 );
+                    byte loBit = (byte)( (tile[j * 2] >> (7 - i)) & 1 );
+                    pixels[j * 8 + i] = (byte) ((hiBit << 1) | loBit);
+                }
+            }
+            return pixels;
         }
 
         void load_palette(int index)
@@ -101,7 +145,8 @@ namespace BrownEditor.editor
             palettePanel3.BackColor = sgbpalettes.toRGB(3);
 
             LoadPaletteColour(0);
- 
+
+            reload_image();
         }
 
         void LoadPaletteColour(int index)
