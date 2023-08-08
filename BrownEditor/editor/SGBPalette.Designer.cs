@@ -36,6 +36,7 @@
             this.palettePanel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBoxEditColor = new System.Windows.Forms.GroupBox();
+            this.ReloadPaletteBut = new System.Windows.Forms.Button();
             this.panelActiveColor = new System.Windows.Forms.Panel();
             this.tabControlColorformat = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -62,16 +63,33 @@
             this.labelSnescolor = new System.Windows.Forms.Label();
             this.labelHexcolor = new System.Windows.Forms.Label();
             this.textboxBGR15 = new System.Windows.Forms.TextBox();
-            this.buttonColor1 = new System.Windows.Forms.Button();
-            this.buttonColor2 = new System.Windows.Forms.Button();
-            this.buttonColor3 = new System.Windows.Forms.Button();
-            this.buttonColor4 = new System.Windows.Forms.Button();
+            this.setPal0 = new System.Windows.Forms.Button();
+            this.setPal1 = new System.Windows.Forms.Button();
+            this.setPal2 = new System.Windows.Forms.Button();
+            this.setPal3 = new System.Windows.Forms.Button();
             this.panelColorbg = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.savePaletteBut = new System.Windows.Forms.Button();
+            this.pokemonComboBox = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.palSlotHexLabel = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.saveMonPalBut = new System.Windows.Forms.Button();
+            this.monPalIndexHex = new System.Windows.Forms.Label();
+            this.monpaletteUD = new System.Windows.Forms.NumericUpDown();
+            this.shinyRadioBut = new System.Windows.Forms.RadioButton();
+            this.normalRadioBut = new System.Windows.Forms.RadioButton();
+            this.Note_label = new System.Windows.Forms.Label();
+            this.saveSlotNUD = new System.Windows.Forms.NumericUpDown();
+            this.saveExitBut = new System.Windows.Forms.Button();
+            this.exitBut = new System.Windows.Forms.Button();
+            this.loadFront2bppBut = new System.Windows.Forms.Button();
+            this.loadBack2bppBut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
             this.groupBoxEditColor.SuspendLayout();
             this.tabControlColorformat.SuspendLayout();
@@ -90,11 +108,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.trackBarR)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.monpaletteUD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.saveSlotNUD)).BeginInit();
             this.SuspendLayout();
             // 
             // paletteIndex
             // 
-            this.paletteIndex.Location = new System.Drawing.Point(82, 36);
+            this.paletteIndex.Location = new System.Drawing.Point(103, 36);
             this.paletteIndex.Maximum = new decimal(new int[] {
             255,
             0,
@@ -110,9 +132,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(33, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
+            this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Palette:";
+            this.label1.Text = "Palette Slot:";
             // 
             // palettePanel0
             // 
@@ -165,6 +187,7 @@
             // 
             // groupBoxEditColor
             // 
+            this.groupBoxEditColor.Controls.Add(this.ReloadPaletteBut);
             this.groupBoxEditColor.Controls.Add(this.panelActiveColor);
             this.groupBoxEditColor.Controls.Add(this.tabControlColorformat);
             this.groupBoxEditColor.Controls.Add(this.labelSet);
@@ -172,10 +195,10 @@
             this.groupBoxEditColor.Controls.Add(this.labelSnescolor);
             this.groupBoxEditColor.Controls.Add(this.labelHexcolor);
             this.groupBoxEditColor.Controls.Add(this.textboxBGR15);
-            this.groupBoxEditColor.Controls.Add(this.buttonColor1);
-            this.groupBoxEditColor.Controls.Add(this.buttonColor2);
-            this.groupBoxEditColor.Controls.Add(this.buttonColor3);
-            this.groupBoxEditColor.Controls.Add(this.buttonColor4);
+            this.groupBoxEditColor.Controls.Add(this.setPal0);
+            this.groupBoxEditColor.Controls.Add(this.setPal1);
+            this.groupBoxEditColor.Controls.Add(this.setPal2);
+            this.groupBoxEditColor.Controls.Add(this.setPal3);
             this.groupBoxEditColor.Controls.Add(this.panelColorbg);
             this.groupBoxEditColor.Location = new System.Drawing.Point(36, 74);
             this.groupBoxEditColor.Name = "groupBoxEditColor";
@@ -183,6 +206,16 @@
             this.groupBoxEditColor.TabIndex = 6;
             this.groupBoxEditColor.TabStop = false;
             this.groupBoxEditColor.Text = "Edit color";
+            // 
+            // ReloadPaletteBut
+            // 
+            this.ReloadPaletteBut.Location = new System.Drawing.Point(323, 204);
+            this.ReloadPaletteBut.Name = "ReloadPaletteBut";
+            this.ReloadPaletteBut.Size = new System.Drawing.Size(59, 45);
+            this.ReloadPaletteBut.TabIndex = 100;
+            this.ReloadPaletteBut.Text = "Reload Palette";
+            this.ReloadPaletteBut.UseVisualStyleBackColor = true;
+            this.ReloadPaletteBut.Click += new System.EventHandler(this.ReloadPaletteBut_Click);
             // 
             // panelActiveColor
             // 
@@ -445,6 +478,7 @@
             this.textboxRGBHex.Location = new System.Drawing.Point(162, 204);
             this.textboxRGBHex.MaxLength = 7;
             this.textboxRGBHex.Name = "textboxRGBHex";
+            this.textboxRGBHex.ReadOnly = true;
             this.textboxRGBHex.Size = new System.Drawing.Size(100, 20);
             this.textboxRGBHex.TabIndex = 1;
             // 
@@ -471,45 +505,50 @@
             this.textboxBGR15.Location = new System.Drawing.Point(162, 230);
             this.textboxBGR15.MaxLength = 4;
             this.textboxBGR15.Name = "textboxBGR15";
+            this.textboxBGR15.ReadOnly = true;
             this.textboxBGR15.Size = new System.Drawing.Size(100, 20);
             this.textboxBGR15.TabIndex = 2;
             this.textboxBGR15.Text = "0f35";
             // 
-            // buttonColor1
+            // setPal0
             // 
-            this.buttonColor1.Location = new System.Drawing.Point(62, 265);
-            this.buttonColor1.Name = "buttonColor1";
-            this.buttonColor1.Size = new System.Drawing.Size(59, 23);
-            this.buttonColor1.TabIndex = 7;
-            this.buttonColor1.Text = "Color 0";
-            this.buttonColor1.UseVisualStyleBackColor = true;
+            this.setPal0.Location = new System.Drawing.Point(62, 265);
+            this.setPal0.Name = "setPal0";
+            this.setPal0.Size = new System.Drawing.Size(59, 23);
+            this.setPal0.TabIndex = 7;
+            this.setPal0.Text = "Color 0";
+            this.setPal0.UseVisualStyleBackColor = true;
+            this.setPal0.Click += new System.EventHandler(this.setPal0_Click);
             // 
-            // buttonColor2
+            // setPal1
             // 
-            this.buttonColor2.Location = new System.Drawing.Point(127, 265);
-            this.buttonColor2.Name = "buttonColor2";
-            this.buttonColor2.Size = new System.Drawing.Size(59, 23);
-            this.buttonColor2.TabIndex = 8;
-            this.buttonColor2.Text = "Color 1";
-            this.buttonColor2.UseVisualStyleBackColor = true;
+            this.setPal1.Location = new System.Drawing.Point(127, 265);
+            this.setPal1.Name = "setPal1";
+            this.setPal1.Size = new System.Drawing.Size(59, 23);
+            this.setPal1.TabIndex = 8;
+            this.setPal1.Text = "Color 1";
+            this.setPal1.UseVisualStyleBackColor = true;
+            this.setPal1.Click += new System.EventHandler(this.setPal1_Click);
             // 
-            // buttonColor3
+            // setPal2
             // 
-            this.buttonColor3.Location = new System.Drawing.Point(192, 265);
-            this.buttonColor3.Name = "buttonColor3";
-            this.buttonColor3.Size = new System.Drawing.Size(59, 23);
-            this.buttonColor3.TabIndex = 9;
-            this.buttonColor3.Text = "Color 2";
-            this.buttonColor3.UseVisualStyleBackColor = true;
+            this.setPal2.Location = new System.Drawing.Point(192, 265);
+            this.setPal2.Name = "setPal2";
+            this.setPal2.Size = new System.Drawing.Size(59, 23);
+            this.setPal2.TabIndex = 9;
+            this.setPal2.Text = "Color 2";
+            this.setPal2.UseVisualStyleBackColor = true;
+            this.setPal2.Click += new System.EventHandler(this.setPal2_Click);
             // 
-            // buttonColor4
+            // setPal3
             // 
-            this.buttonColor4.Location = new System.Drawing.Point(257, 265);
-            this.buttonColor4.Name = "buttonColor4";
-            this.buttonColor4.Size = new System.Drawing.Size(59, 23);
-            this.buttonColor4.TabIndex = 10;
-            this.buttonColor4.Text = "Color 3";
-            this.buttonColor4.UseVisualStyleBackColor = true;
+            this.setPal3.Location = new System.Drawing.Point(257, 265);
+            this.setPal3.Name = "setPal3";
+            this.setPal3.Size = new System.Drawing.Size(59, 23);
+            this.setPal3.TabIndex = 10;
+            this.setPal3.Text = "Color 3";
+            this.setPal3.UseVisualStyleBackColor = true;
+            this.setPal3.Click += new System.EventHandler(this.setPal3_Click);
             // 
             // panelColorbg
             // 
@@ -565,22 +604,469 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(513, 74);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(180, 169);
+            this.pictureBox1.Size = new System.Drawing.Size(168, 168);
             this.pictureBox1.TabIndex = 11;
             this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox2.Location = new System.Drawing.Point(513, 245);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(168, 168);
+            this.pictureBox2.TabIndex = 12;
+            this.pictureBox2.TabStop = false;
+            // 
+            // savePaletteBut
+            // 
+            this.savePaletteBut.Location = new System.Drawing.Point(36, 384);
+            this.savePaletteBut.Name = "savePaletteBut";
+            this.savePaletteBut.Size = new System.Drawing.Size(162, 34);
+            this.savePaletteBut.TabIndex = 13;
+            this.savePaletteBut.Text = "Save Current Palette to Slot:";
+            this.savePaletteBut.UseVisualStyleBackColor = true;
+            this.savePaletteBut.Click += new System.EventHandler(this.savePaletteBut_Click);
+            // 
+            // pokemonComboBox
+            // 
+            this.pokemonComboBox.FormattingEnabled = true;
+            this.pokemonComboBox.Items.AddRange(new object[] {
+            "001 - Bulbasaur",
+            "002 - Ivysaur",
+            "003 - Venusaur",
+            "004 - Charmander",
+            "005 - Charmeleon",
+            "006 - Charizard",
+            "007 - Squirtle",
+            "008 - Wartortle",
+            "009 - Blastoise",
+            "010 - Caterpie",
+            "011 - Metapod",
+            "012 - Butterfree",
+            "013 - Weedle",
+            "014 - Kakuna",
+            "015 - Beedrill",
+            "016 - Pidgey",
+            "017 - Pidgeotto",
+            "018 - Pidgeot",
+            "019 - Rattata",
+            "020 - Raticate",
+            "021 - Spearow",
+            "022 - Fearow",
+            "023 - Ekans",
+            "024 - Arbok",
+            "025 - Pikachu",
+            "026 - Raichu",
+            "027 - Sandshrew",
+            "028 - Sandslash",
+            "029 - NidoranF",
+            "030 - Nidorina",
+            "031 - Nidoqueen",
+            "032 - NidoranM",
+            "033 - Nidorino",
+            "034 - Nidoking",
+            "035 - Clefairy",
+            "036 - Clefable",
+            "037 - Vulpix",
+            "038 - Ninetales",
+            "039 - Jigglypuff",
+            "040 - Wigglytuff",
+            "041 - Zubat",
+            "042 - Golbat",
+            "043 - Oddish",
+            "044 - Gloom",
+            "045 - Vileplume",
+            "046 - Paras",
+            "047 - Parasect",
+            "048 - Venonat",
+            "049 - Venomoth",
+            "050 - Diglett",
+            "051 - Dugtrio",
+            "052 - Meowth",
+            "053 - Persian",
+            "054 - Psyduck",
+            "055 - Golduck",
+            "056 - Mankey",
+            "057 - Primeape",
+            "058 - Growlithe",
+            "059 - Arcanine",
+            "060 - Poliwag",
+            "061 - Poliwhirl",
+            "062 - Poliwrath",
+            "063 - Abra",
+            "064 - Kadabra",
+            "065 - Alakazam",
+            "066 - Machop",
+            "067 - Machoke",
+            "068 - Machamp",
+            "069 - Bellsprout",
+            "070 - Weepinbell",
+            "071 - Victreebel",
+            "072 - Tentacool",
+            "073 - Tentacruel",
+            "074 - Geodude",
+            "075 - Graveler",
+            "076 - Golem",
+            "077 - Ponyta",
+            "078 - Rapidash",
+            "079 - Slowpoke",
+            "080 - Slowbro",
+            "081 - Magnemite",
+            "082 - Magneton",
+            "083 - Farfetch\'d",
+            "084 - Doduo",
+            "085 - Dodrio",
+            "086 - Seel",
+            "087 - Dewgong",
+            "088 - Grimer",
+            "089 - Muk",
+            "090 - Shellder",
+            "091 - Cloyster",
+            "092 - Gastly",
+            "093 - Haunter",
+            "094 - Gengar",
+            "095 - Onix",
+            "096 - Drowzee",
+            "097 - Hypno",
+            "098 - Krabby",
+            "099 - Kingler",
+            "100 - Voltorb",
+            "101 - Electrode",
+            "102 - Exeggcute",
+            "103 - Exeggutor",
+            "104 - Cubone",
+            "105 - Marowak",
+            "106 - Hitmonlee",
+            "107 - Hitmonchan",
+            "108 - Lickitung",
+            "109 - Koffing",
+            "110 - Weezing",
+            "111 - Rhyhorn",
+            "112 - Rhydon",
+            "113 - Chansey",
+            "114 - Tangela",
+            "115 - Kangaskhan",
+            "116 - Horsea",
+            "117 - Seadra",
+            "118 - Goldeen",
+            "119 - Seaking",
+            "120 - Staryu",
+            "121 - Starmie",
+            "122 - Mr. Mime",
+            "123 - Scyther",
+            "124 - Jynx",
+            "125 - Electabuzz",
+            "126 - Magmar",
+            "127 - Pinsir",
+            "128 - Tauros",
+            "129 - Magikarp",
+            "130 - Gyarados",
+            "131 - Lapras",
+            "132 - Ditto",
+            "133 - Eevee",
+            "134 - Vaporeon",
+            "135 - Jolteon",
+            "136 - Flareon",
+            "137 - Porygon",
+            "138 - Omanyte",
+            "139 - Omastar",
+            "140 - Kabuto",
+            "141 - Kabutops",
+            "142 - Aerodactyl",
+            "143 - Snorlax",
+            "144 - Articuno",
+            "145 - Zapdos",
+            "146 - Moltres",
+            "147 - Dratini",
+            "148 - Dragonair",
+            "149 - Dragonite",
+            "150 - Mewtwo",
+            "151 - Mew",
+            "152 - Chikorita",
+            "153 - Bayleef",
+            "154 - Meganium",
+            "155 - Cyndaquil",
+            "156 - Quilava",
+            "157 - Typhlosion",
+            "158 - Totodile",
+            "159 - Croconaw",
+            "160 - Feraligatr",
+            "161 - Houndour",
+            "162 - Houndoom",
+            "163 - Heracross",
+            "164 - Yanma",
+            "165 - Yanmega",
+            "166 - Spinarak",
+            "167 - Ariados",
+            "168 - Chinchou",
+            "169 - Lanturn",
+            "170 - Swinub",
+            "171 - Piloswine",
+            "172 - Mamoswine",
+            "173 - Natu",
+            "174 - Xatu",
+            "175 - Mareep",
+            "176 - Flaaffy",
+            "177 - Ampharos",
+            "178 - Marill",
+            "179 - Azumarill",
+            "180 - Murkrow",
+            "181 - Honchkrow",
+            "182 - Larvitar",
+            "183 - Pupitar",
+            "184 - Tyranitar",
+            "185 - Phanpy",
+            "186 - Donphan",
+            "187 - Wooper",
+            "188 - Quagsire",
+            "189 - Togepi",
+            "190 - Togetic",
+            "191 - Togekiss",
+            "192 - Gligar",
+            "193 - Gliscor",
+            "194 - Sneasel",
+            "195 - Weavile",
+            "196 - Tyrogue",
+            "197 - Hitmontop",
+            "198 - Misdreavus",
+            "199 - Mismagius",
+            "200 - Espeon",
+            "201 - Umbreon",
+            "202 - Leafeon",
+            "203 - Glaceon",
+            "204 - Magnezone",
+            "205 - Electivire",
+            "206 - Magmortar",
+            "207 - Porygon2",
+            "208 - Porygon-Z",
+            "209 - Tangrowth",
+            "210 - Scizor",
+            "211 - Steelix",
+            "212 - Slowking",
+            "213 - Kingdra",
+            "214 - Rhyperior",
+            "215 - Blissey",
+            "216 - Crobat",
+            "217 - Politoed",
+            "218 - Raikou",
+            "219 - Entei",
+            "220 - Suicune",
+            "221 - Lugia",
+            "222 - Ho-Oh",
+            "223 - Cranidos",
+            "224 - Rampardos",
+            "225 - Sylveon",
+            "226 - Annihilape",
+            "227 - G.Weezing",
+            "228 - Lickilicky",
+            "229 - ?????",
+            "230 - ?????",
+            "231 - ?????",
+            "232 - ?????",
+            "233 - ?????",
+            "234 - ?????",
+            "235 - ?????",
+            "236 - ?????",
+            "237 - ?????",
+            "238 - ?????",
+            "239 - GlitchPhancero",
+            "240 - ?????",
+            "241 - ?????",
+            "242 - ?????",
+            "243 - ?????",
+            "244 - ?????",
+            "245 - ?????",
+            "246 - ?????",
+            "247 - ?????",
+            "248 - ?????",
+            "249 - ?????",
+            "250 - ?????",
+            "251 - ?????",
+            "252 - Phancero",
+            "253 - ?????",
+            "254 - ?????",
+            "255 - ?????"});
+            this.pokemonComboBox.Location = new System.Drawing.Point(513, 34);
+            this.pokemonComboBox.Name = "pokemonComboBox";
+            this.pokemonComboBox.Size = new System.Drawing.Size(180, 21);
+            this.pokemonComboBox.TabIndex = 14;
+            this.pokemonComboBox.SelectedIndexChanged += new System.EventHandler(this.pokemonComboBox_SelectedIndexChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(510, 18);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Pokémon";
+            // 
+            // palSlotHexLabel
+            // 
+            this.palSlotHexLabel.AutoSize = true;
+            this.palSlotHexLabel.Location = new System.Drawing.Point(180, 38);
+            this.palSlotHexLabel.Name = "palSlotHexLabel";
+            this.palSlotHexLabel.Size = new System.Drawing.Size(30, 13);
+            this.palSlotHexLabel.TabIndex = 16;
+            this.palSlotHexLabel.Text = "0x00";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.saveMonPalBut);
+            this.groupBox2.Controls.Add(this.monPalIndexHex);
+            this.groupBox2.Controls.Add(this.monpaletteUD);
+            this.groupBox2.Controls.Add(this.shinyRadioBut);
+            this.groupBox2.Controls.Add(this.normalRadioBut);
+            this.groupBox2.Location = new System.Drawing.Point(708, 77);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(80, 190);
+            this.groupBox2.TabIndex = 17;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Palette";
+            // 
+            // saveMonPalBut
+            // 
+            this.saveMonPalBut.Location = new System.Drawing.Point(6, 133);
+            this.saveMonPalBut.Name = "saveMonPalBut";
+            this.saveMonPalBut.Size = new System.Drawing.Size(68, 43);
+            this.saveMonPalBut.TabIndex = 19;
+            this.saveMonPalBut.Text = "Save Mon Palette";
+            this.saveMonPalBut.UseVisualStyleBackColor = true;
+            this.saveMonPalBut.Click += new System.EventHandler(this.saveMonPalBut_Click);
+            // 
+            // monPalIndexHex
+            // 
+            this.monPalIndexHex.AutoSize = true;
+            this.monPalIndexHex.Location = new System.Drawing.Point(27, 105);
+            this.monPalIndexHex.Name = "monPalIndexHex";
+            this.monPalIndexHex.Size = new System.Drawing.Size(30, 13);
+            this.monPalIndexHex.TabIndex = 18;
+            this.monPalIndexHex.Text = "0x00";
+            // 
+            // monpaletteUD
+            // 
+            this.monpaletteUD.Location = new System.Drawing.Point(6, 78);
+            this.monpaletteUD.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.monpaletteUD.Name = "monpaletteUD";
+            this.monpaletteUD.Size = new System.Drawing.Size(68, 20);
+            this.monpaletteUD.TabIndex = 18;
+            this.monpaletteUD.ValueChanged += new System.EventHandler(this.monpaletteUD_ValueChanged);
+            // 
+            // shinyRadioBut
+            // 
+            this.shinyRadioBut.AutoSize = true;
+            this.shinyRadioBut.Location = new System.Drawing.Point(6, 46);
+            this.shinyRadioBut.Name = "shinyRadioBut";
+            this.shinyRadioBut.Size = new System.Drawing.Size(51, 17);
+            this.shinyRadioBut.TabIndex = 1;
+            this.shinyRadioBut.TabStop = true;
+            this.shinyRadioBut.Text = "Shiny";
+            this.shinyRadioBut.UseVisualStyleBackColor = true;
+            this.shinyRadioBut.CheckedChanged += new System.EventHandler(this.shinyRadioBut_CheckedChanged);
+            // 
+            // normalRadioBut
+            // 
+            this.normalRadioBut.AutoSize = true;
+            this.normalRadioBut.Checked = true;
+            this.normalRadioBut.Location = new System.Drawing.Point(6, 19);
+            this.normalRadioBut.Name = "normalRadioBut";
+            this.normalRadioBut.Size = new System.Drawing.Size(58, 17);
+            this.normalRadioBut.TabIndex = 0;
+            this.normalRadioBut.TabStop = true;
+            this.normalRadioBut.Text = "Normal";
+            this.normalRadioBut.UseVisualStyleBackColor = true;
+            this.normalRadioBut.CheckedChanged += new System.EventHandler(this.normalRadioBut_CheckedChanged);
+            // 
+            // Note_label
+            // 
+            this.Note_label.AutoSize = true;
+            this.Note_label.Location = new System.Drawing.Point(290, 383);
+            this.Note_label.Name = "Note_label";
+            this.Note_label.Size = new System.Drawing.Size(33, 13);
+            this.Note_label.TabIndex = 18;
+            this.Note_label.Text = "Note:";
+            // 
+            // saveSlotNUD
+            // 
+            this.saveSlotNUD.Location = new System.Drawing.Point(204, 393);
+            this.saveSlotNUD.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.saveSlotNUD.Name = "saveSlotNUD";
+            this.saveSlotNUD.Size = new System.Drawing.Size(71, 20);
+            this.saveSlotNUD.TabIndex = 19;
+            // 
+            // saveExitBut
+            // 
+            this.saveExitBut.Location = new System.Drawing.Point(36, 461);
+            this.saveExitBut.Name = "saveExitBut";
+            this.saveExitBut.Size = new System.Drawing.Size(174, 34);
+            this.saveExitBut.TabIndex = 22;
+            this.saveExitBut.Text = "Save changes to ROM and exit";
+            this.saveExitBut.UseVisualStyleBackColor = true;
+            this.saveExitBut.Click += new System.EventHandler(this.saveExitBut_Click);
+            // 
+            // exitBut
+            // 
+            this.exitBut.Location = new System.Drawing.Point(512, 461);
+            this.exitBut.Name = "exitBut";
+            this.exitBut.Size = new System.Drawing.Size(174, 34);
+            this.exitBut.TabIndex = 23;
+            this.exitBut.Text = "Exit without saving changes";
+            this.exitBut.UseVisualStyleBackColor = true;
+            this.exitBut.Click += new System.EventHandler(this.exitBut_Click);
+            // 
+            // loadFront2bppBut
+            // 
+            this.loadFront2bppBut.Location = new System.Drawing.Point(714, 281);
+            this.loadFront2bppBut.Name = "loadFront2bppBut";
+            this.loadFront2bppBut.Size = new System.Drawing.Size(69, 39);
+            this.loadFront2bppBut.TabIndex = 24;
+            this.loadFront2bppBut.Text = "Load Front 2bpp";
+            this.loadFront2bppBut.UseVisualStyleBackColor = true;
+            this.loadFront2bppBut.Click += new System.EventHandler(this.loadFront2bppBut_Click);
+            // 
+            // loadBack2bppBut
+            // 
+            this.loadBack2bppBut.Location = new System.Drawing.Point(714, 331);
+            this.loadBack2bppBut.Name = "loadBack2bppBut";
+            this.loadBack2bppBut.Size = new System.Drawing.Size(68, 39);
+            this.loadBack2bppBut.TabIndex = 25;
+            this.loadBack2bppBut.Text = "Load Back 2bpp";
+            this.loadBack2bppBut.UseVisualStyleBackColor = true;
+            this.loadBack2bppBut.Click += new System.EventHandler(this.loadBack2bppBut_Click);
             // 
             // SGBPalette
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pictureBox1);
+            this.ClientSize = new System.Drawing.Size(800, 507);
+            this.Controls.Add(this.loadBack2bppBut);
+            this.Controls.Add(this.loadFront2bppBut);
+            this.Controls.Add(this.exitBut);
+            this.Controls.Add(this.saveExitBut);
+            this.Controls.Add(this.saveSlotNUD);
+            this.Controls.Add(this.Note_label);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.palSlotHexLabel);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.pokemonComboBox);
+            this.Controls.Add(this.savePaletteBut);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxEditColor);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.paletteIndex);
+            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "SGBPalette";
             this.Text = "SGBPalette";
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).EndInit();
@@ -604,6 +1090,11 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.monpaletteUD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.saveSlotNUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -636,10 +1127,10 @@
         private System.Windows.Forms.Label labelSnescolor;
         private System.Windows.Forms.Label labelHexcolor;
         private System.Windows.Forms.TextBox textboxBGR15;
-        private System.Windows.Forms.Button buttonColor1;
-        private System.Windows.Forms.Button buttonColor2;
-        private System.Windows.Forms.Button buttonColor3;
-        private System.Windows.Forms.Button buttonColor4;
+        private System.Windows.Forms.Button setPal0;
+        private System.Windows.Forms.Button setPal1;
+        private System.Windows.Forms.Button setPal2;
+        private System.Windows.Forms.Button setPal3;
         private System.Windows.Forms.Panel panelColorbg;
         private System.Windows.Forms.NumericUpDown RGB15updownB;
         private System.Windows.Forms.NumericUpDown RGB15updownG;
@@ -655,5 +1146,23 @@
         private System.Windows.Forms.NumericUpDown RGBHupdownG;
         private System.Windows.Forms.NumericUpDown RGBHupdownR;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button savePaletteBut;
+        private System.Windows.Forms.Button ReloadPaletteBut;
+        private System.Windows.Forms.ComboBox pokemonComboBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label palSlotHexLabel;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button saveMonPalBut;
+        private System.Windows.Forms.Label monPalIndexHex;
+        private System.Windows.Forms.NumericUpDown monpaletteUD;
+        private System.Windows.Forms.RadioButton shinyRadioBut;
+        private System.Windows.Forms.RadioButton normalRadioBut;
+        private System.Windows.Forms.Label Note_label;
+        private System.Windows.Forms.NumericUpDown saveSlotNUD;
+        private System.Windows.Forms.Button saveExitBut;
+        private System.Windows.Forms.Button exitBut;
+        private System.Windows.Forms.Button loadFront2bppBut;
+        private System.Windows.Forms.Button loadBack2bppBut;
     }
 }
