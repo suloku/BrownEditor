@@ -20,6 +20,7 @@ namespace BrownEditor
 
         public string loadfilter = "GameBoy ROM|*.gb|GameBoy Color ROM|*.gbc|All Files (*.*)|*.*";
         public static byte[] filebuffer;
+        public static string loadedFilePath;
         private void ButtonLoad_Click(object sender, EventArgs e)
         {
             load_file(null);
@@ -27,12 +28,13 @@ namespace BrownEditor
 
         void load_file(string filepath)
         {
-            string path = filepath;
-            int filesize = FileIO.load_file(ref filebuffer, ref path, loadfilter);
+            int filesize = FileIO.load_file(ref filebuffer, ref loadedFilePath, loadfilter);
             if (filesize > 0)
             {
                 enableEditors();
             }
+            else
+                MessageBox.Show("Error loading file");
         }
 
         private void MainForm_Load(object sender, EventArgs e)

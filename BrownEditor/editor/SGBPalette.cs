@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,8 +23,14 @@ namespace BrownEditor.editor
 
         public static int normalPalettesAddr = 0x73250;
         public static int shinyPalettesAddr = 0x725d0;
+        public static int trainerPalettesAddr = 0x726d0;
+        public static int TrainerPicAndMoneyPointers = 0x101914;
+
         private static byte[] frontbppbuffer = new byte[784];
         private static byte[] backbppbuffer = new byte[784];
+
+        private static int MonFrontSpriteAddress = 0;
+        private static int MonBackSpriteAddress = 0;
 
         private static byte[] tempbuffer;
 
@@ -31,6 +38,8 @@ namespace BrownEditor.editor
         private static byte[] external2bpp;
 
         private bool SwapColumns2bpp = true;
+
+        private bool trainerMode = false;
 
 
         Color [] CurrentPaletteColors = new Color[4];
@@ -57,15 +66,61 @@ namespace BrownEditor.editor
 
             load_palette((int)paletteIndex.Value); //Also loads images
 
-            pokemonComboBox.SelectedIndex = 5; //Default to charizard
+            pkmTrnComboBox.SelectedIndex = 5; //Default to charizard
 
 
         }
+
+        void loadPicfromRom(string romPath, int offset)
+        {
+                
+            string pkdecompPath = Path.Combine(
+                System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
+                , "pkdecomp.exe");
+            if (!File.Exists(pkdecompPath))
+                File.WriteAllBytes(pkdecompPath, Properties.Resources.pkdecomp);
+
+            ProcessStartInfo procStartInfo = new ProcessStartInfo();
+
+            procStartInfo.RedirectStandardOutput = true;
+            procStartInfo.UseShellExecute = false;
+            procStartInfo.CreateNoWindow = true;
+            procStartInfo.Arguments = "--seek " + offset.ToString() + " " + romPath;
+            procStartInfo.FileName = pkdecompPath;
+
+            pictureBox1.Visible = false;
+            loadingLabel.Text = "Loading...";
+            //MessageBox.Show(romPath);
+            // wrap IDisposable into using (in order to release hProcess) 
+            using (Process process = new Process())
+            {
+                process.StartInfo = procStartInfo;
+                process.Start();
+
+                // Add this: wait until process does its work
+                process.WaitForExit();
+
+                // and only then read the result
+                //string result = process.StandardOutput.ReadToEnd();
+                //Console.WriteLine(result);
+            }
+            external2bpp = File.ReadAllBytes(Path.Combine(System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName), "temp.2bpp"));
+            pictureBox1.Visible = true;
+            loadingLabel.Text = "";
+        }
         void reload_images(bool columnOrder)
         {
+            if (!trainerMode)
+            {
+                process_5656_2bpp(frontbppbuffer, Frontbmp, columnOrder, CurrentPaletteColors);
+                process_5656_2bpp(backbppbuffer, Backbmp, columnOrder, CurrentPaletteColors);
 
-            process_5656_2bpp(frontbppbuffer, Frontbmp, columnOrder, CurrentPaletteColors); 
-            process_5656_2bpp(backbppbuffer, Backbmp, columnOrder, CurrentPaletteColors);
+            }
+            else
+            {
+                process_5656_2bpp(external2bpp, Frontbmp, columnOrder, CurrentPaletteColors);
+            }
+
 
             pictureBox1.Image = ResizeBitmap(Frontbmp, 168, 168);
             pictureBox2.Image = ResizeBitmap(Backbmp, 168, 168);
@@ -136,7 +191,7 @@ namespace BrownEditor.editor
             }
         }
 
-        //bye[] tile: 16 byte 2bpp tile array
+        //byte[] tile: 16 byte 2bpp tile array
         byte [] gettilepixelcolors(byte [] tile)
         {
             byte [] pixels = new byte[8*8];
@@ -227,11 +282,10 @@ namespace BrownEditor.editor
                 trackBarG.Value = palettePanel0.BackColor.G;
                 trackBarB.Value = palettePanel0.BackColor.B;
 
-                /*
-                RGB15updownR.Value = sgbpalettes.RGB15(index, 'r');
-                RGB15updownG.Value = sgbpalettes.RGB15(index, 'g');
-                RGB15updownB.Value = sgbpalettes.RGB15(index, 'b');
-                */
+
+                RGB15updownR.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel0.BackColor), 'r');
+                RGB15updownG.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel0.BackColor), 'g');
+                RGB15updownB.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel0.BackColor), 'b');
 
                 panelActiveColor.BackColor = palettePanel0.BackColor;
             }
@@ -249,11 +303,9 @@ namespace BrownEditor.editor
                 trackBarG.Value = palettePanel1.BackColor.G;
                 trackBarB.Value = palettePanel1.BackColor.B;
 
-                /*
-                RGB15updownR.Value = sgbpalettes.RGB15(index, 'r');
-                RGB15updownG.Value = sgbpalettes.RGB15(index, 'g');
-                RGB15updownB.Value = sgbpalettes.RGB15(index, 'b');
-                */
+                RGB15updownR.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel1.BackColor), 'r');
+                RGB15updownG.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel1.BackColor), 'g');
+                RGB15updownB.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel1.BackColor), 'b');
 
                 panelActiveColor.BackColor = palettePanel1.BackColor;
             }
@@ -271,11 +323,9 @@ namespace BrownEditor.editor
                 trackBarG.Value = palettePanel2.BackColor.G;
                 trackBarB.Value = palettePanel2.BackColor.B;
 
-                /*
-                RGB15updownR.Value = sgbpalettes.RGB15(index, 'r');
-                RGB15updownG.Value = sgbpalettes.RGB15(index, 'g');
-                RGB15updownB.Value = sgbpalettes.RGB15(index, 'b');
-                */
+                RGB15updownR.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel2.BackColor), 'r');
+                RGB15updownG.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel2.BackColor), 'g');
+                RGB15updownB.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel2.BackColor), 'b');
 
                 panelActiveColor.BackColor = palettePanel2.BackColor;
             }
@@ -293,11 +343,9 @@ namespace BrownEditor.editor
                 trackBarG.Value = palettePanel3.BackColor.G;
                 trackBarB.Value = palettePanel3.BackColor.B;
 
-                /*
-                RGB15updownR.Value = sgbpalettes.RGB15(index, 'r');
-                RGB15updownG.Value = sgbpalettes.RGB15(index, 'g');
-                RGB15updownB.Value = sgbpalettes.RGB15(index, 'b');
-                */
+                RGB15updownR.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel3.BackColor), 'r');
+                RGB15updownG.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel3.BackColor), 'g');
+                RGB15updownB.Value = RGB15GetComponent(ConvertColortoSFC(palettePanel3.BackColor), 'b');
 
                 panelActiveColor.BackColor = palettePanel3.BackColor;
             }
@@ -419,6 +467,25 @@ namespace BrownEditor.editor
                 textboxBGR15.Text = rgb15.ToString("X");
 
             }
+        }
+
+        public UInt16 RGB15GetComponent(UInt16 color15, char rgbcol)
+        {
+            if (rgbcol == 'r')
+            {
+                return (UInt16)((color15 & 0x7C00) >> 10);
+            }
+            if (rgbcol == 'g')
+            {
+                return (UInt16)((color15 & 0x03e0) >> 5);
+            }
+            if (rgbcol == 'b')
+            {
+                return (UInt16)(color15 & 0x1f);
+            }
+
+            return color15;
+
         }
 
         public static Color ConvertSFCtoColor(int bgr15)
@@ -625,7 +692,31 @@ namespace BrownEditor.editor
             load_palette((int)paletteIndex.Value);
         }
 
+        void loadTrainerPic(int index)
+        {
+            int offset = TrainerPicAndMoneyPointers;
+            int trainerPicBank = 0x13; //All trainer sprites are in the same bank
 
+            int playerM = 0x1ff470;
+            int playerF = 0x1ff5a0;
+            if (index == 0x30)//Special case for trainer backsprite
+            {
+                loadPicfromRom(BrownEditor.MainForm.loadedFilePath, playerM);
+            }
+            else if (index == 0x31)//Special case for female trainer backsprite
+            {
+                loadPicfromRom(BrownEditor.MainForm.loadedFilePath, playerF);
+            }
+            else
+            {
+                //Calculate offset
+                offset += (5 * (index-1));
+               // MessageBox.Show("Pointer Offset: 0x" + offset.ToString("X") + " Pointer: 0x" + BitConverter.ToUInt16(tempbuffer, offset).ToString("X") +" Full Pointer 0x"+ BrownEditor.MainForm.ThreeByteToTwoByte(trainerPicBank, BitConverter.ToUInt16(tempbuffer, offset)).ToString("X"));
+                loadPicfromRom(BrownEditor.MainForm.loadedFilePath, BrownEditor.MainForm.ThreeByteToTwoByte(trainerPicBank, BitConverter.ToUInt16(tempbuffer, offset)));
+            }
+
+            reload_images(SwapColumns2bpp);
+        }
         void loadMonPic(int dexnum)
         {
             int BasesstatsOffset = 0xFC336;
@@ -634,23 +725,41 @@ namespace BrownEditor.editor
             int BackpicAddr = BasesstatsOffset + (dexnum * basestat_size)+13;
             int BankAddr = BasesstatsOffset + (dexnum * basestat_size)+27;
 
-            int truepointer = 0;
-
             UInt16 pointer = BitConverter.ToUInt16(tempbuffer, FrontpicAddr);
-            truepointer = BrownEditor.MainForm.ThreeByteToTwoByte(tempbuffer[BankAddr], pointer);
-            Buffer.BlockCopy(tempbuffer, truepointer, frontbppbuffer, 0, 784);
+            MonFrontSpriteAddress = BrownEditor.MainForm.ThreeByteToTwoByte(tempbuffer[BankAddr], pointer);
+            Buffer.BlockCopy(tempbuffer, MonFrontSpriteAddress, frontbppbuffer, 0, 784);
 
-            //Debug.WriteLine(pointer.ToString());
-            //Debug.WriteLine(truepointer.ToString());
 
             pointer = BitConverter.ToUInt16(tempbuffer, BackpicAddr);
-            truepointer = BrownEditor.MainForm.ThreeByteToTwoByte(tempbuffer[BankAddr], pointer);
-            Buffer.BlockCopy(tempbuffer, truepointer, backbppbuffer, 0, 784);
-
-            //Debug.WriteLine(pointer.ToString());
-            //Debug.WriteLine(truepointer.ToString());
+            MonBackSpriteAddress = BrownEditor.MainForm.ThreeByteToTwoByte(tempbuffer[BankAddr], pointer);
+            Buffer.BlockCopy(tempbuffer, MonBackSpriteAddress, backbppbuffer, 0, 784);
 
             reload_images(SwapColumns2bpp);
+
+        }
+
+        private int getTrainerPalette(int index)
+        {
+            if (index == 0x30 || index == 0x31) //Special case for player backsprite
+            {
+                return tempbuffer[trainerPalettesAddr + index + 0x10];
+            }
+            else
+            {
+                return tempbuffer[trainerPalettesAddr + index];
+            }
+
+        }
+        private void setTrainerPalette(int index)
+        {
+            if (index == 0x30 || index == 0x31) //Special case for player backsprite
+            {
+                tempbuffer[trainerPalettesAddr + index + 0x10] = (byte)monpaletteUD.Value;
+            }
+            else
+            {
+                tempbuffer[trainerPalettesAddr + index] = (byte)monpaletteUD.Value;
+            }
 
         }
         private int getMonPalette(int index, bool shiny)
@@ -675,8 +784,16 @@ namespace BrownEditor.editor
         }
         private void pokemonComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            loadMonPic(pokemonComboBox.SelectedIndex);
-            monpaletteUD.Value = getMonPalette(pokemonComboBox.SelectedIndex+1, shinyRadioBut.Checked);
+            if (trainerMode)
+            {
+                loadTrainerPic(pkmTrnComboBox.SelectedIndex+1);
+                monpaletteUD.Value = getTrainerPalette(pkmTrnComboBox.SelectedIndex + 1);
+            }
+            else
+            {
+                loadMonPic(pkmTrnComboBox.SelectedIndex);
+                monpaletteUD.Value = getMonPalette(pkmTrnComboBox.SelectedIndex + 1, shinyRadioBut.Checked);
+            }
         }
 
         private void monpaletteUD_ValueChanged(object sender, EventArgs e)
@@ -687,22 +804,35 @@ namespace BrownEditor.editor
 
         private void normalRadioBut_CheckedChanged(object sender, EventArgs e)
         {
-            loadMonPic(pokemonComboBox.SelectedIndex);
-            monpaletteUD.Value = getMonPalette(pokemonComboBox.SelectedIndex + 1, shinyRadioBut.Checked);
+            if (!trainerMode)
+            {
+                loadMonPic(pkmTrnComboBox.SelectedIndex);
+                monpaletteUD.Value = getMonPalette(pkmTrnComboBox.SelectedIndex + 1, shinyRadioBut.Checked);
+            }
 
         }
 
         private void shinyRadioBut_CheckedChanged(object sender, EventArgs e)
         {
-            loadMonPic(pokemonComboBox.SelectedIndex);
-            monpaletteUD.Value = getMonPalette(pokemonComboBox.SelectedIndex + 1, shinyRadioBut.Checked);
+            if (!trainerMode)
+            {
+                loadMonPic(pkmTrnComboBox.SelectedIndex);
+                monpaletteUD.Value = getMonPalette(pkmTrnComboBox.SelectedIndex + 1, shinyRadioBut.Checked);
+            }
 
         }
 
         private void saveMonPalBut_Click(object sender, EventArgs e)
         {
-            setMonPalette(pokemonComboBox.SelectedIndex + 1, shinyRadioBut.Checked);
-            MessageBox.Show("Pokémon Palette ID saved.");
+            if (trainerMode)
+            {
+                setTrainerPalette(pkmTrnComboBox.SelectedIndex + 1);
+            }
+            else
+            {
+                setMonPalette(pkmTrnComboBox.SelectedIndex + 1, shinyRadioBut.Checked);
+            }
+            MessageBox.Show("Palette ID saved.");
         }
 
         private void exitBut_Click(object sender, EventArgs e)
@@ -720,7 +850,7 @@ namespace BrownEditor.editor
         }
 
 
-        void load2bpp(bool back)
+        void load2bpp(bool back, bool inject)
         {
             MessageBox.Show("2BPP image must be exactly 784 bytes.\nGenerate it from a 4 colour 56x56 PNG image file with the following command using rgbgfx:\n\n\trgbgfx -Z -o battlesprite.2bpp battlepsrite.png.\n\n(Trainer sprites don't use the -Z option in-game, but to see one here you'll need to)");
             string filepath = null;
@@ -736,18 +866,501 @@ namespace BrownEditor.editor
                 else
                     Buffer.BlockCopy(external2bpp, 0, frontbppbuffer, 0, 784);
 
+                if (inject)
+                {
+                    if (back)
+                    {
+                        Buffer.BlockCopy(external2bpp, 0, tempbuffer, MonBackSpriteAddress, 784);
+                        MessageBox.Show("Back battle Sprite injected to ROM. Save to keep changes.");
+                    }
+                    else
+                    {
+                        Buffer.BlockCopy(external2bpp, 0, tempbuffer, MonFrontSpriteAddress, 784);
+                        MessageBox.Show("Front battle Sprite injected to ROM. Save to keep changes.");
+                    }
+                }
+
                 reload_images(SwapColumns2bpp);
             }
         }
 
         private void loadFront2bppBut_Click(object sender, EventArgs e)
         {
-            load2bpp(false);
+            load2bpp(false, false);
         }
 
         private void loadBack2bppBut_Click(object sender, EventArgs e)
         {
-            load2bpp(true);
+            load2bpp(true, false);
         }
+
+        private void pkmModeRB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (pkmModeRB.Checked) //Ensures update is only called once when toogling
+                updateMode();
+        }
+
+        private void trainerModeRB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (trainerModeRB.Checked) //Ensures update is only called once when toogling
+                updateMode();
+        }
+
+        void updateMode()
+        {
+            trainerMode = trainerModeRB.Checked;
+
+            pkmTrnComboBox.Items.Clear();
+
+            if (trainerMode)
+            {
+                //Disable backpic
+                pictureBox2.Visible = false;
+                //Disable normal/shiny buttons
+                normalRadioBut.Enabled = false;
+                shinyRadioBut.Enabled = false;
+                //Disable load buttons
+                loadFront2bppBut.Enabled = false;
+                loadBack2bppBut.Enabled = false;
+                //Disable inject buttons
+                loadinjectFrontBut.Enabled = false;
+                LoadInjectBackBut.Enabled = false;
+                //Disable export buttons
+                exportBackBut.Enabled = false;
+                exportBack2bppBut.Enabled = false;
+                exportAllBut.Enabled = false;
+
+                //Update label
+                PkmTrnLabel.Text = "Trainer";
+
+                pkmTrnComboBox.Items.AddRange(brownTrainers);
+            }
+            else //Pokémon mode
+            {
+                //Enable backpic
+                pictureBox2.Visible = true;
+                //Enable normal/shiny buttons
+                normalRadioBut.Enabled = true;
+                shinyRadioBut.Enabled = true;
+                //Enable load buttons
+                loadFront2bppBut.Enabled = true;
+                loadBack2bppBut.Enabled = true;
+                //Enable inject buttons
+                loadinjectFrontBut.Enabled = true;
+                LoadInjectBackBut.Enabled = true;
+                //Enable export buttons
+                exportBackBut.Enabled = true;
+                exportBack2bppBut.Enabled = true;
+                exportAllBut.Enabled = true;
+
+                //Update label
+                PkmTrnLabel.Text = "Pokémon";
+
+                pkmTrnComboBox.Items.AddRange(brownSpecies);
+            }
+
+            pkmTrnComboBox.SelectedIndex = 0;
+            normalRadioBut.Checked = true;
+        }
+        private string[] brownTrainers =
+        {
+            "Youngster",
+            "Bug Catcher",
+            "Lass",
+            "Sailor",
+            "Jr Trainer M",
+            "Jr Trainer F",
+            "Pokemaniac",
+            "Super Nerd",
+            "Hiker",
+            "Biker",
+            "Burglar",
+            "Engineer",
+            "Black Patrol",
+            "Fisher",
+            "Swimmer",
+            "Cue Ball",
+            "Gamber",
+            "Beauty",
+            "Psychic",
+            "Rocker",
+            "Juggler",
+            "Tamer",
+            "Bird Keeper",
+            "Blackbelt",
+            "Rival1",
+            "Red Patrol",
+            "Bugsy",
+            "Scientist",
+            "Giovanni",
+            "Rocket",
+            "Cooltrainer M",
+            "Cooltrainer F",
+            "Jared",
+            "Karpman",
+            "Lily",
+            "Sparky",
+            "Lois",
+            "Koji",
+            "Joe",
+            "Sheral",
+            "Gentleman",
+            "Rival2",
+            "Rival3",
+            "Redd",
+            "Channeler",
+            "Agatha",
+            "Drake",
+            "BrownBack",
+            "BeigeBack",
+        };
+        private string[] brownSpecies =
+        {
+            "001 - Bulbasaur",
+            "002 - Ivysaur",
+            "003 - Venusaur",
+            "004 - Charmander",
+            "005 - Charmeleon",
+            "006 - Charizard",
+            "007 - Squirtle",
+            "008 - Wartortle",
+            "009 - Blastoise",
+            "010 - Caterpie",
+            "011 - Metapod",
+            "012 - Butterfree",
+            "013 - Weedle",
+            "014 - Kakuna",
+            "015 - Beedrill",
+            "016 - Pidgey",
+            "017 - Pidgeotto",
+            "018 - Pidgeot",
+            "019 - Rattata",
+            "020 - Raticate",
+            "021 - Spearow",
+            "022 - Fearow",
+            "023 - Ekans",
+            "024 - Arbok",
+            "025 - Pikachu",
+            "026 - Raichu",
+            "027 - Sandshrew",
+            "028 - Sandslash",
+            "029 - NidoranF",
+            "030 - Nidorina",
+            "031 - Nidoqueen",
+            "032 - NidoranM",
+            "033 - Nidorino",
+            "034 - Nidoking",
+            "035 - Clefairy",
+            "036 - Clefable",
+            "037 - Vulpix",
+            "038 - Ninetales",
+            "039 - Jigglypuff",
+            "040 - Wigglytuff",
+            "041 - Zubat",
+            "042 - Golbat",
+            "043 - Oddish",
+            "044 - Gloom",
+            "045 - Vileplume",
+            "046 - Paras",
+            "047 - Parasect",
+            "048 - Venonat",
+            "049 - Venomoth",
+            "050 - Diglett",
+            "051 - Dugtrio",
+            "052 - Meowth",
+            "053 - Persian",
+            "054 - Psyduck",
+            "055 - Golduck",
+            "056 - Mankey",
+            "057 - Primeape",
+            "058 - Growlithe",
+            "059 - Arcanine",
+            "060 - Poliwag",
+            "061 - Poliwhirl",
+            "062 - Poliwrath",
+            "063 - Abra",
+            "064 - Kadabra",
+            "065 - Alakazam",
+            "066 - Machop",
+            "067 - Machoke",
+            "068 - Machamp",
+            "069 - Bellsprout",
+            "070 - Weepinbell",
+            "071 - Victreebel",
+            "072 - Tentacool",
+            "073 - Tentacruel",
+            "074 - Geodude",
+            "075 - Graveler",
+            "076 - Golem",
+            "077 - Ponyta",
+            "078 - Rapidash",
+            "079 - Slowpoke",
+            "080 - Slowbro",
+            "081 - Magnemite",
+            "082 - Magneton",
+            "083 - Farfetch'd",
+            "084 - Doduo",
+            "085 - Dodrio",
+            "086 - Seel",
+            "087 - Dewgong",
+            "088 - Grimer",
+            "089 - Muk",
+            "090 - Shellder",
+            "091 - Cloyster",
+            "092 - Gastly",
+            "093 - Haunter",
+            "094 - Gengar",
+            "095 - Onix",
+            "096 - Drowzee",
+            "097 - Hypno",
+            "098 - Krabby",
+            "099 - Kingler",
+            "100 - Voltorb",
+            "101 - Electrode",
+            "102 - Exeggcute",
+            "103 - Exeggutor",
+            "104 - Cubone",
+            "105 - Marowak",
+            "106 - Hitmonlee",
+            "107 - Hitmonchan",
+            "108 - Lickitung",
+            "109 - Koffing",
+            "110 - Weezing",
+            "111 - Rhyhorn",
+            "112 - Rhydon",
+            "113 - Chansey",
+            "114 - Tangela",
+            "115 - Kangaskhan",
+            "116 - Horsea",
+            "117 - Seadra",
+            "118 - Goldeen",
+            "119 - Seaking",
+            "120 - Staryu",
+            "121 - Starmie",
+            "122 - Mr. Mime",
+            "123 - Scyther",
+            "124 - Jynx",
+            "125 - Electabuzz",
+            "126 - Magmar",
+            "127 - Pinsir",
+            "128 - Tauros",
+            "129 - Magikarp",
+            "130 - Gyarados",
+            "131 - Lapras",
+            "132 - Ditto",
+            "133 - Eevee",
+            "134 - Vaporeon",
+            "135 - Jolteon",
+            "136 - Flareon",
+            "137 - Porygon",
+            "138 - Omanyte",
+            "139 - Omastar",
+            "140 - Kabuto",
+            "141 - Kabutops",
+            "142 - Aerodactyl",
+            "143 - Snorlax",
+            "144 - Articuno",
+            "145 - Zapdos",
+            "146 - Moltres",
+            "147 - Dratini",
+            "148 - Dragonair",
+            "149 - Dragonite",
+            "150 - Mewtwo",
+            "151 - Mew",
+            "152 - Chikorita",
+            "153 - Bayleef",
+            "154 - Meganium",
+            "155 - Cyndaquil",
+            "156 - Quilava",
+            "157 - Typhlosion",
+            "158 - Totodile",
+            "159 - Croconaw",
+            "160 - Feraligatr",
+            "161 - Houndour",
+            "162 - Houndoom",
+            "163 - Heracross",
+            "164 - Yanma",
+            "165 - Yanmega",
+            "166 - Spinarak",
+            "167 - Ariados",
+            "168 - Chinchou",
+            "169 - Lanturn",
+            "170 - Swinub",
+            "171 - Piloswine",
+            "172 - Mamoswine",
+            "173 - Natu",
+            "174 - Xatu",
+            "175 - Mareep",
+            "176 - Flaaffy",
+            "177 - Ampharos",
+            "178 - Marill",
+            "179 - Azumarill",
+            "180 - Murkrow",
+            "181 - Honchkrow",
+            "182 - Larvitar",
+            "183 - Pupitar",
+            "184 - Tyranitar",
+            "185 - Phanpy",
+            "186 - Donphan",
+            "187 - Wooper",
+            "188 - Quagsire",
+            "189 - Togepi",
+            "190 - Togetic",
+            "191 - Togekiss",
+            "192 - Gligar",
+            "193 - Gliscor",
+            "194 - Sneasel",
+            "195 - Weavile",
+            "196 - Tyrogue",
+            "197 - Hitmontop",
+            "198 - Misdreavus",
+            "199 - Mismagius",
+            "200 - Espeon",
+            "201 - Umbreon",
+            "202 - Leafeon",
+            "203 - Glaceon",
+            "204 - Magnezone",
+            "205 - Electivire",
+            "206 - Magmortar",
+            "207 - Porygon2",
+            "208 - Porygon-Z",
+            "209 - Tangrowth",
+            "210 - Scizor",
+            "211 - Steelix",
+            "212 - Slowking",
+            "213 - Kingdra",
+            "214 - Rhyperior",
+            "215 - Blissey",
+            "216 - Crobat",
+            "217 - Politoed",
+            "218 - Raikou",
+            "219 - Entei",
+            "220 - Suicune",
+            "221 - Lugia",
+            "222 - Ho-Oh",
+            "223 - Cranidos",
+            "224 - Rampardos",
+            "225 - Sylveon",
+            "226 - Annihilape",
+            "227 - G.Weezing",
+            "228 - Lickilicky",
+            "229 - ?????",
+            "230 - ?????",
+            "231 - ?????",
+            "232 - ?????",
+            "233 - ?????",
+            "234 - ?????",
+            "235 - ?????",
+            "236 - ?????",
+            "237 - ?????",
+            "238 - ?????",
+            "239 - GlitchPhancero",
+            "240 - ?????",
+            "241 - ?????",
+            "242 - ?????",
+            "243 - ?????",
+            "244 - ?????",
+            "245 - ?????",
+            "246 - ?????",
+            "247 - ?????",
+            "248 - ?????",
+            "249 - ?????",
+            "250 - ?????",
+            "251 - ?????",
+            "252 - Phancero",
+            "253 - ?????",
+            "254 - ?????",
+            "255 - ?????",
+        };
+
+        private void exportFrontBut_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = @"PNG|*.png" })
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox1.Image.Save(saveFileDialog.FileName);
+                }
+            }
+        }
+
+        private void exportBackBut_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = @"PNG|*.png" })
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    pictureBox2.Image.Save(saveFileDialog.FileName);
+                }
+            }
+        }
+
+        private void loadinjectFrontBut_Click(object sender, EventArgs e)
+        {
+            load2bpp(false, true);
+        }
+
+        private void LoadInjectBackBut_Click(object sender, EventArgs e)
+        {
+            load2bpp(true, true);
+        }
+
+        private void exportFront2bppBut_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = @"2bpp|*.2bpp" })
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllBytes(saveFileDialog.FileName, frontbppbuffer);
+                }
+            }
+        }
+
+        private void exportBack2bppBut_Click(object sender, EventArgs e)
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog() { Filter = @"2bpp|*.2bpp" })
+            {
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllBytes(saveFileDialog.FileName, backbppbuffer);
+                }
+            }
+        }
+
+        private void exportAllBut_Click(object sender, EventArgs e)
+        {
+            int tempindex = pkmTrnComboBox.SelectedIndex;
+            string exportdir;
+            string exportname;
+            exportingLabel.Text = "Exporting...";
+            //Get a directory to store the export
+            FolderBrowserDialog dlg = new FolderBrowserDialog();
+            DialogResult res = dlg.ShowDialog();
+            if (res == System.Windows.Forms.DialogResult.OK)
+            {
+                
+                exportdir = dlg.SelectedPath;
+                int i = 0;
+                for (i=0; i<255;i++)
+                {
+                    loadMonPic(i);
+                    monpaletteUD.Value = getMonPalette(i + 1, shinyRadioBut.Checked);
+                    //Build name
+                    exportname = (i+1).ToString("D3") + "_F.2bpp";
+                    File.WriteAllBytes(Path.Combine(exportdir, exportname), frontbppbuffer);
+                    exportname = (i + 1).ToString("D3") + "_B.2bpp";
+                    File.WriteAllBytes(Path.Combine(exportdir, exportname), backbppbuffer);
+                    exportname = (i + 1).ToString("D3") + "_F.png";
+                    pictureBox1.Image.Save(Path.Combine(exportdir, exportname));
+                    exportname = (i + 1).ToString("D3") + "_B.png";
+                    pictureBox2.Image.Save(Path.Combine(exportdir, exportname));
+                }
+                exportingLabel.Text = "";
+                MessageBox.Show("Export complete.");
+                pkmTrnComboBox.SelectedIndex = tempindex;
+
+            }
+        }
+
     }
 }

@@ -66,6 +66,7 @@ namespace BrownEditor
 					#region filename
 					path = openFD.FileName;
 					//MessageBox.Show(path.ToString());
+					MainForm.loadedFilePath = path;
 					#endregion
 					_read_data(ref buffer, path);
 					//MessageBox.Show(buffer.Length.ToString());

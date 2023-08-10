@@ -75,10 +75,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.savePaletteBut = new System.Windows.Forms.Button();
-            this.pokemonComboBox = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.pkmTrnComboBox = new System.Windows.Forms.ComboBox();
+            this.PkmTrnLabel = new System.Windows.Forms.Label();
             this.palSlotHexLabel = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.normalShinyGBox = new System.Windows.Forms.GroupBox();
             this.saveMonPalBut = new System.Windows.Forms.Button();
             this.monPalIndexHex = new System.Windows.Forms.Label();
             this.monpaletteUD = new System.Windows.Forms.NumericUpDown();
@@ -90,7 +90,22 @@
             this.exitBut = new System.Windows.Forms.Button();
             this.loadFront2bppBut = new System.Windows.Forms.Button();
             this.loadBack2bppBut = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.trainerModeRB = new System.Windows.Forms.RadioButton();
+            this.pkmModeRB = new System.Windows.Forms.RadioButton();
+            this.exportFrontBut = new System.Windows.Forms.Button();
+            this.exportBackBut = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.loadinjectFrontBut = new System.Windows.Forms.Button();
+            this.LoadInjectBackBut = new System.Windows.Forms.Button();
+            this.loadingLabel = new System.Windows.Forms.Label();
+            this.exportFront2bppBut = new System.Windows.Forms.Button();
+            this.exportBack2bppBut = new System.Windows.Forms.Button();
+            this.exportAllBut = new System.Windows.Forms.Button();
+            this.exportingLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
+            this.palettePanel0.SuspendLayout();
             this.groupBoxEditColor.SuspendLayout();
             this.tabControlColorformat.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -109,9 +124,11 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.normalShinyGBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.monpaletteUD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveSlotNUD)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // paletteIndex
@@ -140,6 +157,7 @@
             // 
             this.palettePanel0.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.palettePanel0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.palettePanel0.Controls.Add(this.panel1);
             this.palettePanel0.Location = new System.Drawing.Point(6, 38);
             this.palettePanel0.Name = "palettePanel0";
             this.palettePanel0.Size = new System.Drawing.Size(40, 40);
@@ -630,10 +648,10 @@
             this.savePaletteBut.UseVisualStyleBackColor = true;
             this.savePaletteBut.Click += new System.EventHandler(this.savePaletteBut_Click);
             // 
-            // pokemonComboBox
+            // pkmTrnComboBox
             // 
-            this.pokemonComboBox.FormattingEnabled = true;
-            this.pokemonComboBox.Items.AddRange(new object[] {
+            this.pkmTrnComboBox.FormattingEnabled = true;
+            this.pkmTrnComboBox.Items.AddRange(new object[] {
             "001 - Bulbasaur",
             "002 - Ivysaur",
             "003 - Venusaur",
@@ -889,20 +907,20 @@
             "253 - ?????",
             "254 - ?????",
             "255 - ?????"});
-            this.pokemonComboBox.Location = new System.Drawing.Point(513, 34);
-            this.pokemonComboBox.Name = "pokemonComboBox";
-            this.pokemonComboBox.Size = new System.Drawing.Size(180, 21);
-            this.pokemonComboBox.TabIndex = 14;
-            this.pokemonComboBox.SelectedIndexChanged += new System.EventHandler(this.pokemonComboBox_SelectedIndexChanged);
+            this.pkmTrnComboBox.Location = new System.Drawing.Point(513, 34);
+            this.pkmTrnComboBox.Name = "pkmTrnComboBox";
+            this.pkmTrnComboBox.Size = new System.Drawing.Size(168, 21);
+            this.pkmTrnComboBox.TabIndex = 14;
+            this.pkmTrnComboBox.SelectedIndexChanged += new System.EventHandler(this.pokemonComboBox_SelectedIndexChanged);
             // 
-            // label7
+            // PkmTrnLabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(510, 18);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Pokémon";
+            this.PkmTrnLabel.AutoSize = true;
+            this.PkmTrnLabel.Location = new System.Drawing.Point(510, 18);
+            this.PkmTrnLabel.Name = "PkmTrnLabel";
+            this.PkmTrnLabel.Size = new System.Drawing.Size(52, 13);
+            this.PkmTrnLabel.TabIndex = 15;
+            this.PkmTrnLabel.Text = "Pokémon";
             // 
             // palSlotHexLabel
             // 
@@ -913,27 +931,27 @@
             this.palSlotHexLabel.TabIndex = 16;
             this.palSlotHexLabel.Text = "0x00";
             // 
-            // groupBox2
+            // normalShinyGBox
             // 
-            this.groupBox2.Controls.Add(this.saveMonPalBut);
-            this.groupBox2.Controls.Add(this.monPalIndexHex);
-            this.groupBox2.Controls.Add(this.monpaletteUD);
-            this.groupBox2.Controls.Add(this.shinyRadioBut);
-            this.groupBox2.Controls.Add(this.normalRadioBut);
-            this.groupBox2.Location = new System.Drawing.Point(708, 77);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(80, 190);
-            this.groupBox2.TabIndex = 17;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Palette";
+            this.normalShinyGBox.Controls.Add(this.monPalIndexHex);
+            this.normalShinyGBox.Controls.Add(this.monpaletteUD);
+            this.normalShinyGBox.Controls.Add(this.saveMonPalBut);
+            this.normalShinyGBox.Controls.Add(this.shinyRadioBut);
+            this.normalShinyGBox.Controls.Add(this.normalRadioBut);
+            this.normalShinyGBox.Location = new System.Drawing.Point(773, 74);
+            this.normalShinyGBox.Name = "normalShinyGBox";
+            this.normalShinyGBox.Size = new System.Drawing.Size(80, 190);
+            this.normalShinyGBox.TabIndex = 17;
+            this.normalShinyGBox.TabStop = false;
+            this.normalShinyGBox.Text = "Palette";
             // 
             // saveMonPalBut
             // 
-            this.saveMonPalBut.Location = new System.Drawing.Point(6, 133);
+            this.saveMonPalBut.Location = new System.Drawing.Point(6, 132);
             this.saveMonPalBut.Name = "saveMonPalBut";
-            this.saveMonPalBut.Size = new System.Drawing.Size(68, 43);
+            this.saveMonPalBut.Size = new System.Drawing.Size(68, 47);
             this.saveMonPalBut.TabIndex = 19;
-            this.saveMonPalBut.Text = "Save Mon Palette";
+            this.saveMonPalBut.Text = "Save Palette Index";
             this.saveMonPalBut.UseVisualStyleBackColor = true;
             this.saveMonPalBut.Click += new System.EventHandler(this.saveMonPalBut_Click);
             // 
@@ -1007,7 +1025,7 @@
             // 
             // saveExitBut
             // 
-            this.saveExitBut.Location = new System.Drawing.Point(36, 461);
+            this.saveExitBut.Location = new System.Drawing.Point(36, 440);
             this.saveExitBut.Name = "saveExitBut";
             this.saveExitBut.Size = new System.Drawing.Size(174, 34);
             this.saveExitBut.TabIndex = 22;
@@ -1017,7 +1035,7 @@
             // 
             // exitBut
             // 
-            this.exitBut.Location = new System.Drawing.Point(512, 461);
+            this.exitBut.Location = new System.Drawing.Point(582, 440);
             this.exitBut.Name = "exitBut";
             this.exitBut.Size = new System.Drawing.Size(174, 34);
             this.exitBut.TabIndex = 23;
@@ -1027,7 +1045,7 @@
             // 
             // loadFront2bppBut
             // 
-            this.loadFront2bppBut.Location = new System.Drawing.Point(714, 281);
+            this.loadFront2bppBut.Location = new System.Drawing.Point(680, 71);
             this.loadFront2bppBut.Name = "loadFront2bppBut";
             this.loadFront2bppBut.Size = new System.Drawing.Size(69, 39);
             this.loadFront2bppBut.TabIndex = 24;
@@ -1037,7 +1055,7 @@
             // 
             // loadBack2bppBut
             // 
-            this.loadBack2bppBut.Location = new System.Drawing.Point(714, 331);
+            this.loadBack2bppBut.Location = new System.Drawing.Point(681, 242);
             this.loadBack2bppBut.Name = "loadBack2bppBut";
             this.loadBack2bppBut.Size = new System.Drawing.Size(68, 39);
             this.loadBack2bppBut.TabIndex = 25;
@@ -1045,21 +1063,169 @@
             this.loadBack2bppBut.UseVisualStyleBackColor = true;
             this.loadBack2bppBut.Click += new System.EventHandler(this.loadBack2bppBut_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.trainerModeRB);
+            this.groupBox3.Controls.Add(this.pkmModeRB);
+            this.groupBox3.Location = new System.Drawing.Point(239, 7);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(159, 65);
+            this.groupBox3.TabIndex = 26;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Mode";
+            // 
+            // trainerModeRB
+            // 
+            this.trainerModeRB.AutoSize = true;
+            this.trainerModeRB.Location = new System.Drawing.Point(18, 39);
+            this.trainerModeRB.Name = "trainerModeRB";
+            this.trainerModeRB.Size = new System.Drawing.Size(88, 17);
+            this.trainerModeRB.TabIndex = 1;
+            this.trainerModeRB.Text = "Trainer Mode";
+            this.trainerModeRB.UseVisualStyleBackColor = true;
+            this.trainerModeRB.CheckedChanged += new System.EventHandler(this.trainerModeRB_CheckedChanged);
+            // 
+            // pkmModeRB
+            // 
+            this.pkmModeRB.AutoSize = true;
+            this.pkmModeRB.Checked = true;
+            this.pkmModeRB.Location = new System.Drawing.Point(18, 19);
+            this.pkmModeRB.Name = "pkmModeRB";
+            this.pkmModeRB.Size = new System.Drawing.Size(100, 17);
+            this.pkmModeRB.TabIndex = 0;
+            this.pkmModeRB.TabStop = true;
+            this.pkmModeRB.Text = "Pokémon Mode";
+            this.pkmModeRB.UseVisualStyleBackColor = true;
+            this.pkmModeRB.CheckedChanged += new System.EventHandler(this.pkmModeRB_CheckedChanged);
+            // 
+            // exportFrontBut
+            // 
+            this.exportFrontBut.Location = new System.Drawing.Point(680, 164);
+            this.exportFrontBut.Name = "exportFrontBut";
+            this.exportFrontBut.Size = new System.Drawing.Size(69, 36);
+            this.exportFrontBut.TabIndex = 27;
+            this.exportFrontBut.Text = "Export Front PNG";
+            this.exportFrontBut.UseVisualStyleBackColor = true;
+            this.exportFrontBut.Click += new System.EventHandler(this.exportFrontBut_Click);
+            // 
+            // exportBackBut
+            // 
+            this.exportBackBut.Location = new System.Drawing.Point(682, 336);
+            this.exportBackBut.Name = "exportBackBut";
+            this.exportBackBut.Size = new System.Drawing.Size(68, 36);
+            this.exportBackBut.TabIndex = 28;
+            this.exportBackBut.Text = "Export Back PNG";
+            this.exportBackBut.UseVisualStyleBackColor = true;
+            this.exportBackBut.Click += new System.EventHandler(this.exportBackBut_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.exportingLabel);
+            this.groupBox2.Controls.Add(this.exportAllBut);
+            this.groupBox2.Controls.Add(this.exportBack2bppBut);
+            this.groupBox2.Controls.Add(this.loadFront2bppBut);
+            this.groupBox2.Controls.Add(this.exportFront2bppBut);
+            this.groupBox2.Controls.Add(this.loadingLabel);
+            this.groupBox2.Controls.Add(this.loadBack2bppBut);
+            this.groupBox2.Controls.Add(this.exportBackBut);
+            this.groupBox2.Controls.Add(this.LoadInjectBackBut);
+            this.groupBox2.Controls.Add(this.exportFrontBut);
+            this.groupBox2.Controls.Add(this.loadinjectFrontBut);
+            this.groupBox2.Controls.Add(this.groupBox3);
+            this.groupBox2.Location = new System.Drawing.Point(7, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(855, 431);
+            this.groupBox2.TabIndex = 29;
+            this.groupBox2.TabStop = false;
+            // 
+            // loadinjectFrontBut
+            // 
+            this.loadinjectFrontBut.Location = new System.Drawing.Point(680, 113);
+            this.loadinjectFrontBut.Name = "loadinjectFrontBut";
+            this.loadinjectFrontBut.Size = new System.Drawing.Size(69, 48);
+            this.loadinjectFrontBut.TabIndex = 30;
+            this.loadinjectFrontBut.Text = "Load and Inject Front 2bpp";
+            this.loadinjectFrontBut.UseVisualStyleBackColor = true;
+            this.loadinjectFrontBut.Click += new System.EventHandler(this.loadinjectFrontBut_Click);
+            // 
+            // LoadInjectBackBut
+            // 
+            this.LoadInjectBackBut.Location = new System.Drawing.Point(681, 285);
+            this.LoadInjectBackBut.Name = "LoadInjectBackBut";
+            this.LoadInjectBackBut.Size = new System.Drawing.Size(69, 48);
+            this.LoadInjectBackBut.TabIndex = 31;
+            this.LoadInjectBackBut.Text = "Load and Inject Back 2bpp";
+            this.LoadInjectBackBut.UseVisualStyleBackColor = true;
+            this.LoadInjectBackBut.Click += new System.EventHandler(this.LoadInjectBackBut_Click);
+            // 
+            // loadingLabel
+            // 
+            this.loadingLabel.AutoSize = true;
+            this.loadingLabel.Location = new System.Drawing.Point(572, 146);
+            this.loadingLabel.Name = "loadingLabel";
+            this.loadingLabel.Size = new System.Drawing.Size(0, 13);
+            this.loadingLabel.TabIndex = 30;
+            // 
+            // exportFront2bppBut
+            // 
+            this.exportFront2bppBut.Location = new System.Drawing.Point(680, 201);
+            this.exportFront2bppBut.Name = "exportFront2bppBut";
+            this.exportFront2bppBut.Size = new System.Drawing.Size(69, 36);
+            this.exportFront2bppBut.TabIndex = 32;
+            this.exportFront2bppBut.Text = "Export Front 2bpp";
+            this.exportFront2bppBut.UseVisualStyleBackColor = true;
+            this.exportFront2bppBut.Click += new System.EventHandler(this.exportFront2bppBut_Click);
+            // 
+            // exportBack2bppBut
+            // 
+            this.exportBack2bppBut.Location = new System.Drawing.Point(682, 374);
+            this.exportBack2bppBut.Name = "exportBack2bppBut";
+            this.exportBack2bppBut.Size = new System.Drawing.Size(68, 36);
+            this.exportBack2bppBut.TabIndex = 33;
+            this.exportBack2bppBut.Text = "Export Back 2bpp";
+            this.exportBack2bppBut.UseVisualStyleBackColor = true;
+            this.exportBack2bppBut.Click += new System.EventHandler(this.exportBack2bppBut_Click);
+            // 
+            // exportAllBut
+            // 
+            this.exportAllBut.Location = new System.Drawing.Point(772, 341);
+            this.exportAllBut.Name = "exportAllBut";
+            this.exportAllBut.Size = new System.Drawing.Size(68, 69);
+            this.exportAllBut.TabIndex = 34;
+            this.exportAllBut.Text = "Export all mon as PNG and 2bpp";
+            this.exportAllBut.UseVisualStyleBackColor = true;
+            this.exportAllBut.Click += new System.EventHandler(this.exportAllBut_Click);
+            // 
+            // exportingLabel
+            // 
+            this.exportingLabel.AutoSize = true;
+            this.exportingLabel.Location = new System.Drawing.Point(769, 325);
+            this.exportingLabel.Name = "exportingLabel";
+            this.exportingLabel.Size = new System.Drawing.Size(0, 13);
+            this.exportingLabel.TabIndex = 35;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Location = new System.Drawing.Point(-1, -1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(40, 40);
+            this.panel1.TabIndex = 3;
+            // 
             // SGBPalette
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 507);
-            this.Controls.Add(this.loadBack2bppBut);
-            this.Controls.Add(this.loadFront2bppBut);
+            this.ClientSize = new System.Drawing.Size(868, 491);
             this.Controls.Add(this.exitBut);
             this.Controls.Add(this.saveExitBut);
             this.Controls.Add(this.saveSlotNUD);
             this.Controls.Add(this.Note_label);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.normalShinyGBox);
             this.Controls.Add(this.palSlotHexLabel);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.pokemonComboBox);
+            this.Controls.Add(this.PkmTrnLabel);
+            this.Controls.Add(this.pkmTrnComboBox);
             this.Controls.Add(this.savePaletteBut);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxEditColor);
@@ -1067,9 +1233,11 @@
             this.Controls.Add(this.paletteIndex);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.groupBox2);
             this.Name = "SGBPalette";
             this.Text = "SGBPalette";
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).EndInit();
+            this.palettePanel0.ResumeLayout(false);
             this.groupBoxEditColor.ResumeLayout(false);
             this.groupBoxEditColor.PerformLayout();
             this.tabControlColorformat.ResumeLayout(false);
@@ -1091,10 +1259,14 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.normalShinyGBox.ResumeLayout(false);
+            this.normalShinyGBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.monpaletteUD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.saveSlotNUD)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1149,10 +1321,10 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button savePaletteBut;
         private System.Windows.Forms.Button ReloadPaletteBut;
-        private System.Windows.Forms.ComboBox pokemonComboBox;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox pkmTrnComboBox;
+        private System.Windows.Forms.Label PkmTrnLabel;
         private System.Windows.Forms.Label palSlotHexLabel;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox normalShinyGBox;
         private System.Windows.Forms.Button saveMonPalBut;
         private System.Windows.Forms.Label monPalIndexHex;
         private System.Windows.Forms.NumericUpDown monpaletteUD;
@@ -1164,5 +1336,19 @@
         private System.Windows.Forms.Button exitBut;
         private System.Windows.Forms.Button loadFront2bppBut;
         private System.Windows.Forms.Button loadBack2bppBut;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.RadioButton trainerModeRB;
+        private System.Windows.Forms.RadioButton pkmModeRB;
+        private System.Windows.Forms.Button exportFrontBut;
+        private System.Windows.Forms.Button exportBackBut;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button LoadInjectBackBut;
+        private System.Windows.Forms.Button loadinjectFrontBut;
+        private System.Windows.Forms.Label loadingLabel;
+        private System.Windows.Forms.Button exportBack2bppBut;
+        private System.Windows.Forms.Button exportFront2bppBut;
+        private System.Windows.Forms.Button exportAllBut;
+        private System.Windows.Forms.Label exportingLabel;
+        private System.Windows.Forms.Panel panel1;
     }
 }
