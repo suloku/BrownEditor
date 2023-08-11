@@ -740,9 +740,13 @@ namespace BrownEditor.editor
 
         private int getTrainerPalette(int index)
         {
-            if (index == 0x30 || index == 0x31) //Special case for player backsprite
+            if (index == 0x30) //Special case for player backsprite
             {
-                return tempbuffer[trainerPalettesAddr + index + 0x10];
+                return tempbuffer[trainerPalettesAddr + index-1 + 0x10];
+            }
+            else if (index == 0x31) //Special case for female player backsprite
+            {
+                return tempbuffer[trainerPalettesAddr + index-2 + 0x10];
             }
             else
             {
@@ -752,9 +756,13 @@ namespace BrownEditor.editor
         }
         private void setTrainerPalette(int index)
         {
-            if (index == 0x30 || index == 0x31) //Special case for player backsprite
+            if (index == 0x30) //Special case for player backsprite
             {
-                tempbuffer[trainerPalettesAddr + index + 0x10] = (byte)monpaletteUD.Value;
+                tempbuffer[trainerPalettesAddr + index-1 + 0x10] = (byte)monpaletteUD.Value;
+            }
+            else if (index == 0x31) //Special case for female player backsprite
+            {
+                tempbuffer[trainerPalettesAddr + index-2 + 0x10] = (byte)monpaletteUD.Value;
             }
             else
             {
@@ -1359,6 +1367,180 @@ namespace BrownEditor.editor
                 MessageBox.Show("Export complete.");
                 pkmTrnComboBox.SelectedIndex = tempindex;
 
+            }
+        }
+
+        private void loadColorToEditor(Color color)
+        {
+            autoupdate = false;
+
+            panelActiveColor.BackColor = color;
+
+
+            RGBupdownR.Value = panelActiveColor.BackColor.R;
+            RGBupdownG.Value = panelActiveColor.BackColor.G;
+            RGBupdownB.Value = panelActiveColor.BackColor.B;
+
+            RGBHupdownR.Value = panelActiveColor.BackColor.R;
+            RGBHupdownG.Value = panelActiveColor.BackColor.G;
+            RGBHupdownB.Value = panelActiveColor.BackColor.B;
+
+            trackBarR.Value = panelActiveColor.BackColor.R;
+            trackBarG.Value = panelActiveColor.BackColor.G;
+            trackBarB.Value = panelActiveColor.BackColor.B;
+
+
+            RGB15updownR.Value = ((ConvertColortoSFC(panelActiveColor.BackColor) & 0x7C00) >> 10);
+            RGB15updownG.Value = ((ConvertColortoSFC(panelActiveColor.BackColor) & 0x03e0) >> 5);
+            RGB15updownB.Value = (ConvertColortoSFC(panelActiveColor.BackColor) & 0x1f);
+
+            textboxRGBHex.Text = panelActiveColor.BackColor.R.ToString("X2") + panelActiveColor.BackColor.G.ToString("X2") + panelActiveColor.BackColor.B.ToString("X2");
+            textboxBGR15.Text = ConvertColortoSFC(panelActiveColor.BackColor).ToString("X");
+
+            autoupdate = true;
+        }
+
+        private void storedColor0_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor0.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor0.BackColor);
+            }
+        }
+
+        private void storedColor1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor1.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor1.BackColor);
+            }
+        }
+
+        private void storedColor2_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor2.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor2.BackColor);
+            }
+        }
+
+        private void storedColor3_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor3.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor3.BackColor);
+            }
+        }
+
+        private void storedColor4_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor4.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor4.BackColor);
+            }
+        }
+
+        private void storedColor5_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor5.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor5.BackColor);
+            }
+        }
+
+        private void storedColor6_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor6.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor6.BackColor);
+            }
+        }
+
+        private void storedColor7_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor7.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor7.BackColor);
+            }
+        }
+
+        private void storedColor8_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor8.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor8.BackColor);
+            }
+        }
+
+        private void storedColor9_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor9.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor9.BackColor);
+            }
+        }
+
+        private void storedColor10_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor10.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor10.BackColor);
+            }
+        }
+
+        private void storedColor11_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                storedColor11.BackColor = panelActiveColor.BackColor;
+            }
+            else
+            {
+                loadColorToEditor(storedColor11.BackColor);
             }
         }
 

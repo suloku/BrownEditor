@@ -36,10 +36,19 @@
             this.palettePanel3 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBoxEditColor = new System.Windows.Forms.GroupBox();
-            this.ReloadPaletteBut = new System.Windows.Forms.Button();
-            this.panelActiveColor = new System.Windows.Forms.Panel();
-            this.tabControlColorformat = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.storedColor11 = new System.Windows.Forms.Panel();
+            this.storedColor10 = new System.Windows.Forms.Panel();
+            this.storedColor9 = new System.Windows.Forms.Panel();
+            this.storedColor8 = new System.Windows.Forms.Panel();
+            this.storedColor7 = new System.Windows.Forms.Panel();
+            this.storedColor6 = new System.Windows.Forms.Panel();
+            this.storedColor5 = new System.Windows.Forms.Panel();
+            this.storedColor4 = new System.Windows.Forms.Panel();
+            this.storedColor3 = new System.Windows.Forms.Panel();
+            this.storedColor2 = new System.Windows.Forms.Panel();
+            this.storedColor1 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.storedColor0 = new System.Windows.Forms.Panel();
             this.RGBupdownB = new System.Windows.Forms.NumericUpDown();
             this.RGBupdownG = new System.Windows.Forms.NumericUpDown();
             this.RGBupdownR = new System.Windows.Forms.NumericUpDown();
@@ -58,6 +67,8 @@
             this.labelHex = new System.Windows.Forms.Label();
             this.labelDec = new System.Windows.Forms.Label();
             this.labelRed = new System.Windows.Forms.Label();
+            this.ReloadPaletteBut = new System.Windows.Forms.Button();
+            this.panelActiveColor = new System.Windows.Forms.Panel();
             this.labelSet = new System.Windows.Forms.Label();
             this.textboxRGBHex = new System.Windows.Forms.TextBox();
             this.labelSnescolor = new System.Windows.Forms.Label();
@@ -79,9 +90,9 @@
             this.PkmTrnLabel = new System.Windows.Forms.Label();
             this.palSlotHexLabel = new System.Windows.Forms.Label();
             this.normalShinyGBox = new System.Windows.Forms.GroupBox();
-            this.saveMonPalBut = new System.Windows.Forms.Button();
             this.monPalIndexHex = new System.Windows.Forms.Label();
             this.monpaletteUD = new System.Windows.Forms.NumericUpDown();
+            this.saveMonPalBut = new System.Windows.Forms.Button();
             this.shinyRadioBut = new System.Windows.Forms.RadioButton();
             this.normalRadioBut = new System.Windows.Forms.RadioButton();
             this.Note_label = new System.Windows.Forms.Label();
@@ -96,19 +107,15 @@
             this.exportFrontBut = new System.Windows.Forms.Button();
             this.exportBackBut = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.loadinjectFrontBut = new System.Windows.Forms.Button();
-            this.LoadInjectBackBut = new System.Windows.Forms.Button();
-            this.loadingLabel = new System.Windows.Forms.Label();
-            this.exportFront2bppBut = new System.Windows.Forms.Button();
-            this.exportBack2bppBut = new System.Windows.Forms.Button();
-            this.exportAllBut = new System.Windows.Forms.Button();
             this.exportingLabel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.exportAllBut = new System.Windows.Forms.Button();
+            this.exportBack2bppBut = new System.Windows.Forms.Button();
+            this.exportFront2bppBut = new System.Windows.Forms.Button();
+            this.loadingLabel = new System.Windows.Forms.Label();
+            this.LoadInjectBackBut = new System.Windows.Forms.Button();
+            this.loadinjectFrontBut = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
-            this.palettePanel0.SuspendLayout();
             this.groupBoxEditColor.SuspendLayout();
-            this.tabControlColorformat.SuspendLayout();
-            this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RGBupdownB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RGBupdownG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RGBupdownR)).BeginInit();
@@ -157,7 +164,6 @@
             // 
             this.palettePanel0.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.palettePanel0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.palettePanel0.Controls.Add(this.panel1);
             this.palettePanel0.Location = new System.Drawing.Point(6, 38);
             this.palettePanel0.Name = "palettePanel0";
             this.palettePanel0.Size = new System.Drawing.Size(40, 40);
@@ -205,9 +211,39 @@
             // 
             // groupBoxEditColor
             // 
+            this.groupBoxEditColor.Controls.Add(this.storedColor11);
+            this.groupBoxEditColor.Controls.Add(this.storedColor10);
+            this.groupBoxEditColor.Controls.Add(this.storedColor9);
+            this.groupBoxEditColor.Controls.Add(this.storedColor8);
+            this.groupBoxEditColor.Controls.Add(this.storedColor7);
+            this.groupBoxEditColor.Controls.Add(this.storedColor6);
+            this.groupBoxEditColor.Controls.Add(this.storedColor5);
+            this.groupBoxEditColor.Controls.Add(this.storedColor4);
+            this.groupBoxEditColor.Controls.Add(this.storedColor3);
+            this.groupBoxEditColor.Controls.Add(this.storedColor2);
+            this.groupBoxEditColor.Controls.Add(this.storedColor1);
+            this.groupBoxEditColor.Controls.Add(this.label7);
+            this.groupBoxEditColor.Controls.Add(this.storedColor0);
+            this.groupBoxEditColor.Controls.Add(this.RGBupdownB);
+            this.groupBoxEditColor.Controls.Add(this.RGBupdownG);
+            this.groupBoxEditColor.Controls.Add(this.RGBupdownR);
+            this.groupBoxEditColor.Controls.Add(this.RGBHupdownB);
+            this.groupBoxEditColor.Controls.Add(this.RGBHupdownG);
+            this.groupBoxEditColor.Controls.Add(this.RGBHupdownR);
+            this.groupBoxEditColor.Controls.Add(this.RGB15updownB);
+            this.groupBoxEditColor.Controls.Add(this.RGB15updownG);
+            this.groupBoxEditColor.Controls.Add(this.RGB15updownR);
+            this.groupBoxEditColor.Controls.Add(this.label3);
+            this.groupBoxEditColor.Controls.Add(this.trackBarB);
+            this.groupBoxEditColor.Controls.Add(this.trackBarG);
+            this.groupBoxEditColor.Controls.Add(this.trackBarR);
+            this.groupBoxEditColor.Controls.Add(this.labelBlue);
+            this.groupBoxEditColor.Controls.Add(this.labelGreen);
+            this.groupBoxEditColor.Controls.Add(this.labelHex);
+            this.groupBoxEditColor.Controls.Add(this.labelDec);
+            this.groupBoxEditColor.Controls.Add(this.labelRed);
             this.groupBoxEditColor.Controls.Add(this.ReloadPaletteBut);
             this.groupBoxEditColor.Controls.Add(this.panelActiveColor);
-            this.groupBoxEditColor.Controls.Add(this.tabControlColorformat);
             this.groupBoxEditColor.Controls.Add(this.labelSet);
             this.groupBoxEditColor.Controls.Add(this.textboxRGBHex);
             this.groupBoxEditColor.Controls.Add(this.labelSnescolor);
@@ -223,7 +259,337 @@
             this.groupBoxEditColor.Size = new System.Drawing.Size(392, 303);
             this.groupBoxEditColor.TabIndex = 6;
             this.groupBoxEditColor.TabStop = false;
-            this.groupBoxEditColor.Text = "Edit color";
+            this.groupBoxEditColor.Text = "Edit color (RGB)";
+            // 
+            // storedColor11
+            // 
+            this.storedColor11.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor11.Location = new System.Drawing.Point(357, 169);
+            this.storedColor11.Name = "storedColor11";
+            this.storedColor11.Size = new System.Drawing.Size(15, 15);
+            this.storedColor11.TabIndex = 114;
+            this.storedColor11.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor11_MouseClick);
+            // 
+            // storedColor10
+            // 
+            this.storedColor10.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor10.Location = new System.Drawing.Point(336, 169);
+            this.storedColor10.Name = "storedColor10";
+            this.storedColor10.Size = new System.Drawing.Size(15, 15);
+            this.storedColor10.TabIndex = 114;
+            this.storedColor10.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor10_MouseClick);
+            // 
+            // storedColor9
+            // 
+            this.storedColor9.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor9.Location = new System.Drawing.Point(315, 169);
+            this.storedColor9.Name = "storedColor9";
+            this.storedColor9.Size = new System.Drawing.Size(15, 15);
+            this.storedColor9.TabIndex = 114;
+            this.storedColor9.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor9_MouseClick);
+            // 
+            // storedColor8
+            // 
+            this.storedColor8.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor8.Location = new System.Drawing.Point(294, 169);
+            this.storedColor8.Name = "storedColor8";
+            this.storedColor8.Size = new System.Drawing.Size(15, 15);
+            this.storedColor8.TabIndex = 114;
+            this.storedColor8.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor8_MouseClick);
+            // 
+            // storedColor7
+            // 
+            this.storedColor7.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor7.Location = new System.Drawing.Point(273, 169);
+            this.storedColor7.Name = "storedColor7";
+            this.storedColor7.Size = new System.Drawing.Size(15, 15);
+            this.storedColor7.TabIndex = 114;
+            this.storedColor7.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor7_MouseClick);
+            // 
+            // storedColor6
+            // 
+            this.storedColor6.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor6.Location = new System.Drawing.Point(252, 169);
+            this.storedColor6.Name = "storedColor6";
+            this.storedColor6.Size = new System.Drawing.Size(15, 15);
+            this.storedColor6.TabIndex = 114;
+            this.storedColor6.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor6_MouseClick);
+            // 
+            // storedColor5
+            // 
+            this.storedColor5.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor5.Location = new System.Drawing.Point(231, 169);
+            this.storedColor5.Name = "storedColor5";
+            this.storedColor5.Size = new System.Drawing.Size(15, 15);
+            this.storedColor5.TabIndex = 114;
+            this.storedColor5.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor5_MouseClick);
+            // 
+            // storedColor4
+            // 
+            this.storedColor4.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor4.Location = new System.Drawing.Point(208, 169);
+            this.storedColor4.Name = "storedColor4";
+            this.storedColor4.Size = new System.Drawing.Size(15, 15);
+            this.storedColor4.TabIndex = 114;
+            this.storedColor4.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor4_MouseClick);
+            // 
+            // storedColor3
+            // 
+            this.storedColor3.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor3.Location = new System.Drawing.Point(187, 169);
+            this.storedColor3.Name = "storedColor3";
+            this.storedColor3.Size = new System.Drawing.Size(15, 15);
+            this.storedColor3.TabIndex = 114;
+            this.storedColor3.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor3_MouseClick);
+            // 
+            // storedColor2
+            // 
+            this.storedColor2.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor2.Location = new System.Drawing.Point(166, 169);
+            this.storedColor2.Name = "storedColor2";
+            this.storedColor2.Size = new System.Drawing.Size(15, 15);
+            this.storedColor2.TabIndex = 114;
+            this.storedColor2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor2_MouseClick);
+            // 
+            // storedColor1
+            // 
+            this.storedColor1.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor1.Location = new System.Drawing.Point(144, 169);
+            this.storedColor1.Name = "storedColor1";
+            this.storedColor1.Size = new System.Drawing.Size(15, 15);
+            this.storedColor1.TabIndex = 114;
+            this.storedColor1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor1_MouseClick);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(17, 166);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(96, 26);
+            this.label7.TabIndex = 0;
+            this.label7.Text = "     Temp Colors\n(right click to store)";
+            // 
+            // storedColor0
+            // 
+            this.storedColor0.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.storedColor0.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.storedColor0.Location = new System.Drawing.Point(123, 169);
+            this.storedColor0.Name = "storedColor0";
+            this.storedColor0.Size = new System.Drawing.Size(15, 15);
+            this.storedColor0.TabIndex = 113;
+            this.storedColor0.MouseClick += new System.Windows.Forms.MouseEventHandler(this.storedColor0_MouseClick);
+            // 
+            // RGBupdownB
+            // 
+            this.RGBupdownB.Location = new System.Drawing.Point(216, 119);
+            this.RGBupdownB.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.RGBupdownB.Name = "RGBupdownB";
+            this.RGBupdownB.Size = new System.Drawing.Size(48, 20);
+            this.RGBupdownB.TabIndex = 131;
+            this.RGBupdownB.ValueChanged += new System.EventHandler(this.RGBupdown_ValueChanged);
+            // 
+            // RGBupdownG
+            // 
+            this.RGBupdownG.Location = new System.Drawing.Point(216, 79);
+            this.RGBupdownG.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.RGBupdownG.Name = "RGBupdownG";
+            this.RGBupdownG.Size = new System.Drawing.Size(48, 20);
+            this.RGBupdownG.TabIndex = 130;
+            this.RGBupdownG.ValueChanged += new System.EventHandler(this.RGBupdown_ValueChanged);
+            // 
+            // RGBupdownR
+            // 
+            this.RGBupdownR.Location = new System.Drawing.Point(216, 38);
+            this.RGBupdownR.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.RGBupdownR.Name = "RGBupdownR";
+            this.RGBupdownR.Size = new System.Drawing.Size(48, 20);
+            this.RGBupdownR.TabIndex = 129;
+            this.RGBupdownR.ValueChanged += new System.EventHandler(this.RGBupdown_ValueChanged);
+            // 
+            // RGBHupdownB
+            // 
+            this.RGBHupdownB.Hexadecimal = true;
+            this.RGBHupdownB.Location = new System.Drawing.Point(270, 119);
+            this.RGBHupdownB.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.RGBHupdownB.Name = "RGBHupdownB";
+            this.RGBHupdownB.Size = new System.Drawing.Size(48, 20);
+            this.RGBHupdownB.TabIndex = 128;
+            this.RGBHupdownB.ValueChanged += new System.EventHandler(this.RGBHupdown_ValueChanged);
+            // 
+            // RGBHupdownG
+            // 
+            this.RGBHupdownG.Hexadecimal = true;
+            this.RGBHupdownG.Location = new System.Drawing.Point(270, 79);
+            this.RGBHupdownG.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.RGBHupdownG.Name = "RGBHupdownG";
+            this.RGBHupdownG.Size = new System.Drawing.Size(48, 20);
+            this.RGBHupdownG.TabIndex = 127;
+            this.RGBHupdownG.ValueChanged += new System.EventHandler(this.RGBHupdown_ValueChanged);
+            // 
+            // RGBHupdownR
+            // 
+            this.RGBHupdownR.Hexadecimal = true;
+            this.RGBHupdownR.Location = new System.Drawing.Point(270, 38);
+            this.RGBHupdownR.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.RGBHupdownR.Name = "RGBHupdownR";
+            this.RGBHupdownR.Size = new System.Drawing.Size(48, 20);
+            this.RGBHupdownR.TabIndex = 126;
+            this.RGBHupdownR.ValueChanged += new System.EventHandler(this.RGBHupdown_ValueChanged);
+            // 
+            // RGB15updownB
+            // 
+            this.RGB15updownB.Location = new System.Drawing.Point(324, 119);
+            this.RGB15updownB.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.RGB15updownB.Name = "RGB15updownB";
+            this.RGB15updownB.Size = new System.Drawing.Size(48, 20);
+            this.RGB15updownB.TabIndex = 125;
+            this.RGB15updownB.ValueChanged += new System.EventHandler(this.RGB15updown_ValueChanged);
+            // 
+            // RGB15updownG
+            // 
+            this.RGB15updownG.Location = new System.Drawing.Point(324, 79);
+            this.RGB15updownG.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.RGB15updownG.Name = "RGB15updownG";
+            this.RGB15updownG.Size = new System.Drawing.Size(48, 20);
+            this.RGB15updownG.TabIndex = 124;
+            this.RGB15updownG.ValueChanged += new System.EventHandler(this.RGB15updown_ValueChanged);
+            // 
+            // RGB15updownR
+            // 
+            this.RGB15updownR.Location = new System.Drawing.Point(324, 38);
+            this.RGB15updownR.Maximum = new decimal(new int[] {
+            31,
+            0,
+            0,
+            0});
+            this.RGB15updownR.Name = "RGB15updownR";
+            this.RGB15updownR.Size = new System.Drawing.Size(48, 20);
+            this.RGB15updownR.TabIndex = 114;
+            this.RGB15updownR.ValueChanged += new System.EventHandler(this.RGB15updown_ValueChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(330, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 13);
+            this.label3.TabIndex = 123;
+            this.label3.Text = "RGB15";
+            // 
+            // trackBarB
+            // 
+            this.trackBarB.Location = new System.Drawing.Point(50, 118);
+            this.trackBarB.Maximum = 255;
+            this.trackBarB.Name = "trackBarB";
+            this.trackBarB.Size = new System.Drawing.Size(164, 45);
+            this.trackBarB.TabIndex = 122;
+            this.trackBarB.ValueChanged += new System.EventHandler(this.trackBarChanged);
+            // 
+            // trackBarG
+            // 
+            this.trackBarG.Location = new System.Drawing.Point(51, 78);
+            this.trackBarG.Maximum = 255;
+            this.trackBarG.Name = "trackBarG";
+            this.trackBarG.Size = new System.Drawing.Size(164, 45);
+            this.trackBarG.TabIndex = 121;
+            this.trackBarG.ValueChanged += new System.EventHandler(this.trackBarChanged);
+            // 
+            // trackBarR
+            // 
+            this.trackBarR.Location = new System.Drawing.Point(51, 37);
+            this.trackBarR.Maximum = 255;
+            this.trackBarR.Name = "trackBarR";
+            this.trackBarR.Size = new System.Drawing.Size(164, 45);
+            this.trackBarR.TabIndex = 120;
+            this.trackBarR.ValueChanged += new System.EventHandler(this.trackBarChanged);
+            // 
+            // labelBlue
+            // 
+            this.labelBlue.AutoSize = true;
+            this.labelBlue.Location = new System.Drawing.Point(17, 119);
+            this.labelBlue.Name = "labelBlue";
+            this.labelBlue.Size = new System.Drawing.Size(28, 13);
+            this.labelBlue.TabIndex = 118;
+            this.labelBlue.Text = "Blue";
+            // 
+            // labelGreen
+            // 
+            this.labelGreen.AutoSize = true;
+            this.labelGreen.Location = new System.Drawing.Point(17, 79);
+            this.labelGreen.Name = "labelGreen";
+            this.labelGreen.Size = new System.Drawing.Size(36, 13);
+            this.labelGreen.TabIndex = 117;
+            this.labelGreen.Text = "Green";
+            // 
+            // labelHex
+            // 
+            this.labelHex.AutoSize = true;
+            this.labelHex.Location = new System.Drawing.Point(281, 19);
+            this.labelHex.Name = "labelHex";
+            this.labelHex.Size = new System.Drawing.Size(26, 13);
+            this.labelHex.TabIndex = 116;
+            this.labelHex.Text = "Hex";
+            // 
+            // labelDec
+            // 
+            this.labelDec.AutoSize = true;
+            this.labelDec.Location = new System.Drawing.Point(226, 19);
+            this.labelDec.Name = "labelDec";
+            this.labelDec.Size = new System.Drawing.Size(27, 13);
+            this.labelDec.TabIndex = 119;
+            this.labelDec.Text = "Dec";
+            // 
+            // labelRed
+            // 
+            this.labelRed.AutoSize = true;
+            this.labelRed.Location = new System.Drawing.Point(17, 39);
+            this.labelRed.Name = "labelRed";
+            this.labelRed.Size = new System.Drawing.Size(27, 13);
+            this.labelRed.TabIndex = 115;
+            this.labelRed.Text = "Red";
             // 
             // ReloadPaletteBut
             // 
@@ -243,244 +609,6 @@
             this.panelActiveColor.Name = "panelActiveColor";
             this.panelActiveColor.Size = new System.Drawing.Size(44, 44);
             this.panelActiveColor.TabIndex = 99;
-            // 
-            // tabControlColorformat
-            // 
-            this.tabControlColorformat.Controls.Add(this.tabPage1);
-            this.tabControlColorformat.Location = new System.Drawing.Point(7, 20);
-            this.tabControlColorformat.Name = "tabControlColorformat";
-            this.tabControlColorformat.SelectedIndex = 0;
-            this.tabControlColorformat.Size = new System.Drawing.Size(379, 178);
-            this.tabControlColorformat.TabIndex = 3;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.SystemColors.Menu;
-            this.tabPage1.Controls.Add(this.RGBupdownB);
-            this.tabPage1.Controls.Add(this.RGBupdownG);
-            this.tabPage1.Controls.Add(this.RGBupdownR);
-            this.tabPage1.Controls.Add(this.RGBHupdownB);
-            this.tabPage1.Controls.Add(this.RGBHupdownG);
-            this.tabPage1.Controls.Add(this.RGBHupdownR);
-            this.tabPage1.Controls.Add(this.RGB15updownB);
-            this.tabPage1.Controls.Add(this.RGB15updownG);
-            this.tabPage1.Controls.Add(this.RGB15updownR);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.trackBarB);
-            this.tabPage1.Controls.Add(this.trackBarG);
-            this.tabPage1.Controls.Add(this.trackBarR);
-            this.tabPage1.Controls.Add(this.labelBlue);
-            this.tabPage1.Controls.Add(this.labelGreen);
-            this.tabPage1.Controls.Add(this.labelHex);
-            this.tabPage1.Controls.Add(this.labelDec);
-            this.tabPage1.Controls.Add(this.labelRed);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(371, 152);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "RGB";
-            // 
-            // RGBupdownB
-            // 
-            this.RGBupdownB.Location = new System.Drawing.Point(212, 107);
-            this.RGBupdownB.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.RGBupdownB.Name = "RGBupdownB";
-            this.RGBupdownB.Size = new System.Drawing.Size(48, 20);
-            this.RGBupdownB.TabIndex = 112;
-            this.RGBupdownB.ValueChanged += new System.EventHandler(this.RGBupdown_ValueChanged);
-            // 
-            // RGBupdownG
-            // 
-            this.RGBupdownG.Location = new System.Drawing.Point(212, 67);
-            this.RGBupdownG.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.RGBupdownG.Name = "RGBupdownG";
-            this.RGBupdownG.Size = new System.Drawing.Size(48, 20);
-            this.RGBupdownG.TabIndex = 111;
-            this.RGBupdownG.ValueChanged += new System.EventHandler(this.RGBupdown_ValueChanged);
-            // 
-            // RGBupdownR
-            // 
-            this.RGBupdownR.Location = new System.Drawing.Point(212, 26);
-            this.RGBupdownR.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.RGBupdownR.Name = "RGBupdownR";
-            this.RGBupdownR.Size = new System.Drawing.Size(48, 20);
-            this.RGBupdownR.TabIndex = 110;
-            this.RGBupdownR.ValueChanged += new System.EventHandler(this.RGBupdown_ValueChanged);
-            // 
-            // RGBHupdownB
-            // 
-            this.RGBHupdownB.Hexadecimal = true;
-            this.RGBHupdownB.Location = new System.Drawing.Point(266, 107);
-            this.RGBHupdownB.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.RGBHupdownB.Name = "RGBHupdownB";
-            this.RGBHupdownB.Size = new System.Drawing.Size(48, 20);
-            this.RGBHupdownB.TabIndex = 109;
-            this.RGBHupdownB.ValueChanged += new System.EventHandler(this.RGBHupdown_ValueChanged);
-            // 
-            // RGBHupdownG
-            // 
-            this.RGBHupdownG.Hexadecimal = true;
-            this.RGBHupdownG.Location = new System.Drawing.Point(266, 67);
-            this.RGBHupdownG.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.RGBHupdownG.Name = "RGBHupdownG";
-            this.RGBHupdownG.Size = new System.Drawing.Size(48, 20);
-            this.RGBHupdownG.TabIndex = 108;
-            this.RGBHupdownG.ValueChanged += new System.EventHandler(this.RGBHupdown_ValueChanged);
-            // 
-            // RGBHupdownR
-            // 
-            this.RGBHupdownR.Hexadecimal = true;
-            this.RGBHupdownR.Location = new System.Drawing.Point(266, 26);
-            this.RGBHupdownR.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.RGBHupdownR.Name = "RGBHupdownR";
-            this.RGBHupdownR.Size = new System.Drawing.Size(48, 20);
-            this.RGBHupdownR.TabIndex = 107;
-            this.RGBHupdownR.ValueChanged += new System.EventHandler(this.RGBHupdown_ValueChanged);
-            // 
-            // RGB15updownB
-            // 
-            this.RGB15updownB.Location = new System.Drawing.Point(320, 107);
-            this.RGB15updownB.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.RGB15updownB.Name = "RGB15updownB";
-            this.RGB15updownB.Size = new System.Drawing.Size(48, 20);
-            this.RGB15updownB.TabIndex = 106;
-            this.RGB15updownB.ValueChanged += new System.EventHandler(this.RGB15updown_ValueChanged);
-            // 
-            // RGB15updownG
-            // 
-            this.RGB15updownG.Location = new System.Drawing.Point(320, 67);
-            this.RGB15updownG.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.RGB15updownG.Name = "RGB15updownG";
-            this.RGB15updownG.Size = new System.Drawing.Size(48, 20);
-            this.RGB15updownG.TabIndex = 105;
-            this.RGB15updownG.ValueChanged += new System.EventHandler(this.RGB15updown_ValueChanged);
-            // 
-            // RGB15updownR
-            // 
-            this.RGB15updownR.Location = new System.Drawing.Point(320, 26);
-            this.RGB15updownR.Maximum = new decimal(new int[] {
-            31,
-            0,
-            0,
-            0});
-            this.RGB15updownR.Name = "RGB15updownR";
-            this.RGB15updownR.Size = new System.Drawing.Size(48, 20);
-            this.RGB15updownR.TabIndex = 7;
-            this.RGB15updownR.ValueChanged += new System.EventHandler(this.RGB15updown_ValueChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(326, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 13);
-            this.label3.TabIndex = 104;
-            this.label3.Text = "RGB15";
-            // 
-            // trackBarB
-            // 
-            this.trackBarB.Location = new System.Drawing.Point(46, 106);
-            this.trackBarB.Maximum = 255;
-            this.trackBarB.Name = "trackBarB";
-            this.trackBarB.Size = new System.Drawing.Size(164, 45);
-            this.trackBarB.TabIndex = 102;
-            this.trackBarB.ValueChanged += new System.EventHandler(this.trackBarChanged);
-            // 
-            // trackBarG
-            // 
-            this.trackBarG.Location = new System.Drawing.Point(47, 66);
-            this.trackBarG.Maximum = 255;
-            this.trackBarG.Name = "trackBarG";
-            this.trackBarG.Size = new System.Drawing.Size(164, 45);
-            this.trackBarG.TabIndex = 101;
-            this.trackBarG.ValueChanged += new System.EventHandler(this.trackBarChanged);
-            // 
-            // trackBarR
-            // 
-            this.trackBarR.Location = new System.Drawing.Point(47, 25);
-            this.trackBarR.Maximum = 255;
-            this.trackBarR.Name = "trackBarR";
-            this.trackBarR.Size = new System.Drawing.Size(164, 45);
-            this.trackBarR.TabIndex = 100;
-            this.trackBarR.ValueChanged += new System.EventHandler(this.trackBarChanged);
-            // 
-            // labelBlue
-            // 
-            this.labelBlue.AutoSize = true;
-            this.labelBlue.Location = new System.Drawing.Point(13, 107);
-            this.labelBlue.Name = "labelBlue";
-            this.labelBlue.Size = new System.Drawing.Size(28, 13);
-            this.labelBlue.TabIndex = 99;
-            this.labelBlue.Text = "Blue";
-            // 
-            // labelGreen
-            // 
-            this.labelGreen.AutoSize = true;
-            this.labelGreen.Location = new System.Drawing.Point(13, 67);
-            this.labelGreen.Name = "labelGreen";
-            this.labelGreen.Size = new System.Drawing.Size(36, 13);
-            this.labelGreen.TabIndex = 99;
-            this.labelGreen.Text = "Green";
-            // 
-            // labelHex
-            // 
-            this.labelHex.AutoSize = true;
-            this.labelHex.Location = new System.Drawing.Point(277, 7);
-            this.labelHex.Name = "labelHex";
-            this.labelHex.Size = new System.Drawing.Size(26, 13);
-            this.labelHex.TabIndex = 99;
-            this.labelHex.Text = "Hex";
-            // 
-            // labelDec
-            // 
-            this.labelDec.AutoSize = true;
-            this.labelDec.Location = new System.Drawing.Point(222, 7);
-            this.labelDec.Name = "labelDec";
-            this.labelDec.Size = new System.Drawing.Size(27, 13);
-            this.labelDec.TabIndex = 99;
-            this.labelDec.Text = "Dec";
-            // 
-            // labelRed
-            // 
-            this.labelRed.AutoSize = true;
-            this.labelRed.Location = new System.Drawing.Point(13, 27);
-            this.labelRed.Name = "labelRed";
-            this.labelRed.Size = new System.Drawing.Size(27, 13);
-            this.labelRed.TabIndex = 99;
-            this.labelRed.Text = "Red";
             // 
             // labelSet
             // 
@@ -945,16 +1073,6 @@
             this.normalShinyGBox.TabStop = false;
             this.normalShinyGBox.Text = "Palette";
             // 
-            // saveMonPalBut
-            // 
-            this.saveMonPalBut.Location = new System.Drawing.Point(6, 132);
-            this.saveMonPalBut.Name = "saveMonPalBut";
-            this.saveMonPalBut.Size = new System.Drawing.Size(68, 47);
-            this.saveMonPalBut.TabIndex = 19;
-            this.saveMonPalBut.Text = "Save Palette Index";
-            this.saveMonPalBut.UseVisualStyleBackColor = true;
-            this.saveMonPalBut.Click += new System.EventHandler(this.saveMonPalBut_Click);
-            // 
             // monPalIndexHex
             // 
             this.monPalIndexHex.AutoSize = true;
@@ -976,6 +1094,16 @@
             this.monpaletteUD.Size = new System.Drawing.Size(68, 20);
             this.monpaletteUD.TabIndex = 18;
             this.monpaletteUD.ValueChanged += new System.EventHandler(this.monpaletteUD_ValueChanged);
+            // 
+            // saveMonPalBut
+            // 
+            this.saveMonPalBut.Location = new System.Drawing.Point(6, 132);
+            this.saveMonPalBut.Name = "saveMonPalBut";
+            this.saveMonPalBut.Size = new System.Drawing.Size(68, 47);
+            this.saveMonPalBut.TabIndex = 19;
+            this.saveMonPalBut.Text = "Save Palette Index";
+            this.saveMonPalBut.UseVisualStyleBackColor = true;
+            this.saveMonPalBut.Click += new System.EventHandler(this.saveMonPalBut_Click);
             // 
             // shinyRadioBut
             // 
@@ -1138,53 +1266,13 @@
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
             // 
-            // loadinjectFrontBut
+            // exportingLabel
             // 
-            this.loadinjectFrontBut.Location = new System.Drawing.Point(680, 113);
-            this.loadinjectFrontBut.Name = "loadinjectFrontBut";
-            this.loadinjectFrontBut.Size = new System.Drawing.Size(69, 48);
-            this.loadinjectFrontBut.TabIndex = 30;
-            this.loadinjectFrontBut.Text = "Load and Inject Front 2bpp";
-            this.loadinjectFrontBut.UseVisualStyleBackColor = true;
-            this.loadinjectFrontBut.Click += new System.EventHandler(this.loadinjectFrontBut_Click);
-            // 
-            // LoadInjectBackBut
-            // 
-            this.LoadInjectBackBut.Location = new System.Drawing.Point(681, 285);
-            this.LoadInjectBackBut.Name = "LoadInjectBackBut";
-            this.LoadInjectBackBut.Size = new System.Drawing.Size(69, 48);
-            this.LoadInjectBackBut.TabIndex = 31;
-            this.LoadInjectBackBut.Text = "Load and Inject Back 2bpp";
-            this.LoadInjectBackBut.UseVisualStyleBackColor = true;
-            this.LoadInjectBackBut.Click += new System.EventHandler(this.LoadInjectBackBut_Click);
-            // 
-            // loadingLabel
-            // 
-            this.loadingLabel.AutoSize = true;
-            this.loadingLabel.Location = new System.Drawing.Point(572, 146);
-            this.loadingLabel.Name = "loadingLabel";
-            this.loadingLabel.Size = new System.Drawing.Size(0, 13);
-            this.loadingLabel.TabIndex = 30;
-            // 
-            // exportFront2bppBut
-            // 
-            this.exportFront2bppBut.Location = new System.Drawing.Point(680, 201);
-            this.exportFront2bppBut.Name = "exportFront2bppBut";
-            this.exportFront2bppBut.Size = new System.Drawing.Size(69, 36);
-            this.exportFront2bppBut.TabIndex = 32;
-            this.exportFront2bppBut.Text = "Export Front 2bpp";
-            this.exportFront2bppBut.UseVisualStyleBackColor = true;
-            this.exportFront2bppBut.Click += new System.EventHandler(this.exportFront2bppBut_Click);
-            // 
-            // exportBack2bppBut
-            // 
-            this.exportBack2bppBut.Location = new System.Drawing.Point(682, 374);
-            this.exportBack2bppBut.Name = "exportBack2bppBut";
-            this.exportBack2bppBut.Size = new System.Drawing.Size(68, 36);
-            this.exportBack2bppBut.TabIndex = 33;
-            this.exportBack2bppBut.Text = "Export Back 2bpp";
-            this.exportBack2bppBut.UseVisualStyleBackColor = true;
-            this.exportBack2bppBut.Click += new System.EventHandler(this.exportBack2bppBut_Click);
+            this.exportingLabel.AutoSize = true;
+            this.exportingLabel.Location = new System.Drawing.Point(769, 325);
+            this.exportingLabel.Name = "exportingLabel";
+            this.exportingLabel.Size = new System.Drawing.Size(0, 13);
+            this.exportingLabel.TabIndex = 35;
             // 
             // exportAllBut
             // 
@@ -1196,22 +1284,53 @@
             this.exportAllBut.UseVisualStyleBackColor = true;
             this.exportAllBut.Click += new System.EventHandler(this.exportAllBut_Click);
             // 
-            // exportingLabel
+            // exportBack2bppBut
             // 
-            this.exportingLabel.AutoSize = true;
-            this.exportingLabel.Location = new System.Drawing.Point(769, 325);
-            this.exportingLabel.Name = "exportingLabel";
-            this.exportingLabel.Size = new System.Drawing.Size(0, 13);
-            this.exportingLabel.TabIndex = 35;
+            this.exportBack2bppBut.Location = new System.Drawing.Point(682, 374);
+            this.exportBack2bppBut.Name = "exportBack2bppBut";
+            this.exportBack2bppBut.Size = new System.Drawing.Size(68, 36);
+            this.exportBack2bppBut.TabIndex = 33;
+            this.exportBack2bppBut.Text = "Export Back 2bpp";
+            this.exportBack2bppBut.UseVisualStyleBackColor = true;
+            this.exportBack2bppBut.Click += new System.EventHandler(this.exportBack2bppBut_Click);
             // 
-            // panel1
+            // exportFront2bppBut
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Location = new System.Drawing.Point(-1, -1);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(40, 40);
-            this.panel1.TabIndex = 3;
+            this.exportFront2bppBut.Location = new System.Drawing.Point(680, 201);
+            this.exportFront2bppBut.Name = "exportFront2bppBut";
+            this.exportFront2bppBut.Size = new System.Drawing.Size(69, 36);
+            this.exportFront2bppBut.TabIndex = 32;
+            this.exportFront2bppBut.Text = "Export Front 2bpp";
+            this.exportFront2bppBut.UseVisualStyleBackColor = true;
+            this.exportFront2bppBut.Click += new System.EventHandler(this.exportFront2bppBut_Click);
+            // 
+            // loadingLabel
+            // 
+            this.loadingLabel.AutoSize = true;
+            this.loadingLabel.Location = new System.Drawing.Point(572, 146);
+            this.loadingLabel.Name = "loadingLabel";
+            this.loadingLabel.Size = new System.Drawing.Size(0, 13);
+            this.loadingLabel.TabIndex = 30;
+            // 
+            // LoadInjectBackBut
+            // 
+            this.LoadInjectBackBut.Location = new System.Drawing.Point(681, 285);
+            this.LoadInjectBackBut.Name = "LoadInjectBackBut";
+            this.LoadInjectBackBut.Size = new System.Drawing.Size(69, 48);
+            this.LoadInjectBackBut.TabIndex = 31;
+            this.LoadInjectBackBut.Text = "Load and Inject Back 2bpp";
+            this.LoadInjectBackBut.UseVisualStyleBackColor = true;
+            this.LoadInjectBackBut.Click += new System.EventHandler(this.LoadInjectBackBut_Click);
+            // 
+            // loadinjectFrontBut
+            // 
+            this.loadinjectFrontBut.Location = new System.Drawing.Point(680, 113);
+            this.loadinjectFrontBut.Name = "loadinjectFrontBut";
+            this.loadinjectFrontBut.Size = new System.Drawing.Size(69, 48);
+            this.loadinjectFrontBut.TabIndex = 30;
+            this.loadinjectFrontBut.Text = "Load and Inject Front 2bpp";
+            this.loadinjectFrontBut.UseVisualStyleBackColor = true;
+            this.loadinjectFrontBut.Click += new System.EventHandler(this.loadinjectFrontBut_Click);
             // 
             // SGBPalette
             // 
@@ -1237,12 +1356,8 @@
             this.Name = "SGBPalette";
             this.Text = "SGBPalette";
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).EndInit();
-            this.palettePanel0.ResumeLayout(false);
             this.groupBoxEditColor.ResumeLayout(false);
             this.groupBoxEditColor.PerformLayout();
-            this.tabControlColorformat.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RGBupdownB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RGBupdownG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RGBupdownR)).EndInit();
@@ -1283,17 +1398,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBoxEditColor;
         private System.Windows.Forms.Panel panelActiveColor;
-        private System.Windows.Forms.TabControl tabControlColorformat;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TrackBar trackBarB;
-        private System.Windows.Forms.TrackBar trackBarG;
-        private System.Windows.Forms.TrackBar trackBarR;
-        private System.Windows.Forms.Label labelBlue;
-        private System.Windows.Forms.Label labelGreen;
-        private System.Windows.Forms.Label labelHex;
-        private System.Windows.Forms.Label labelDec;
-        private System.Windows.Forms.Label labelRed;
         private System.Windows.Forms.Label labelSet;
         private System.Windows.Forms.TextBox textboxRGBHex;
         private System.Windows.Forms.Label labelSnescolor;
@@ -1304,19 +1408,10 @@
         private System.Windows.Forms.Button setPal2;
         private System.Windows.Forms.Button setPal3;
         private System.Windows.Forms.Panel panelColorbg;
-        private System.Windows.Forms.NumericUpDown RGB15updownB;
-        private System.Windows.Forms.NumericUpDown RGB15updownG;
-        private System.Windows.Forms.NumericUpDown RGB15updownR;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown RGBupdownB;
-        private System.Windows.Forms.NumericUpDown RGBupdownG;
-        private System.Windows.Forms.NumericUpDown RGBupdownR;
-        private System.Windows.Forms.NumericUpDown RGBHupdownB;
-        private System.Windows.Forms.NumericUpDown RGBHupdownG;
-        private System.Windows.Forms.NumericUpDown RGBHupdownR;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button savePaletteBut;
@@ -1349,6 +1444,36 @@
         private System.Windows.Forms.Button exportFront2bppBut;
         private System.Windows.Forms.Button exportAllBut;
         private System.Windows.Forms.Label exportingLabel;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel storedColor11;
+        private System.Windows.Forms.Panel storedColor10;
+        private System.Windows.Forms.Panel storedColor9;
+        private System.Windows.Forms.Panel storedColor8;
+        private System.Windows.Forms.Panel storedColor7;
+        private System.Windows.Forms.Panel storedColor6;
+        private System.Windows.Forms.Panel storedColor5;
+        private System.Windows.Forms.Panel storedColor4;
+        private System.Windows.Forms.Panel storedColor3;
+        private System.Windows.Forms.Panel storedColor2;
+        private System.Windows.Forms.Panel storedColor1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Panel storedColor0;
+        private System.Windows.Forms.NumericUpDown RGBupdownB;
+        private System.Windows.Forms.NumericUpDown RGBupdownG;
+        private System.Windows.Forms.NumericUpDown RGBupdownR;
+        private System.Windows.Forms.NumericUpDown RGBHupdownB;
+        private System.Windows.Forms.NumericUpDown RGBHupdownG;
+        private System.Windows.Forms.NumericUpDown RGBHupdownR;
+        private System.Windows.Forms.NumericUpDown RGB15updownB;
+        private System.Windows.Forms.NumericUpDown RGB15updownG;
+        private System.Windows.Forms.NumericUpDown RGB15updownR;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TrackBar trackBarB;
+        private System.Windows.Forms.TrackBar trackBarG;
+        private System.Windows.Forms.TrackBar trackBarR;
+        private System.Windows.Forms.Label labelBlue;
+        private System.Windows.Forms.Label labelGreen;
+        private System.Windows.Forms.Label labelHex;
+        private System.Windows.Forms.Label labelDec;
+        private System.Windows.Forms.Label labelRed;
     }
 }
