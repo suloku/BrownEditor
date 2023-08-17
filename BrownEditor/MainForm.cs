@@ -78,7 +78,18 @@ namespace BrownEditor
 
         public static int ThreeByteToTwoByte(int bank, UInt16 off)
         {
-            return ((bank * 0x4000) + (off - 0x4000));
+            if (off < 0x4000)
+            {
+                return off;
+            }
+            else if (off >= 0x8000)
+            {
+                return -1;
+            }
+            else
+            {
+                return ((bank * 0x4000) + (off - 0x4000));
+            }
         }
         public static int getBank(int off)
         {
