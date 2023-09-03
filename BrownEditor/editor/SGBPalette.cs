@@ -211,10 +211,21 @@ namespace BrownEditor.editor
 
         void UpdateDrawingColors()
         {
-            CurrentPaletteColors[0] = palettePanel0.BackColor;
+            if (forcecolorCB.Checked)
+            {
+                //Force color 0 and 3 to white and black (the game does this for in-battle sprites)
+                CurrentPaletteColors[0] = Color.FromArgb(255, 255, 239, 255);
+                CurrentPaletteColors[3] = Color.FromArgb(255, 0, 0, 0);
+
+            }
+            else
+            {
+                CurrentPaletteColors[0] = palettePanel0.BackColor;
+                CurrentPaletteColors[3] = palettePanel3.BackColor;
+            }
+
             CurrentPaletteColors[1] = palettePanel1.BackColor;
             CurrentPaletteColors[2] = palettePanel2.BackColor;
-            CurrentPaletteColors[3] = palettePanel3.BackColor;
         }
 
         void load_palette(int index)
@@ -695,7 +706,7 @@ namespace BrownEditor.editor
         void loadTrainerPic(int index)
         {
             int offset = TrainerPicAndMoneyPointers;
-            int trainerPicBank = 0x13; //All trainer sprites are in the same bank
+            int trainerPicBank = 0x77; //All trainer sprites are in the same bank
 
             int playerM = 0x1ff470;
             int playerF = 0x1ff5a0;
@@ -1544,5 +1555,11 @@ namespace BrownEditor.editor
             }
         }
 
+        private void forcecolorCB_CheckedChanged(object sender, EventArgs e)
+        {
+
+            UpdateDrawingColors();
+            reload_images(SwapColumns2bpp);
+        }
     }
 }

@@ -107,6 +107,7 @@
             this.exportFrontBut = new System.Windows.Forms.Button();
             this.exportBackBut = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.forcecolorCB = new System.Windows.Forms.CheckBox();
             this.exportingLabel = new System.Windows.Forms.Label();
             this.exportAllBut = new System.Windows.Forms.Button();
             this.exportBack2bppBut = new System.Windows.Forms.Button();
@@ -1248,6 +1249,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.forcecolorCB);
             this.groupBox2.Controls.Add(this.exportingLabel);
             this.groupBox2.Controls.Add(this.exportAllBut);
             this.groupBox2.Controls.Add(this.exportBack2bppBut);
@@ -1265,6 +1267,19 @@
             this.groupBox2.Size = new System.Drawing.Size(855, 431);
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
+            // 
+            // forcecolorCB
+            // 
+            this.forcecolorCB.AutoSize = true;
+            this.forcecolorCB.Checked = true;
+            this.forcecolorCB.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.forcecolorCB.Location = new System.Drawing.Point(408, 21);
+            this.forcecolorCB.Name = "forcecolorCB";
+            this.forcecolorCB.Size = new System.Drawing.Size(79, 30);
+            this.forcecolorCB.TabIndex = 36;
+            this.forcecolorCB.Text = "Force color\n  0 and 3";
+            this.forcecolorCB.UseVisualStyleBackColor = true;
+            this.forcecolorCB.CheckedChanged += new System.EventHandler(this.forcecolorCB_CheckedChanged);
             // 
             // exportingLabel
             // 
@@ -1475,5 +1490,6 @@
         private System.Windows.Forms.Label labelHex;
         private System.Windows.Forms.Label labelDec;
         private System.Windows.Forms.Label labelRed;
+        private System.Windows.Forms.CheckBox forcecolorCB;
     }
 }

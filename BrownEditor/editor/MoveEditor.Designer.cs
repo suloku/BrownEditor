@@ -719,7 +719,7 @@
             "084 - LEECH_SEED_EFFECT",
             "085 - SPLASH_EFFECT",
             "086 - DISABLE_EFFECT",
-            "087 - ",
+            "087 - ATTACK_UP1_SIDE_EFFECT (BROWN)",
             "088 - ",
             "089 - ",
             "090 - ",
