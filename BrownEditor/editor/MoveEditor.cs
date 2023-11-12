@@ -95,22 +95,26 @@ namespace BrownEditor.editor
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-			SelectedMove.SelectedIndex = dataGridView1.CurrentRow.Index;
+			//SelectedMove.SelectedIndex = dataGridView1.CurrentRow.Index;
+			SelectedMove.SelectedIndex = (int)dataGridView1.CurrentRow.Cells[0].Value - 1;
 		}
 
 		private void dataGridView1_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-			SelectedMove.SelectedIndex = dataGridView1.CurrentRow.Index;
+			//SelectedMove.SelectedIndex = dataGridView1.CurrentRow.Index;
+			SelectedMove.SelectedIndex = (int)dataGridView1.CurrentRow.Cells[0].Value - 1;
 		}
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-			SelectedMove.SelectedIndex = dataGridView1.CurrentRow.Index;
+			//SelectedMove.SelectedIndex = dataGridView1.CurrentRow.Index;
+			SelectedMove.SelectedIndex = (int)dataGridView1.CurrentRow.Cells[0].Value - 1;
 		}
 
         private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
         {
-			SelectedMove.SelectedIndex = dataGridView1.CurrentRow.Index;
+			//SelectedMove.SelectedIndex = dataGridView1.CurrentRow.Index;
+			SelectedMove.SelectedIndex = (int)dataGridView1.CurrentRow.Cells[0].Value - 1;
 		}
 
         private void dataGridView1_KeyPress(object sender, KeyPressEventArgs e)
@@ -120,7 +124,8 @@ namespace BrownEditor.editor
 
         private void dataGridView1_KeyUp(object sender, KeyEventArgs e)
         {
-			SelectedMove.SelectedIndex = dataGridView1.CurrentRow.Index;
+			//SelectedMove.SelectedIndex = dataGridView1.CurrentRow.Index;
+			SelectedMove.SelectedIndex = (int)dataGridView1.CurrentRow.Cells[0].Value - 1;
 		}
 
         private void moveAccuracy_ValueChanged(object sender, EventArgs e)

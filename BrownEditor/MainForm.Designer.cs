@@ -36,6 +36,7 @@
             this.tmhmBut = new System.Windows.Forms.Button();
             this.wildBut = new System.Windows.Forms.Button();
             this.SGBPaletteBut = new System.Windows.Forms.Button();
+            this.gymBut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ButtonLoad
@@ -124,11 +125,23 @@
             this.SGBPaletteBut.UseVisualStyleBackColor = true;
             this.SGBPaletteBut.Click += new System.EventHandler(this.SGBPaletteBut_Click);
             // 
+            // gymBut
+            // 
+            this.gymBut.Enabled = false;
+            this.gymBut.Location = new System.Drawing.Point(12, 162);
+            this.gymBut.Name = "gymBut";
+            this.gymBut.Size = new System.Drawing.Size(106, 23);
+            this.gymBut.TabIndex = 8;
+            this.gymBut.Text = "Gym/E4 Editor";
+            this.gymBut.UseVisualStyleBackColor = true;
+            this.gymBut.Click += new System.EventHandler(this.gymBut_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 164);
+            this.ClientSize = new System.Drawing.Size(240, 194);
+            this.Controls.Add(this.gymBut);
             this.Controls.Add(this.SGBPaletteBut);
             this.Controls.Add(this.wildBut);
             this.Controls.Add(this.tmhmBut);
@@ -154,6 +167,7 @@
         private System.Windows.Forms.Button tmhmBut;
         private System.Windows.Forms.Button wildBut;
         private System.Windows.Forms.Button SGBPaletteBut;
+        private System.Windows.Forms.Button gymBut;
     }
 }
 

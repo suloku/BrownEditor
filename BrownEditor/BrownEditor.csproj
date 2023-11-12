@@ -86,6 +86,12 @@
     <Compile Include="editor\evomoves.Designer.cs">
       <DependentUpon>evomoves.cs</DependentUpon>
     </Compile>
+    <Compile Include="editor\gymEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="editor\gymEditor.Designer.cs">
+      <DependentUpon>gymEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="editor\MoveEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +127,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="editor\evomoves.resx">
       <DependentUpon>evomoves.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="editor\gymEditor.resx">
+      <DependentUpon>gymEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="editor\MoveEditor.resx">
       <DependentUpon>MoveEditor.cs</DependentUpon>

@@ -62,6 +62,7 @@ namespace BrownEditor
             this.evomovesBut.Enabled = true;
             this.wildBut.Enabled = true;
             this.SGBPaletteBut.Enabled = true;
+            this.gymBut.Enabled = true;
         }
 
         private void BaseStatsEditorBut_Click(object sender, EventArgs e)
@@ -110,6 +111,12 @@ namespace BrownEditor
         {
             Form sgbpalette = new BrownEditor.editor.SGBPalette();
             sgbpalette.ShowDialog();
+        }
+
+        private void gymBut_Click(object sender, EventArgs e)
+        {
+            Form gymeditor = new BrownEditor.editor.gymEditor();
+            gymeditor.ShowDialog();
         }
     }
 }
