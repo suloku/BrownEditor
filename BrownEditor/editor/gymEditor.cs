@@ -12,11 +12,20 @@ namespace BrownEditor.editor
 {
     public partial class gymEditor : Form
     {
-
+        //Team data
         public static int TeamDataOffset = 0x1f6140;
-        public static int TeamDataSize = 480; //includes padding
+        public static int TeamDataSize = 454;
+        //Mura's hayward and haunted forest teams aren't contiguous in the rom due to implementing them afterwards and being lazy to rebuild the pointer tables
+        public static int MuraTeamDataOffset = 0x1f6700;
+        public static int MuraTeamDataSize = 78;
+
+        public static int TeamDataTotalSize = TeamDataSize+MuraTeamDataSize+1;
+
+        //Move data
         public static int MoveDataOffset = 0x1f6310;
-        public static int MoveDataSize = 848; //includes padding
+        public static int MoveDataSize = 984; //includes padding
+
+
 
         public byte[] TeamData;
         public byte[] MoveData;
@@ -34,8 +43,11 @@ namespace BrownEditor.editor
             poke5CB.Items.AddRange(brownSpecies);
             poke6CB.Items.AddRange(brownSpecies);
 
-            TeamData = BrownEditor.MainForm.filebuffer.Skip(TeamDataOffset).Take(TeamDataSize).ToArray();
+            TeamData = BrownEditor.MainForm.filebuffer.Skip(TeamDataOffset).Take(TeamDataTotalSize).ToArray(); //This gets some of the move data in, but is overwritten later with correct data
             MoveData = BrownEditor.MainForm.filebuffer.Skip(MoveDataOffset).Take(MoveDataSize).ToArray();
+            //Append Mura's team data to TeamData
+            Buffer.BlockCopy(BrownEditor.MainForm.filebuffer, MuraTeamDataOffset, TeamData, TeamDataSize+1, MuraTeamDataSize);            
+
             movenamedata = new MOVENAMEDATA(BrownEditor.MainForm.filebuffer.Skip(BrownEditor.editor.MoveEditor.MoveNamesOffset).Take(BrownEditor.editor.MoveEditor.MoveNamesSize).ToArray());
             movenamedata.populateNameList();
 
@@ -494,6 +506,7 @@ namespace BrownEditor.editor
         private void saveTeamBut_Click(object sender, EventArgs e)
         {
             SaveTrainer();
+            MessageBox.Show("Team Saved");
 
         }
 
@@ -514,6 +527,7 @@ namespace BrownEditor.editor
             */
             Buffer.BlockCopy(TeamData, 0, BrownEditor.MainForm.filebuffer, TeamDataOffset, TeamDataSize);
             Buffer.BlockCopy(MoveData, 0, BrownEditor.MainForm.filebuffer, MoveDataOffset, MoveDataSize);
+            Buffer.BlockCopy(TeamData, TeamDataSize+1, BrownEditor.MainForm.filebuffer, MuraTeamDataOffset, MuraTeamDataSize);
             this.Close();
             MessageBox.Show("Saved Gym Leader/E4 teams data to Rom");
         }
