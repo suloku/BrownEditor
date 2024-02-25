@@ -402,7 +402,7 @@ namespace BrownEditor.editor
             "Weezing",
             "Persian",
             "Marowak",
-            "Tyrogue (Hitmontop)",
+            "Noibat",
             "Haunter",
             "Abra",
             "Alakazam",
