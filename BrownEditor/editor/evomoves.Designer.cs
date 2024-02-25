@@ -380,7 +380,7 @@
             "Weezing",
             "Persian",
             "Marowak",
-            "Noibat",
+            "Tyrogue(Hitmontop)/Noibat",
             "Haunter",
             "Abra",
             "Alakazam",
