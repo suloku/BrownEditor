@@ -994,7 +994,7 @@ namespace BrownEditor.editor
             "0x6E Route 62 - Castro Forest Gate (Entrance)",
             "0x6F International Tunnel 1F",
             "0x70 UNUSED",
-            "0x71 Drake's Room (Elite 4)",
+            "0x71 Blanch's Room (Elite 4)",
             "0x72 UNUSED",
             "0x73 UNUSED (Seneca Caverns B2F copy)",
             "0x74 Route 65 - Route 67 Gate",
