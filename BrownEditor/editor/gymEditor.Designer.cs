@@ -128,7 +128,7 @@
             this.trainerCB.FormattingEnabled = true;
             this.trainerCB.Items.AddRange(new object[] {
             "Giovanni (unused)",
-            "Giovanni (Sylph Warehouse)",
+            "Giovanni (Silph Warehouse)",
             "Giovanni (Gym Battle)",
             "Jared Pre E4",
             "Jared Post E4",
