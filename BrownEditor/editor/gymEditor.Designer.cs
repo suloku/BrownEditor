@@ -128,7 +128,7 @@
             this.trainerCB.FormattingEnabled = true;
             this.trainerCB.Items.AddRange(new object[] {
             "Giovanni (unused)",
-            "Giovanni (Sylph Warehouse)",
+            "Giovanni (Silph Warehouse)",
             "Giovanni (Gym Battle)",
             "Jared Pre E4",
             "Jared Post E4",
@@ -160,8 +160,8 @@
             "Bugsy Post E",
             "Agatha Pre E4",
             "Agatha Post E4",
-            "Drake Pre E4",
-            "Drake Post E4",
+            "Blanch Pre E4",
+            "Blanch Post E4",
             "Mura (Hayward City) - Squirtle",
             "Mura (Hayward City) - Bulbasaur",
             "Mura (Hayward City) - Charmander",

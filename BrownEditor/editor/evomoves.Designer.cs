@@ -380,7 +380,7 @@
             "Weezing",
             "Persian",
             "Marowak",
-            "Tyrogue(Hitmontop)",
+            "Tyrogue(Hitmontop)/Noibat",
             "Haunter",
             "Abra",
             "Alakazam",
@@ -468,7 +468,8 @@
             "Sylveon",
             "Annihilape",
             "G.Weezing",
-            "Lickilicky"});
+            "Lickilicky",
+            "Noivern"});
             this.evoSpeciesBox.Location = new System.Drawing.Point(303, 36);
             this.evoSpeciesBox.Name = "evoSpeciesBox";
             this.evoSpeciesBox.Size = new System.Drawing.Size(121, 21);
