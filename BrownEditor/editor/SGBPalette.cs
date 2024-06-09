@@ -21,10 +21,16 @@ namespace BrownEditor.editor
         public static int SGBPaletteNum = 256;
         public static int SGBPalettes_totalSize = SGBPaletteSize * SGBPaletteNum;
 
+        public static int mapPalettesAddr = 0x72755; //Stored as 2 byte per map, map index and palette index, ending with 0xFF
         public static int normalPalettesAddr = 0x73250;
         public static int shinyPalettesAddr = 0x725d0;
         public static int trainerPalettesAddr = 0x726d0;
         public static int TrainerPicAndMoneyPointers = 0x101914;
+
+        public static string mapSharedPalettes;
+        public static string monSharedPalettes;
+        public static string shinySharedPalettes;
+        public static string trainerSharedPalettes;
 
         private static byte[] frontbppbuffer = new byte[784];
         private static byte[] backbppbuffer = new byte[784];
@@ -42,7 +48,7 @@ namespace BrownEditor.editor
         private bool trainerMode = false;
 
 
-        Color [] CurrentPaletteColors = new Color[4];
+        Color[] CurrentPaletteColors = new Color[4];
 
         Bitmap Frontbmp = new Bitmap(56, 56);
         Bitmap Frontresized;
@@ -68,12 +74,14 @@ namespace BrownEditor.editor
 
             pkmTrnComboBox.SelectedIndex = 5; //Default to charizard
 
+            updateSharedPalettes();
+            updateOrgPalette();
 
         }
 
         void loadPicfromRom(string romPath, int offset)
         {
-                
+
             string pkdecompPath = Path.Combine(
                 System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName)
                 , "pkdecomp.exe");
@@ -137,10 +145,10 @@ namespace BrownEditor.editor
             return result;
         }
 
-        void process_5656_2bpp(byte [] twobpp, Bitmap bmp, bool colMajor, Color[] palette)
+        void process_5656_2bpp(byte[] twobpp, Bitmap bmp, bool colMajor, Color[] palette)
         {
 
-            byte [] rawtile = new byte[16];
+            byte[] rawtile = new byte[16];
 
 
             int column = 0;
@@ -154,7 +162,7 @@ namespace BrownEditor.editor
                 //Buffer.BlockCopy(twobpp, row*16+16*column, rawtile, 0, 16);
                 for (column = 0; column < 7; column++)
                 {
-                    Buffer.BlockCopy(twobpp, curtile*16, rawtile, 0, 16);
+                    Buffer.BlockCopy(twobpp, curtile * 16, rawtile, 0, 16);
                     if (colMajor)
                         drawtile(rawtile, bmp, column, row, CurrentPaletteColors);
                     else
@@ -170,7 +178,7 @@ namespace BrownEditor.editor
             int tilerow = 0;
             int tilecolumn = 0;
             int pixel = 0;
-            byte [] pixelcolors = gettilepixelcolors(rawtile);
+            byte[] pixelcolors = gettilepixelcolors(rawtile);
             foreach (byte i in pixelcolors)
             {
                 //Debug.WriteLine (i.ToString("X"));
@@ -182,7 +190,7 @@ namespace BrownEditor.editor
                     //Get the color for each pixel
                     //get2bppcolor(twobpp[1], twobpp[0], tilecolumn;
 
-                    bmp.SetPixel((column*8)+tilecolumn, (row*8)+tilerow, CurrentPaletteColors[pixelcolors[pixel]]);
+                    bmp.SetPixel((column * 8) + tilecolumn, (row * 8) + tilerow, CurrentPaletteColors[pixelcolors[pixel]]);
                     //Debug.WriteLine(pixel.ToString());
                     //Debug.WriteLine("X:" + ((column*8) + tilecolumn).ToString() + " Y:" + ((row*8) + tilerow).ToString()) ;
                     pixel++;
@@ -192,18 +200,18 @@ namespace BrownEditor.editor
         }
 
         //byte[] tile: 16 byte 2bpp tile array
-        byte [] gettilepixelcolors(byte [] tile)
+        byte[] gettilepixelcolors(byte[] tile)
         {
-            byte [] pixels = new byte[8*8];
+            byte[] pixels = new byte[8 * 8];
             int j = 0;
             int i = 0;
             for (j = 0; j < 8; j++)
             {
                 for (i = 0; i < 8; i++)
                 {
-                    byte hiBit = (byte)( (tile[j * 2 + 1] >> (7 - i)) & 1 );
-                    byte loBit = (byte)( (tile[j * 2] >> (7 - i)) & 1 );
-                    pixels[j * 8 + i] = (byte) ((hiBit << 1) | loBit);
+                    byte hiBit = (byte)((tile[j * 2 + 1] >> (7 - i)) & 1);
+                    byte loBit = (byte)((tile[j * 2] >> (7 - i)) & 1);
+                    pixels[j * 8 + i] = (byte)((hiBit << 1) | loBit);
                 }
             }
             return pixels;
@@ -230,7 +238,7 @@ namespace BrownEditor.editor
 
         void load_palette(int index)
         {
-            sgbpalettes.SetcurrentPalette (index);
+            sgbpalettes.SetcurrentPalette(index);
 
             palettePanel0.BackColor = sgbpalettes.toRGB(0);
             palettePanel1.BackColor = sgbpalettes.toRGB(1);
@@ -590,24 +598,38 @@ namespace BrownEditor.editor
 
             }
 
-            public void storeSGBPalette(Color color0, Color color1, Color color2, Color color3 )
+            public void storeSGBPalette(Color color0, Color color1, Color color2, Color color3)
             {
                 UInt16 u16color = ConvertColortoSFC(color0);
                 Buffer.BlockCopy(BitConverter.GetBytes(u16color), 0, Data, (SGBPaletteSize * _currentPalette), 2);
                 u16color = ConvertColortoSFC(color1);
-                Buffer.BlockCopy(BitConverter.GetBytes(u16color), 0, Data, (SGBPaletteSize * _currentPalette)+2, 2);
+                Buffer.BlockCopy(BitConverter.GetBytes(u16color), 0, Data, (SGBPaletteSize * _currentPalette) + 2, 2);
                 u16color = ConvertColortoSFC(color2);
-                Buffer.BlockCopy(BitConverter.GetBytes(u16color), 0, Data, (SGBPaletteSize * _currentPalette)+4, 2);
+                Buffer.BlockCopy(BitConverter.GetBytes(u16color), 0, Data, (SGBPaletteSize * _currentPalette) + 4, 2);
                 u16color = ConvertColortoSFC(color3);
-                Buffer.BlockCopy(BitConverter.GetBytes(u16color), 0, Data, (SGBPaletteSize * _currentPalette)+6, 2);
+                Buffer.BlockCopy(BitConverter.GetBytes(u16color), 0, Data, (SGBPaletteSize * _currentPalette) + 6, 2);
             }
         }
-
+        private void updateOrgPalette()
+        {
+            if (paletteIndex.Value < 37)
+            {
+                OrgPalLabel.Text = OrgPalettes[(int)paletteIndex.Value];
+            }
+            else
+            {
+                OrgPalLabel.Text = "";
+            }
+        }
         private void paletteIndex_ValueChanged(object sender, EventArgs e)
         {
             load_palette((int)paletteIndex.Value);
-            palSlotHexLabel.Text = "0x"+ ((int)paletteIndex.Value).ToString("X2");
+            palSlotHexLabel.Text = "0x" + ((int)paletteIndex.Value).ToString("X2");
             saveSlotNUD.Value = paletteIndex.Value;
+
+            updateSharedPalettes();
+            updateOrgPalette();
+
         }
         private void palettePanel0_MouseClick(object sender, MouseEventArgs e)
         {
@@ -695,7 +717,7 @@ namespace BrownEditor.editor
             sgbpalettes.storeSGBPalette(palettePanel0.BackColor, palettePanel1.BackColor, palettePanel2.BackColor, palettePanel3.BackColor);
             paletteIndex.Value = saveSlotNUD.Value;
 
-            MessageBox.Show("Palette Saved at index" + saveSlotNUD.Value.ToString()+"\nPalette is switched to that index.");
+            MessageBox.Show("Palette Saved at index" + saveSlotNUD.Value.ToString() + "\nPalette is switched to that index.");
         }
 
         private void ReloadPaletteBut_Click(object sender, EventArgs e)
@@ -721,8 +743,8 @@ namespace BrownEditor.editor
             else
             {
                 //Calculate offset
-                offset += (5 * (index-1));
-               // MessageBox.Show("Pointer Offset: 0x" + offset.ToString("X") + " Pointer: 0x" + BitConverter.ToUInt16(tempbuffer, offset).ToString("X") +" Full Pointer 0x"+ BrownEditor.MainForm.ThreeByteToTwoByte(trainerPicBank, BitConverter.ToUInt16(tempbuffer, offset)).ToString("X"));
+                offset += (5 * (index - 1));
+                // MessageBox.Show("Pointer Offset: 0x" + offset.ToString("X") + " Pointer: 0x" + BitConverter.ToUInt16(tempbuffer, offset).ToString("X") +" Full Pointer 0x"+ BrownEditor.MainForm.ThreeByteToTwoByte(trainerPicBank, BitConverter.ToUInt16(tempbuffer, offset)).ToString("X"));
                 loadPicfromRom(BrownEditor.MainForm.loadedFilePath, BrownEditor.MainForm.ThreeByteToTwoByte(trainerPicBank, BitConverter.ToUInt16(tempbuffer, offset)));
             }
 
@@ -732,9 +754,9 @@ namespace BrownEditor.editor
         {
             int BasesstatsOffset = 0xFC336;
             int basestat_size = 28;
-            int FrontpicAddr = BasesstatsOffset+(dexnum*basestat_size)+11;
-            int BackpicAddr = BasesstatsOffset + (dexnum * basestat_size)+13;
-            int BankAddr = BasesstatsOffset + (dexnum * basestat_size)+27;
+            int FrontpicAddr = BasesstatsOffset + (dexnum * basestat_size) + 11;
+            int BackpicAddr = BasesstatsOffset + (dexnum * basestat_size) + 13;
+            int BankAddr = BasesstatsOffset + (dexnum * basestat_size) + 27;
 
             UInt16 pointer = BitConverter.ToUInt16(tempbuffer, FrontpicAddr);
             MonFrontSpriteAddress = BrownEditor.MainForm.ThreeByteToTwoByte(tempbuffer[BankAddr], pointer);
@@ -753,11 +775,11 @@ namespace BrownEditor.editor
         {
             if (index == 0x30) //Special case for player backsprite
             {
-                return tempbuffer[trainerPalettesAddr + index-1 + 0x10];
+                return tempbuffer[trainerPalettesAddr + index - 1 + 0x10];
             }
             else if (index == 0x31) //Special case for female player backsprite
             {
-                return tempbuffer[trainerPalettesAddr + index-2 + 0x10];
+                return tempbuffer[trainerPalettesAddr + index - 2 + 0x10];
             }
             else
             {
@@ -769,11 +791,11 @@ namespace BrownEditor.editor
         {
             if (index == 0x30) //Special case for player backsprite
             {
-                tempbuffer[trainerPalettesAddr + index-1 + 0x10] = (byte)monpaletteUD.Value;
+                tempbuffer[trainerPalettesAddr + index - 1 + 0x10] = (byte)monpaletteUD.Value;
             }
             else if (index == 0x31) //Special case for female player backsprite
             {
-                tempbuffer[trainerPalettesAddr + index-2 + 0x10] = (byte)monpaletteUD.Value;
+                tempbuffer[trainerPalettesAddr + index - 2 + 0x10] = (byte)monpaletteUD.Value;
             }
             else
             {
@@ -805,7 +827,7 @@ namespace BrownEditor.editor
         {
             if (trainerMode)
             {
-                loadTrainerPic(pkmTrnComboBox.SelectedIndex+1);
+                loadTrainerPic(pkmTrnComboBox.SelectedIndex + 1);
                 monpaletteUD.Value = getTrainerPalette(pkmTrnComboBox.SelectedIndex + 1);
             }
             else
@@ -851,6 +873,7 @@ namespace BrownEditor.editor
             {
                 setMonPalette(pkmTrnComboBox.SelectedIndex + 1, shinyRadioBut.Checked);
             }
+            updateSharedPalettes();
             MessageBox.Show("Palette ID saved.");
         }
 
@@ -981,6 +1004,46 @@ namespace BrownEditor.editor
             pkmTrnComboBox.SelectedIndex = 0;
             normalRadioBut.Checked = true;
         }
+        private string[] OrgPalettes =
+        {
+            "PAL_ROUTE     ; $00",
+            "PAL_GRAVEL    ; $01",
+            "PAL_SEASHORE  ; $02",
+            "PAL_JAERU    ; $03",
+            "PAL_HAYWARD  ; $04",
+            "PAL_MERSON  ; $05",
+            "PAL_CASTRO ; $06",
+            "PAL_MORAGA   ; $07",
+            "PAL_OWSAURI   ; $08",
+            "PAL_EAGULOU  ; $09",
+            "PAL_LEAGUE    ; $0A",
+            "PAL_BOTAN   ; $0B",
+            "PAL_TOWNMAP   ; $0C",
+            "PAL_LOGO1     ; $0D",
+            "PAL_LOGO2     ; $0E",
+            "PAL_0F        ; $0F",
+            "PAL_MEWMON    ; $10",
+            "PAL_BLUEMON   ; $11",
+            "PAL_REDMON    ; $12",
+            "PAL_CYANMON   ; $13",
+            "PAL_PURPLEMON ; $14",
+            "PAL_BROWNMON  ; $15",
+            "PAL_GREENMON  ; $16",
+            "PAL_PINKMON   ; $17",
+            "PAL_YELLOWMON ; $18",
+            "PAL_GREYMON   ; $19",
+            "PAL_SLOTS1    ; $1A",
+            "PAL_SLOTS2    ; $1B",
+            "PAL_SLOTS3    ; $1C",
+            "PAL_SLOTS4    ; $1D",
+            "PAL_BLACK     ; $1E",
+            "PAL_GREENBAR  ; $1F",
+            "PAL_YELLOWBAR ; $20",
+            "PAL_REDBAR    ; $21",
+            "PAL_BADGE     ; $22",
+            "PAL_CAVE      ; $23",
+            "PAL_GAMEFREAK ; $24",
+        };
         private string[] brownTrainers =
         {
             "Youngster",
@@ -1357,15 +1420,15 @@ namespace BrownEditor.editor
             DialogResult res = dlg.ShowDialog();
             if (res == System.Windows.Forms.DialogResult.OK)
             {
-                
+
                 exportdir = dlg.SelectedPath;
                 int i = 0;
-                for (i=0; i<255;i++)
+                for (i = 0; i < 255; i++)
                 {
                     loadMonPic(i);
                     monpaletteUD.Value = getMonPalette(i + 1, shinyRadioBut.Checked);
                     //Build name
-                    exportname = (i+1).ToString("D3") + "_F.2bpp";
+                    exportname = (i + 1).ToString("D3") + "_F.2bpp";
                     File.WriteAllBytes(Path.Combine(exportdir, exportname), frontbppbuffer);
                     exportname = (i + 1).ToString("D3") + "_B.2bpp";
                     File.WriteAllBytes(Path.Combine(exportdir, exportname), backbppbuffer);
@@ -1560,6 +1623,175 @@ namespace BrownEditor.editor
 
             UpdateDrawingColors();
             reload_images(SwapColumns2bpp);
+        }
+
+        int FindMonsThatUsePalette (int paletteIndex, int offset)
+        {
+            string tempstring = string.Empty;
+
+            int duplicates = 0;
+            int i = 0;
+            for (i = 1; i < 255; i++) //Index 0 is unused
+            {
+                // Mon Palettes are stored in pokedex order
+                if ( (tempbuffer[offset + i]&0xff) == paletteIndex)
+                {
+                        tempstring = tempstring + brownSpecies[i - 1] + "\n";
+                        duplicates++;
+
+                }
+            }
+            monSharedPalettes = tempstring;
+            return duplicates;
+            
+        }
+        int FindShinyThatUsePalette(int paletteIndex, int offset)
+        {
+            string tempstring = string.Empty;
+            int duplicates = 0;
+            int i = 0;
+            for (i = 1; i < 255; i++) //Index 0 is unused
+            {
+                // Mon Palettes are stored in pokedex order
+                if ((tempbuffer[offset + i] & 0xff) == paletteIndex)
+                {
+                    tempstring = tempstring + brownSpecies[i - 1] + "\n";
+                    duplicates++;
+                }
+            }
+            shinySharedPalettes = tempstring;
+            return duplicates;
+
+        }
+
+        int FindMapsThatUsePalette(int paletteIndex, int offset)
+        {
+            string tempstring = string.Empty;
+            int duplicates = 0;
+            int i = 0;
+            int j = 0;
+            for (i = 0; i < 255; i++)
+            {
+                int curPal = (tempbuffer[offset + j + 1] & 0xff);
+                // Mon Palettes are stored in pokedex order
+                if ((curPal & 0xff) == paletteIndex)
+                {
+                    int curMap = (tempbuffer[offset + j] & 0xff);
+                    //map index (tempbuffer[offset + j] & 0xff)
+                    if (curMap < 248)
+                    {
+                        tempstring = tempstring + BrownEditor.editor.evomoves.brownMaps[(curMap & 0xff)] + "\n";
+                        duplicates++;
+                    }
+                }
+                j += 2;
+            }
+            mapSharedPalettes = tempstring;
+            return duplicates;
+
+        }
+
+        int FindTrainersThatUsePalette(int paletteIndex, int offset)
+        {
+            string tempstring = string.Empty;
+            int duplicates = 0;
+            int i = 0;
+            for (i = 0; i < 64; i++)
+            {
+                // Mon Palettes are stored in pokedex order
+                if ((tempbuffer[offset + i] & 0xff) == paletteIndex)
+                {
+                    if (i == 63) //exception for brown backsprite, there are only 47 trainer entries
+                    {
+                        tempstring = tempstring + brownTrainers[47] + "/" + brownTrainers[48] + "\n";
+                        duplicates++;
+                    }
+                    else if (i== 0)
+                    {
+                        tempstring = tempstring + "Error?" + "\n";
+                    }
+                    else if (i < 48)
+                    {
+                        tempstring = tempstring + brownTrainers[i-1] + "\n";
+                        duplicates++;
+                    }
+
+                }
+            }
+            trainerSharedPalettes = tempstring;
+            return duplicates;
+
+        }
+
+        void updateSharedPalettes()
+        {
+            //Update Shared map palettes
+            int buttoncolor = FindMapsThatUsePalette((int)paletteIndex.Value, mapPalettesAddr);
+            if (buttoncolor == 0)
+            {
+                PalUseMapBut.BackColor = Color.LightGray;
+                PalUseMapBut.Enabled = false;
+            }
+            else PalUseMapBut.Enabled = true;
+            if (buttoncolor > 1) PalUseMapBut.BackColor = Color.PaleVioletRed;
+            if (buttoncolor == 1) PalUseMapBut.BackColor = Color.LightGreen;
+            PalUseMapBut.Text = "Maps: " + buttoncolor.ToString();
+
+            //Update Shared mon palettes
+            buttoncolor = FindMonsThatUsePalette((int)paletteIndex.Value, normalPalettesAddr);
+            if (buttoncolor == 0)
+            {
+                PalUseMonBut.BackColor = Color.LightGray;
+                PalUseMonBut.Enabled = false;
+            }
+            else PalUseMonBut.Enabled = true;
+            if (buttoncolor > 1) PalUseMonBut.BackColor = Color.PaleVioletRed;
+
+            if (buttoncolor == 1) PalUseMonBut.BackColor = Color.LightGreen;
+            PalUseMonBut.Text = "Mons: " + buttoncolor.ToString();
+
+            //Update Shared shiny mon palettes
+            buttoncolor = FindShinyThatUsePalette((int)paletteIndex.Value, shinyPalettesAddr);
+            if (buttoncolor == 0)
+            {
+                PalUseShinyBut.BackColor = Color.LightGray;
+                PalUseShinyBut.Enabled = false;
+            }
+            else PalUseShinyBut.Enabled = true;
+            if (buttoncolor > 1) PalUseShinyBut.BackColor = Color.PaleVioletRed;
+            if (buttoncolor == 1) PalUseShinyBut.BackColor = Color.LightGreen;
+            PalUseShinyBut.Text = "Shinies: " + buttoncolor.ToString();
+
+            //Update Shared Traner palettes
+            buttoncolor = FindTrainersThatUsePalette ((int)paletteIndex.Value, trainerPalettesAddr);
+            if (buttoncolor == 0) {
+                PalUseTrainerBut.BackColor = Color.LightGray;
+                PalUseTrainerBut.Enabled = false;
+            } else PalUseTrainerBut.Enabled = true;
+            if (buttoncolor > 1) PalUseTrainerBut.BackColor = Color.PaleVioletRed;
+           
+            if (buttoncolor == 1) PalUseTrainerBut.BackColor = Color.LightGreen;
+            PalUseTrainerBut.Text = "Trainer: " + buttoncolor.ToString();
+        }
+
+        private void PalUseTrainerBut_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(trainerSharedPalettes);
+        }
+
+        private void PalUseMapBut_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(mapSharedPalettes);
+        }
+
+        private void PalUseMonBut_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(monSharedPalettes);
+        }
+
+        private void PalUseShinyBut_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(shinySharedPalettes);
         }
     }
 }

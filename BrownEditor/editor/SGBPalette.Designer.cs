@@ -107,6 +107,11 @@
             this.exportFrontBut = new System.Windows.Forms.Button();
             this.exportBackBut = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.PalUseMapBut = new System.Windows.Forms.Button();
+            this.PalUseTrainerBut = new System.Windows.Forms.Button();
+            this.PalUseShinyBut = new System.Windows.Forms.Button();
+            this.PalUseMonBut = new System.Windows.Forms.Button();
             this.forcecolorCB = new System.Windows.Forms.CheckBox();
             this.exportingLabel = new System.Windows.Forms.Label();
             this.exportAllBut = new System.Windows.Forms.Button();
@@ -115,6 +120,7 @@
             this.loadingLabel = new System.Windows.Forms.Label();
             this.LoadInjectBackBut = new System.Windows.Forms.Button();
             this.loadinjectFrontBut = new System.Windows.Forms.Button();
+            this.OrgPalLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
             this.groupBoxEditColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RGBupdownB)).BeginInit();
@@ -141,7 +147,7 @@
             // 
             // paletteIndex
             // 
-            this.paletteIndex.Location = new System.Drawing.Point(103, 36);
+            this.paletteIndex.Location = new System.Drawing.Point(96, 16);
             this.paletteIndex.Maximum = new decimal(new int[] {
             255,
             0,
@@ -155,7 +161,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 38);
+            this.label1.Location = new System.Drawing.Point(26, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 1;
@@ -1054,7 +1060,7 @@
             // palSlotHexLabel
             // 
             this.palSlotHexLabel.AutoSize = true;
-            this.palSlotHexLabel.Location = new System.Drawing.Point(180, 38);
+            this.palSlotHexLabel.Location = new System.Drawing.Point(173, 18);
             this.palSlotHexLabel.Name = "palSlotHexLabel";
             this.palSlotHexLabel.Size = new System.Drawing.Size(30, 13);
             this.palSlotHexLabel.TabIndex = 16;
@@ -1067,7 +1073,7 @@
             this.normalShinyGBox.Controls.Add(this.saveMonPalBut);
             this.normalShinyGBox.Controls.Add(this.shinyRadioBut);
             this.normalShinyGBox.Controls.Add(this.normalRadioBut);
-            this.normalShinyGBox.Location = new System.Drawing.Point(773, 74);
+            this.normalShinyGBox.Location = new System.Drawing.Point(766, 136);
             this.normalShinyGBox.Name = "normalShinyGBox";
             this.normalShinyGBox.Size = new System.Drawing.Size(80, 190);
             this.normalShinyGBox.TabIndex = 17;
@@ -1249,17 +1255,27 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.OrgPalLabel);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.PalUseMapBut);
+            this.groupBox2.Controls.Add(this.PalUseTrainerBut);
+            this.groupBox2.Controls.Add(this.PalUseShinyBut);
+            this.groupBox2.Controls.Add(this.PalUseMonBut);
+            this.groupBox2.Controls.Add(this.normalShinyGBox);
             this.groupBox2.Controls.Add(this.forcecolorCB);
             this.groupBox2.Controls.Add(this.exportingLabel);
             this.groupBox2.Controls.Add(this.exportAllBut);
             this.groupBox2.Controls.Add(this.exportBack2bppBut);
             this.groupBox2.Controls.Add(this.loadFront2bppBut);
+            this.groupBox2.Controls.Add(this.palSlotHexLabel);
             this.groupBox2.Controls.Add(this.exportFront2bppBut);
             this.groupBox2.Controls.Add(this.loadingLabel);
             this.groupBox2.Controls.Add(this.loadBack2bppBut);
             this.groupBox2.Controls.Add(this.exportBackBut);
             this.groupBox2.Controls.Add(this.LoadInjectBackBut);
             this.groupBox2.Controls.Add(this.exportFrontBut);
+            this.groupBox2.Controls.Add(this.paletteIndex);
+            this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.loadinjectFrontBut);
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Location = new System.Drawing.Point(7, 3);
@@ -1267,6 +1283,55 @@
             this.groupBox2.Size = new System.Drawing.Size(855, 431);
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(694, 15);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(75, 13);
+            this.label8.TabIndex = 30;
+            this.label8.Text = "Palette usage:";
+            // 
+            // PalUseMapBut
+            // 
+            this.PalUseMapBut.Location = new System.Drawing.Point(774, 40);
+            this.PalUseMapBut.Name = "PalUseMapBut";
+            this.PalUseMapBut.Size = new System.Drawing.Size(75, 25);
+            this.PalUseMapBut.TabIndex = 135;
+            this.PalUseMapBut.Text = "Maps: 100";
+            this.PalUseMapBut.UseVisualStyleBackColor = true;
+            this.PalUseMapBut.Click += new System.EventHandler(this.PalUseMapBut_Click);
+            // 
+            // PalUseTrainerBut
+            // 
+            this.PalUseTrainerBut.Location = new System.Drawing.Point(774, 10);
+            this.PalUseTrainerBut.Name = "PalUseTrainerBut";
+            this.PalUseTrainerBut.Size = new System.Drawing.Size(75, 25);
+            this.PalUseTrainerBut.TabIndex = 134;
+            this.PalUseTrainerBut.Text = "Trainer: 100";
+            this.PalUseTrainerBut.UseVisualStyleBackColor = true;
+            this.PalUseTrainerBut.Click += new System.EventHandler(this.PalUseTrainerBut_Click);
+            // 
+            // PalUseShinyBut
+            // 
+            this.PalUseShinyBut.Location = new System.Drawing.Point(774, 102);
+            this.PalUseShinyBut.Name = "PalUseShinyBut";
+            this.PalUseShinyBut.Size = new System.Drawing.Size(75, 25);
+            this.PalUseShinyBut.TabIndex = 133;
+            this.PalUseShinyBut.Text = "Shinies: 100";
+            this.PalUseShinyBut.UseVisualStyleBackColor = true;
+            this.PalUseShinyBut.Click += new System.EventHandler(this.PalUseShinyBut_Click);
+            // 
+            // PalUseMonBut
+            // 
+            this.PalUseMonBut.Location = new System.Drawing.Point(774, 71);
+            this.PalUseMonBut.Name = "PalUseMonBut";
+            this.PalUseMonBut.Size = new System.Drawing.Size(75, 25);
+            this.PalUseMonBut.TabIndex = 132;
+            this.PalUseMonBut.Text = "Mons: 100";
+            this.PalUseMonBut.UseVisualStyleBackColor = true;
+            this.PalUseMonBut.Click += new System.EventHandler(this.PalUseMonBut_Click);
             // 
             // forcecolorCB
             // 
@@ -1347,6 +1412,15 @@
             this.loadinjectFrontBut.UseVisualStyleBackColor = true;
             this.loadinjectFrontBut.Click += new System.EventHandler(this.loadinjectFrontBut_Click);
             // 
+            // OrgPalLabel
+            // 
+            this.OrgPalLabel.AutoSize = true;
+            this.OrgPalLabel.Location = new System.Drawing.Point(84, 46);
+            this.OrgPalLabel.Name = "OrgPalLabel";
+            this.OrgPalLabel.Size = new System.Drawing.Size(104, 13);
+            this.OrgPalLabel.TabIndex = 136;
+            this.OrgPalLabel.Text = "PAL_OVERWORLD";
+            // 
             // SGBPalette
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1356,15 +1430,11 @@
             this.Controls.Add(this.saveExitBut);
             this.Controls.Add(this.saveSlotNUD);
             this.Controls.Add(this.Note_label);
-            this.Controls.Add(this.normalShinyGBox);
-            this.Controls.Add(this.palSlotHexLabel);
             this.Controls.Add(this.PkmTrnLabel);
             this.Controls.Add(this.pkmTrnComboBox);
             this.Controls.Add(this.savePaletteBut);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxEditColor);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.paletteIndex);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
@@ -1491,5 +1561,11 @@
         private System.Windows.Forms.Label labelDec;
         private System.Windows.Forms.Label labelRed;
         private System.Windows.Forms.CheckBox forcecolorCB;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button PalUseMapBut;
+        private System.Windows.Forms.Button PalUseTrainerBut;
+        private System.Windows.Forms.Button PalUseShinyBut;
+        private System.Windows.Forms.Button PalUseMonBut;
+        private System.Windows.Forms.Label OrgPalLabel;
     }
 }
