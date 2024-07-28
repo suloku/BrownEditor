@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using JR.Utils.GUI.Forms;
 
 namespace BrownEditor.editor
 {
@@ -1799,7 +1800,7 @@ namespace BrownEditor.editor
 
         private void PalUseMapBut_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(mapSharedPalettes);
+            FlexibleMessageBox.Show(mapSharedPalettes);
         }
 
         private void PalUseMonBut_Click(object sender, EventArgs e)
