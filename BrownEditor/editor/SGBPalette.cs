@@ -21,7 +21,7 @@ namespace BrownEditor.editor
         public static int SGBPaletteNum = 256;
         public static int SGBPalettes_totalSize = SGBPaletteSize * SGBPaletteNum;
 
-        public static int mapPalettesAddr = 0x72755; //Stored as 2 byte per map, map index and palette index, ending with 0xFF
+        public static int mapPalettesAddr = 0x72750; //Stored as 2 byte per map, map index and palette index, ending with 0xFF
         public static int normalPalettesAddr = 0x73250;
         public static int shinyPalettesAddr = 0x725d0;
         public static int trainerPalettesAddr = 0x726d0;
@@ -1689,14 +1689,13 @@ namespace BrownEditor.editor
             string tempstring = string.Empty;
             int duplicates = 0;
             int i = 0;
-            int j = 0;
             for (i = 0; i < 255; i++)
             {
-                int curPal = (tempbuffer[offset + j + 1] & 0xff);
+                int curPal = (tempbuffer[offset + i] & 0xff);
                 // Mon Palettes are stored in pokedex order
                 if ((curPal & 0xff) == paletteIndex)
                 {
-                    int curMap = (tempbuffer[offset + j] & 0xff);
+                    int curMap = i;
                     //map index (tempbuffer[offset + j] & 0xff)
                     if (curMap < 248)
                     {
@@ -1704,7 +1703,6 @@ namespace BrownEditor.editor
                         duplicates++;
                     }
                 }
-                j += 2;
             }
             mapSharedPalettes = tempstring;
             return duplicates;
