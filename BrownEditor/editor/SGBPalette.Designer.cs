@@ -107,6 +107,7 @@
             this.exportFrontBut = new System.Windows.Forms.Button();
             this.exportBackBut = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.OrgPalLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.PalUseMapBut = new System.Windows.Forms.Button();
             this.PalUseTrainerBut = new System.Windows.Forms.Button();
@@ -120,7 +121,6 @@
             this.loadingLabel = new System.Windows.Forms.Label();
             this.LoadInjectBackBut = new System.Windows.Forms.Button();
             this.loadinjectFrontBut = new System.Windows.Forms.Button();
-            this.OrgPalLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
             this.groupBoxEditColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RGBupdownB)).BeginInit();
@@ -1284,6 +1284,15 @@
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
             // 
+            // OrgPalLabel
+            // 
+            this.OrgPalLabel.AutoSize = true;
+            this.OrgPalLabel.Location = new System.Drawing.Point(20, 40);
+            this.OrgPalLabel.Name = "OrgPalLabel";
+            this.OrgPalLabel.Size = new System.Drawing.Size(104, 13);
+            this.OrgPalLabel.TabIndex = 136;
+            this.OrgPalLabel.Text = "PAL_OVERWORLD";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -1411,15 +1420,6 @@
             this.loadinjectFrontBut.Text = "Load and Inject Front 2bpp";
             this.loadinjectFrontBut.UseVisualStyleBackColor = true;
             this.loadinjectFrontBut.Click += new System.EventHandler(this.loadinjectFrontBut_Click);
-            // 
-            // OrgPalLabel
-            // 
-            this.OrgPalLabel.AutoSize = true;
-            this.OrgPalLabel.Location = new System.Drawing.Point(84, 46);
-            this.OrgPalLabel.Name = "OrgPalLabel";
-            this.OrgPalLabel.Size = new System.Drawing.Size(104, 13);
-            this.OrgPalLabel.TabIndex = 136;
-            this.OrgPalLabel.Text = "PAL_OVERWORLD";
             // 
             // SGBPalette
             // 

@@ -713,11 +713,31 @@ namespace BrownEditor.editor
 
         private void savePaletteBut_Click(object sender, EventArgs e)
         {
-            sgbpalettes.SetcurrentPalette((int)saveSlotNUD.Value);
-            sgbpalettes.storeSGBPalette(palettePanel0.BackColor, palettePanel1.BackColor, palettePanel2.BackColor, palettePanel3.BackColor);
-            paletteIndex.Value = saveSlotNUD.Value;
+            if (saveSlotNUD.Value < 37)
+            {
+                DialogResult dialogResult = MessageBox.Show("Warning!\nThis palette slot is one of the first 37 palettes used by the game for things other than sprites. Are you sure you want to overwrite the palette slot #" + saveSlotNUD.Value.ToString() + " ( " + OrgPalettes[(int)saveSlotNUD.Value] + " ) ?", "Warning!", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    sgbpalettes.SetcurrentPalette((int)saveSlotNUD.Value);
+                    sgbpalettes.storeSGBPalette(palettePanel0.BackColor, palettePanel1.BackColor, palettePanel2.BackColor, palettePanel3.BackColor);
+                    paletteIndex.Value = saveSlotNUD.Value;
 
-            MessageBox.Show("Palette Saved at index" + saveSlotNUD.Value.ToString() + "\nPalette is switched to that index.");
+                    MessageBox.Show("Palette Saved at index" + saveSlotNUD.Value.ToString() + "\nPalette is switched to that index.");
+                }
+                else if (dialogResult == DialogResult.No)
+                {
+                    MessageBox.Show("Palette was NOT saved.");
+                }
+            }
+            else
+            {
+                sgbpalettes.SetcurrentPalette((int)saveSlotNUD.Value);
+                sgbpalettes.storeSGBPalette(palettePanel0.BackColor, palettePanel1.BackColor, palettePanel2.BackColor, palettePanel3.BackColor);
+                paletteIndex.Value = saveSlotNUD.Value;
+
+                MessageBox.Show("Palette Saved at index" + saveSlotNUD.Value.ToString() + "\nPalette is switched to that index.");
+            }
+
         }
 
         private void ReloadPaletteBut_Click(object sender, EventArgs e)
@@ -1006,43 +1026,43 @@ namespace BrownEditor.editor
         }
         private string[] OrgPalettes =
         {
-            "PAL_ROUTE     ; $00",
-            "PAL_GRAVEL    ; $01",
-            "PAL_SEASHORE  ; $02",
-            "PAL_JAERU    ; $03",
-            "PAL_HAYWARD  ; $04",
-            "PAL_MERSON  ; $05",
-            "PAL_CASTRO ; $06",
-            "PAL_MORAGA   ; $07",
-            "PAL_OWSAURI   ; $08",
-            "PAL_EAGULOU  ; $09",
-            "PAL_LEAGUE    ; $0A",
-            "PAL_BOTAN   ; $0B",
-            "PAL_TOWNMAP   ; $0C",
-            "PAL_LOGO1     ; $0D",
-            "PAL_LOGO2     ; $0E",
-            "PAL_0F        ; $0F",
-            "PAL_MEWMON    ; $10",
-            "PAL_BLUEMON   ; $11",
-            "PAL_REDMON    ; $12",
-            "PAL_CYANMON   ; $13",
-            "PAL_PURPLEMON ; $14",
-            "PAL_BROWNMON  ; $15",
-            "PAL_GREENMON  ; $16",
-            "PAL_PINKMON   ; $17",
-            "PAL_YELLOWMON ; $18",
-            "PAL_GREYMON   ; $19",
-            "PAL_SLOTS1    ; $1A",
-            "PAL_SLOTS2    ; $1B",
-            "PAL_SLOTS3    ; $1C",
-            "PAL_SLOTS4    ; $1D",
-            "PAL_BLACK     ; $1E",
-            "PAL_GREENBAR  ; $1F",
-            "PAL_YELLOWBAR ; $20",
-            "PAL_REDBAR    ; $21",
-            "PAL_BADGE     ; $22",
-            "PAL_CAVE      ; $23",
-            "PAL_GAMEFREAK ; $24",
+            "PAL_ROUTE",
+            "PAL_GRAVEL",
+            "PAL_SEASHORE, Startup Logos",
+            "PAL_JAERU",
+            "PAL_HAYWARD",
+            "PAL_MERSON",
+            "PAL_CASTRO",
+            "PAL_MORAGA",
+            "PAL_OWSAURI",
+            "PAL_EAGULOU",
+            "PAL_LEAGUE",
+            "PAL_BOTAN",
+            "PAL_TOWNMAP, Town Map",
+            "PAL_LOGO1, Title Screen",
+            "PAL_LOGO2, Title Screen",
+            "PAL_0F, Unused(?)",
+            "PAL_MEWMON, Default, Party menu,"+"\n            Title Screen, Trainer Card",
+            "PAL_BLUEMON, Startup Logos",
+            "PAL_REDMON, Trainer Card, Startup Logos",
+            "PAL_CYANMON",
+            "PAL_PURPLEMON, Title Screen",
+            "PAL_BROWNMON, Used in Pokedex data"+"\n            screen",
+            "PAL_GREENMON",
+            "PAL_PINKMON",
+            "PAL_YELLOWMON, Trainer Card",
+            "PAL_GREYMON",
+            "PAL_SLOTS1, GC Slots",
+            "PAL_SLOTS2, GC Slots",
+            "PAL_SLOTS3, GC Slots",
+            "PAL_SLOTS4, GC Slots",
+            "PAL_BLACK, Used at battle start",
+            "PAL_GREENBAR, HP Bar",
+            "PAL_YELLOWBAR, HP Bar",
+            "PAL_REDBAR, HP Bar",
+            "PAL_BADGE, Trainer Card",
+            "PAL_CAVE",
+            "PAL_GAMEFREAK, Startup Logos",
         };
         private string[] brownTrainers =
         {

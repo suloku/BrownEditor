@@ -26,7 +26,7 @@ namespace BrownEditor.editor
 		public static int statDataSize = 256 * basestat_size;
 
 		//TM/HM list
-		public static int tmhmmovesOffset = 0x13773;
+		public static int tmhmmovesOffset = 0x13960;
 		public static int totalTMHM = 55;
 		public StatsEvos()
 		{
