@@ -480,7 +480,7 @@
             // 
             // RGB15updownB
             // 
-            this.RGB15updownB.Location = new System.Drawing.Point(324, 119);
+            this.RGB15updownB.Location = new System.Drawing.Point(324, 38);
             this.RGB15updownB.Maximum = new decimal(new int[] {
             31,
             0,
@@ -506,7 +506,7 @@
             // 
             // RGB15updownR
             // 
-            this.RGB15updownR.Location = new System.Drawing.Point(324, 38);
+            this.RGB15updownR.Location = new System.Drawing.Point(324, 118);
             this.RGB15updownR.Maximum = new decimal(new int[] {
             31,
             0,
