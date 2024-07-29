@@ -121,6 +121,11 @@
             this.loadingLabel = new System.Windows.Forms.Label();
             this.LoadInjectBackBut = new System.Windows.Forms.Button();
             this.loadinjectFrontBut = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.mapComboBox = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.saveMapPal_but = new System.Windows.Forms.Button();
+            this.curMapPal_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
             this.groupBoxEditColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RGBupdownB)).BeginInit();
@@ -143,6 +148,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.saveSlotNUD)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // paletteIndex
@@ -1160,7 +1166,7 @@
             // 
             // saveExitBut
             // 
-            this.saveExitBut.Location = new System.Drawing.Point(36, 440);
+            this.saveExitBut.Location = new System.Drawing.Point(163, 495);
             this.saveExitBut.Name = "saveExitBut";
             this.saveExitBut.Size = new System.Drawing.Size(174, 34);
             this.saveExitBut.TabIndex = 22;
@@ -1170,7 +1176,7 @@
             // 
             // exitBut
             // 
-            this.exitBut.Location = new System.Drawing.Point(582, 440);
+            this.exitBut.Location = new System.Drawing.Point(513, 495);
             this.exitBut.Name = "exitBut";
             this.exitBut.Size = new System.Drawing.Size(174, 34);
             this.exitBut.TabIndex = 23;
@@ -1280,7 +1286,7 @@
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Location = new System.Drawing.Point(7, 3);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(855, 431);
+            this.groupBox2.Size = new System.Drawing.Size(855, 427);
             this.groupBox2.TabIndex = 29;
             this.groupBox2.TabStop = false;
             // 
@@ -1421,11 +1427,62 @@
             this.loadinjectFrontBut.UseVisualStyleBackColor = true;
             this.loadinjectFrontBut.Click += new System.EventHandler(this.loadinjectFrontBut_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.curMapPal_label);
+            this.groupBox4.Controls.Add(this.saveMapPal_but);
+            this.groupBox4.Controls.Add(this.label9);
+            this.groupBox4.Controls.Add(this.mapComboBox);
+            this.groupBox4.Location = new System.Drawing.Point(98, 437);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(674, 52);
+            this.groupBox4.TabIndex = 137;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Map Palettes";
+            // 
+            // mapComboBox
+            // 
+            this.mapComboBox.FormattingEnabled = true;
+            this.mapComboBox.Location = new System.Drawing.Point(49, 19);
+            this.mapComboBox.Name = "mapComboBox";
+            this.mapComboBox.Size = new System.Drawing.Size(372, 21);
+            this.mapComboBox.TabIndex = 0;
+            this.mapComboBox.SelectedIndexChanged += new System.EventHandler(this.mapComboBox_SelectedIndexChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(15, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(31, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Map:";
+            // 
+            // saveMapPal_but
+            // 
+            this.saveMapPal_but.Location = new System.Drawing.Point(569, 12);
+            this.saveMapPal_but.Name = "saveMapPal_but";
+            this.saveMapPal_but.Size = new System.Drawing.Size(87, 34);
+            this.saveMapPal_but.TabIndex = 2;
+            this.saveMapPal_but.Text = "Save palette to map";
+            this.saveMapPal_but.UseVisualStyleBackColor = true;
+            this.saveMapPal_but.Click += new System.EventHandler(this.saveMapPal_but_Click);
+            // 
+            // curMapPal_label
+            // 
+            this.curMapPal_label.AutoSize = true;
+            this.curMapPal_label.Location = new System.Drawing.Point(427, 23);
+            this.curMapPal_label.Name = "curMapPal_label";
+            this.curMapPal_label.Size = new System.Drawing.Size(136, 13);
+            this.curMapPal_label.TabIndex = 3;
+            this.curMapPal_label.Text = "Current Palette:  000 (0x00)";
+            // 
             // SGBPalette
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(868, 491);
+            this.ClientSize = new System.Drawing.Size(868, 541);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.exitBut);
             this.Controls.Add(this.saveExitBut);
             this.Controls.Add(this.saveSlotNUD);
@@ -1467,6 +1524,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1567,5 +1626,10 @@
         private System.Windows.Forms.Button PalUseShinyBut;
         private System.Windows.Forms.Button PalUseMonBut;
         private System.Windows.Forms.Label OrgPalLabel;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label curMapPal_label;
+        private System.Windows.Forms.Button saveMapPal_but;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox mapComboBox;
     }
 }

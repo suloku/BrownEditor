@@ -22,7 +22,7 @@ namespace BrownEditor.editor
         public static int SGBPaletteNum = 256;
         public static int SGBPalettes_totalSize = SGBPaletteSize * SGBPaletteNum;
 
-        public static int mapPalettesAddr = 0x72750; //Stored as 2 byte per map, map index and palette index, ending with 0xFF
+        public static int mapPalettesAddr = 0x72750; //Stored as 1 byte per map, in map index order (256 entries)
         public static int normalPalettesAddr = 0x73250;
         public static int shinyPalettesAddr = 0x725d0;
         public static int trainerPalettesAddr = 0x726d0;
@@ -60,6 +60,7 @@ namespace BrownEditor.editor
         public SGBPalette()
         {
             InitializeComponent();
+            mapComboBox.Items.AddRange(BrownEditor.editor.evomoves.brownMaps);
 
             SwapColumns2bpp = true;
 
@@ -77,6 +78,7 @@ namespace BrownEditor.editor
 
             updateSharedPalettes();
             updateOrgPalette();
+            mapComboBox.SelectedIndex = 0;
 
         }
 
@@ -844,6 +846,13 @@ namespace BrownEditor.editor
             }
 
         }
+
+        private void setMapPalette(int index)
+        {
+            tempbuffer[mapPalettesAddr + index] = (byte)paletteIndex.Value;
+            curMapPal_label.Text = "Current Palette: " + ((int)tempbuffer[mapPalettesAddr + index]).ToString("D3") + " (0x" + ((int)tempbuffer[mapPalettesAddr + index]).ToString("X2") + ")";
+        }
+
         private void pokemonComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (trainerMode)
@@ -1811,6 +1820,16 @@ namespace BrownEditor.editor
         private void PalUseShinyBut_Click(object sender, EventArgs e)
         {
             MessageBox.Show(shinySharedPalettes);
+        }
+
+        private void mapComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            curMapPal_label.Text = "Current Palette: " + ((int)tempbuffer[mapPalettesAddr + (int)mapComboBox.SelectedIndex]).ToString("D3") + " (0x" + ((int)tempbuffer[mapPalettesAddr + (int)mapComboBox.SelectedIndex]).ToString("X2") + ")";
+        }
+
+        private void saveMapPal_but_Click(object sender, EventArgs e)
+        {
+            setMapPalette((int)mapComboBox.SelectedIndex);
         }
     }
 }
