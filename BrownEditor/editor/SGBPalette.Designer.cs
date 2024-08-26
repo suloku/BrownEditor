@@ -113,7 +113,6 @@
             this.PalUseTrainerBut = new System.Windows.Forms.Button();
             this.PalUseShinyBut = new System.Windows.Forms.Button();
             this.PalUseMonBut = new System.Windows.Forms.Button();
-            this.forcecolorCB = new System.Windows.Forms.CheckBox();
             this.exportingLabel = new System.Windows.Forms.Label();
             this.exportAllBut = new System.Windows.Forms.Button();
             this.exportBack2bppBut = new System.Windows.Forms.Button();
@@ -122,10 +121,14 @@
             this.LoadInjectBackBut = new System.Windows.Forms.Button();
             this.loadinjectFrontBut = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.mapComboBox = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.saveMapPal_but = new System.Windows.Forms.Button();
             this.curMapPal_label = new System.Windows.Forms.Label();
+            this.saveMapPal_but = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.mapComboBox = new System.Windows.Forms.ComboBox();
+            this.forcePalSG_RB = new System.Windows.Forms.RadioButton();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.forcePalGS_RB = new System.Windows.Forms.RadioButton();
+            this.forcePalGBC_RB = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.paletteIndex)).BeginInit();
             this.groupBoxEditColor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RGBupdownB)).BeginInit();
@@ -149,6 +152,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // paletteIndex
@@ -267,9 +271,9 @@
             this.groupBoxEditColor.Controls.Add(this.setPal2);
             this.groupBoxEditColor.Controls.Add(this.setPal3);
             this.groupBoxEditColor.Controls.Add(this.panelColorbg);
-            this.groupBoxEditColor.Location = new System.Drawing.Point(36, 74);
+            this.groupBoxEditColor.Location = new System.Drawing.Point(29, 84);
             this.groupBoxEditColor.Name = "groupBoxEditColor";
-            this.groupBoxEditColor.Size = new System.Drawing.Size(392, 303);
+            this.groupBoxEditColor.Size = new System.Drawing.Size(392, 297);
             this.groupBoxEditColor.TabIndex = 6;
             this.groupBoxEditColor.TabStop = false;
             this.groupBoxEditColor.Text = "Edit color (RGB)";
@@ -754,7 +758,7 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.palettePanel3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(434, 74);
+            this.groupBox1.Location = new System.Drawing.Point(427, 84);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(53, 262);
             this.groupBox1.TabIndex = 10;
@@ -781,7 +785,7 @@
             // 
             // savePaletteBut
             // 
-            this.savePaletteBut.Location = new System.Drawing.Point(36, 384);
+            this.savePaletteBut.Location = new System.Drawing.Point(36, 388);
             this.savePaletteBut.Name = "savePaletteBut";
             this.savePaletteBut.Size = new System.Drawing.Size(162, 34);
             this.savePaletteBut.TabIndex = 13;
@@ -1146,7 +1150,7 @@
             // Note_label
             // 
             this.Note_label.AutoSize = true;
-            this.Note_label.Location = new System.Drawing.Point(290, 383);
+            this.Note_label.Location = new System.Drawing.Point(290, 387);
             this.Note_label.Name = "Note_label";
             this.Note_label.Size = new System.Drawing.Size(33, 13);
             this.Note_label.TabIndex = 18;
@@ -1154,7 +1158,7 @@
             // 
             // saveSlotNUD
             // 
-            this.saveSlotNUD.Location = new System.Drawing.Point(204, 393);
+            this.saveSlotNUD.Location = new System.Drawing.Point(204, 397);
             this.saveSlotNUD.Maximum = new decimal(new int[] {
             255,
             0,
@@ -1210,7 +1214,7 @@
             this.groupBox3.Controls.Add(this.pkmModeRB);
             this.groupBox3.Location = new System.Drawing.Point(239, 7);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(159, 65);
+            this.groupBox3.Size = new System.Drawing.Size(120, 76);
             this.groupBox3.TabIndex = 26;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mode";
@@ -1261,6 +1265,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.groupBox5);
             this.groupBox2.Controls.Add(this.OrgPalLabel);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.PalUseMapBut);
@@ -1268,7 +1273,8 @@
             this.groupBox2.Controls.Add(this.PalUseShinyBut);
             this.groupBox2.Controls.Add(this.PalUseMonBut);
             this.groupBox2.Controls.Add(this.normalShinyGBox);
-            this.groupBox2.Controls.Add(this.forcecolorCB);
+            this.groupBox2.Controls.Add(this.groupBoxEditColor);
+            this.groupBox2.Controls.Add(this.groupBox1);
             this.groupBox2.Controls.Add(this.exportingLabel);
             this.groupBox2.Controls.Add(this.exportAllBut);
             this.groupBox2.Controls.Add(this.exportBack2bppBut);
@@ -1347,19 +1353,6 @@
             this.PalUseMonBut.Text = "Mons: 100";
             this.PalUseMonBut.UseVisualStyleBackColor = true;
             this.PalUseMonBut.Click += new System.EventHandler(this.PalUseMonBut_Click);
-            // 
-            // forcecolorCB
-            // 
-            this.forcecolorCB.AutoSize = true;
-            this.forcecolorCB.Checked = true;
-            this.forcecolorCB.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.forcecolorCB.Location = new System.Drawing.Point(408, 21);
-            this.forcecolorCB.Name = "forcecolorCB";
-            this.forcecolorCB.Size = new System.Drawing.Size(79, 30);
-            this.forcecolorCB.TabIndex = 36;
-            this.forcecolorCB.Text = "Force color\n  0 and 3";
-            this.forcecolorCB.UseVisualStyleBackColor = true;
-            this.forcecolorCB.CheckedChanged += new System.EventHandler(this.forcecolorCB_CheckedChanged);
             // 
             // exportingLabel
             // 
@@ -1440,23 +1433,14 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Map Palettes";
             // 
-            // mapComboBox
+            // curMapPal_label
             // 
-            this.mapComboBox.FormattingEnabled = true;
-            this.mapComboBox.Location = new System.Drawing.Point(49, 19);
-            this.mapComboBox.Name = "mapComboBox";
-            this.mapComboBox.Size = new System.Drawing.Size(372, 21);
-            this.mapComboBox.TabIndex = 0;
-            this.mapComboBox.SelectedIndexChanged += new System.EventHandler(this.mapComboBox_SelectedIndexChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 22);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(31, 13);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Map:";
+            this.curMapPal_label.AutoSize = true;
+            this.curMapPal_label.Location = new System.Drawing.Point(427, 23);
+            this.curMapPal_label.Name = "curMapPal_label";
+            this.curMapPal_label.Size = new System.Drawing.Size(136, 13);
+            this.curMapPal_label.TabIndex = 3;
+            this.curMapPal_label.Text = "Current Palette:  000 (0x00)";
             // 
             // saveMapPal_but
             // 
@@ -1468,14 +1452,70 @@
             this.saveMapPal_but.UseVisualStyleBackColor = true;
             this.saveMapPal_but.Click += new System.EventHandler(this.saveMapPal_but_Click);
             // 
-            // curMapPal_label
+            // label9
             // 
-            this.curMapPal_label.AutoSize = true;
-            this.curMapPal_label.Location = new System.Drawing.Point(427, 23);
-            this.curMapPal_label.Name = "curMapPal_label";
-            this.curMapPal_label.Size = new System.Drawing.Size(136, 13);
-            this.curMapPal_label.TabIndex = 3;
-            this.curMapPal_label.Text = "Current Palette:  000 (0x00)";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(15, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(31, 13);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Map:";
+            // 
+            // mapComboBox
+            // 
+            this.mapComboBox.FormattingEnabled = true;
+            this.mapComboBox.Location = new System.Drawing.Point(49, 19);
+            this.mapComboBox.Name = "mapComboBox";
+            this.mapComboBox.Size = new System.Drawing.Size(372, 21);
+            this.mapComboBox.TabIndex = 0;
+            this.mapComboBox.SelectedIndexChanged += new System.EventHandler(this.mapComboBox_SelectedIndexChanged);
+            // 
+            // forcePalSG_RB
+            // 
+            this.forcePalSG_RB.AutoSize = true;
+            this.forcePalSG_RB.Checked = true;
+            this.forcePalSG_RB.Location = new System.Drawing.Point(6, 19);
+            this.forcePalSG_RB.Name = "forcePalSG_RB";
+            this.forcePalSG_RB.Size = new System.Drawing.Size(47, 17);
+            this.forcePalSG_RB.TabIndex = 137;
+            this.forcePalSG_RB.TabStop = true;
+            this.forcePalSG_RB.Text = "SGB";
+            this.forcePalSG_RB.UseVisualStyleBackColor = true;
+            this.forcePalSG_RB.CheckedChanged += new System.EventHandler(this.forcePalSG_RB_CheckedChanged);
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.forcePalGBC_RB);
+            this.groupBox5.Controls.Add(this.forcePalGS_RB);
+            this.groupBox5.Controls.Add(this.forcePalSG_RB);
+            this.groupBox5.Location = new System.Drawing.Point(365, 7);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(115, 76);
+            this.groupBox5.TabIndex = 138;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Palette";
+            // 
+            // forcePalGS_RB
+            // 
+            this.forcePalGS_RB.AutoSize = true;
+            this.forcePalGS_RB.Location = new System.Drawing.Point(6, 35);
+            this.forcePalGS_RB.Name = "forcePalGS_RB";
+            this.forcePalGS_RB.Size = new System.Drawing.Size(74, 17);
+            this.forcePalGS_RB.TabIndex = 138;
+            this.forcePalGS_RB.Text = "GrayScale";
+            this.forcePalGS_RB.UseVisualStyleBackColor = true;
+            this.forcePalGS_RB.CheckedChanged += new System.EventHandler(this.forcePalGS_RB_CheckedChanged);
+            // 
+            // forcePalGBC_RB
+            // 
+            this.forcePalGBC_RB.AutoSize = true;
+            this.forcePalGBC_RB.Location = new System.Drawing.Point(6, 53);
+            this.forcePalGBC_RB.Name = "forcePalGBC_RB";
+            this.forcePalGBC_RB.Size = new System.Drawing.Size(47, 17);
+            this.forcePalGBC_RB.TabIndex = 139;
+            this.forcePalGBC_RB.Text = "GBC";
+            this.forcePalGBC_RB.UseVisualStyleBackColor = true;
+            this.forcePalGBC_RB.CheckedChanged += new System.EventHandler(this.forcePalGBC_RB_CheckedChanged);
             // 
             // SGBPalette
             // 
@@ -1490,8 +1530,6 @@
             this.Controls.Add(this.PkmTrnLabel);
             this.Controls.Add(this.pkmTrnComboBox);
             this.Controls.Add(this.savePaletteBut);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBoxEditColor);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
@@ -1526,6 +1564,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1619,7 +1659,6 @@
         private System.Windows.Forms.Label labelHex;
         private System.Windows.Forms.Label labelDec;
         private System.Windows.Forms.Label labelRed;
-        private System.Windows.Forms.CheckBox forcecolorCB;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button PalUseMapBut;
         private System.Windows.Forms.Button PalUseTrainerBut;
@@ -1631,5 +1670,9 @@
         private System.Windows.Forms.Button saveMapPal_but;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox mapComboBox;
+        private System.Windows.Forms.RadioButton forcePalSG_RB;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.RadioButton forcePalGBC_RB;
+        private System.Windows.Forms.RadioButton forcePalGS_RB;
     }
 }

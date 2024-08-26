@@ -222,21 +222,33 @@ namespace BrownEditor.editor
 
         void UpdateDrawingColors()
         {
-            if (forcecolorCB.Checked)
+            //Force Grayscale palette (default BGB grayscale palette)
+            if (forcePalGS_RB.Checked)
             {
                 //Force color 0 and 3 to white and black (the game does this for in-battle sprites)
-                CurrentPaletteColors[0] = Color.FromArgb(255, 255, 239, 255);
-                CurrentPaletteColors[3] = Color.FromArgb(255, 0, 0, 0);
+                CurrentPaletteColors[0] = Color.FromArgb(255, 239, 239, 239);
+                CurrentPaletteColors[1] = Color.FromArgb(255, 165, 165, 165);
+                CurrentPaletteColors[2] = Color.FromArgb(255, 90, 90, 90);
+                CurrentPaletteColors[3] = Color.FromArgb(255, 16, 16, 16);
 
             }
+            //Force the brown palette used in GBC mode
+            else if (forcePalGBC_RB.Checked)
+            {
+                //Force color 0 and 3 to white and black (the game does this for in-battle sprites)
+                CurrentPaletteColors[0] = Color.FromArgb(255, 255, 255, 255);
+                CurrentPaletteColors[1] = Color.FromArgb(255, 255, 206, 156);
+                CurrentPaletteColors[2] = Color.FromArgb(255, 173, 82, 41);
+                CurrentPaletteColors[3] = Color.FromArgb(255, 0, 0, 0);
+            }
+            //Use the loaded Super Game Boy palette if the others aren't checked
             else
             {
                 CurrentPaletteColors[0] = palettePanel0.BackColor;
+                CurrentPaletteColors[1] = palettePanel1.BackColor;
+                CurrentPaletteColors[2] = palettePanel2.BackColor;
                 CurrentPaletteColors[3] = palettePanel3.BackColor;
             }
-
-            CurrentPaletteColors[1] = palettePanel1.BackColor;
-            CurrentPaletteColors[2] = palettePanel2.BackColor;
         }
 
         void load_palette(int index)
@@ -1648,7 +1660,7 @@ namespace BrownEditor.editor
             }
         }
 
-        private void forcecolorCB_CheckedChanged(object sender, EventArgs e)
+        private void forcePalette()
         {
 
             UpdateDrawingColors();
@@ -1830,6 +1842,21 @@ namespace BrownEditor.editor
         private void saveMapPal_but_Click(object sender, EventArgs e)
         {
             setMapPalette((int)mapComboBox.SelectedIndex);
+        }
+
+        private void forcePalSG_RB_CheckedChanged(object sender, EventArgs e)
+        {
+            forcePalette();
+        }
+
+        private void forcePalGS_RB_CheckedChanged(object sender, EventArgs e)
+        {
+            forcePalette();
+        }
+
+        private void forcePalGBC_RB_CheckedChanged(object sender, EventArgs e)
+        {
+            forcePalette();
         }
     }
 }
