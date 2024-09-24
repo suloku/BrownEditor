@@ -19,8 +19,8 @@ namespace BrownEditor.editor
         public static int EvomovesTotalEntries = 255; //On the current rom there's only room for 243 entries, 232 are currently used
         public static int TotalSpecies = 255; //This should be updated if any new species is added
         public static int EvomovesPointerTableOffset = 0x3bdf9;
-        public static int EvomovesDataStartOffset = 0x380a0;
-        public static int EvomovesDataSize = 0x1570;
+        public static int EvomovesDataStartOffset = 0x38000;
+        public static int EvomovesDataSize = 0x1610;
         public static int EvomovesBank = 0xE;
 
         private static byte NO_EVOLUTION = 0;
