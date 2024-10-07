@@ -978,7 +978,7 @@ namespace BrownEditor.editor
             "094 (0x5E) - UNUSED (VERMILION_DOCK)",
             "095 (0x5F) - UNUSED (SS_ANNE_1F)",
             "096 (0x60) - UNUSED (SS_ANNE_2F)",
-            "097 (0x61) - UNUSED (SS_ANNE_3F)",
+            "097 (0x61) - Castro Valley - Punch Tutor House",
             "098 (0x62) - UNUSED (SS_ANNE_B1F)",
             "099 (0x63) - Final Dungeon Main Building B3F",
             "100 (0x64) - Castro Valley Dock",
